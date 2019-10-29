@@ -77,4 +77,23 @@ public class CustomerDao {
         }
     }
 
+
+    public static void updateCustomer(Customer customer) {
+
+        int customerId = customer.getCustomerId();
+        //int addressId = customer.getAddressId();
+        String customerName = customer.getCustomerName();
+
+
+        String sqlStatement = "UPDATE customer" +
+        "SET customerName=" + customerName + " " +
+                "WHERE customerId=" + customerId + "";
+
+
+        QueryManager.makeQuery(sqlStatement);
+
+
+    }
+
+
 }

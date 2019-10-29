@@ -3,6 +3,8 @@ package controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import entity.Customer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -57,6 +59,14 @@ public class CustomerEditScreenController {
     @FXML
     void initialize() {
 
+
+
+
+    }
+
+    public void receiveCustomer(Customer selectedItem) {
+
+        customer_name_field.setText(String.valueOf(selectedItem.getCustomerName()));
 
     }
 }
