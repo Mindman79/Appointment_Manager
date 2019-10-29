@@ -1,5 +1,7 @@
 package entity;
 
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -8,19 +10,20 @@ public class Address {
     private int addressId;
     private String address1;
     private String address2;
-    private City city;
+    private int cityId;
     private String postalCode;
     private String phone;
-    private LocalDate createDate;
+    private LocalDateTime createDate;
     private String createdBy;
-    private LocalDateTime lastUpdate;
+    private Timestamp lastUpdate;
     private String lastUpdateBy;
 
-    public Address(int addressId, String address1, String address2, City city, String postalCode, String phone, LocalDate createDate, String createdBy, LocalDateTime lastUpdate, String lastUpdateBy) {
+
+    public Address(int addressId, String address1, String address2, int cityId, String postalCode, String phone, LocalDateTime createDate, String createdBy, Timestamp lastUpdate, String lastUpdateBy) {
         this.addressId = addressId;
         this.address1 = address1;
         this.address2 = address2;
-        this.city = city;
+        this.cityId = cityId;
         this.postalCode = postalCode;
         this.phone = phone;
         this.createDate = createDate;
@@ -28,11 +31,6 @@ public class Address {
         this.lastUpdate = lastUpdate;
         this.lastUpdateBy = lastUpdateBy;
     }
-
-
-    public Address() {
-    }
-
 
     public int getAddressId() {
         return addressId;
@@ -58,12 +56,12 @@ public class Address {
         this.address2 = address2;
     }
 
-    public City getCity() {
-        return city;
+    public int getCityId() {
+        return cityId;
     }
 
-    public void setCity(City city) {
-        this.city = city;
+    public void setCityId(int cityId) {
+        this.cityId = cityId;
     }
 
     public String getPostalCode() {
@@ -82,11 +80,11 @@ public class Address {
         this.phone = phone;
     }
 
-    public LocalDate getCreateDate() {
+    public LocalDateTime getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(LocalDate createDate) {
+    public void setCreateDate(LocalDateTime createDate) {
         this.createDate = createDate;
     }
 
@@ -98,11 +96,11 @@ public class Address {
         this.createdBy = createdBy;
     }
 
-    public LocalDateTime getLastUpdate() {
+    public Timestamp getLastUpdate() {
         return lastUpdate;
     }
 
-    public void setLastUpdate(LocalDateTime lastUpdate) {
+    public void setLastUpdate(Timestamp lastUpdate) {
         this.lastUpdate = lastUpdate;
     }
 

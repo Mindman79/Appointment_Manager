@@ -1,8 +1,7 @@
 package database;
 
-import entity.City;
-import entity.Country;
-import entity.Customer;
+import entity.*;
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -15,14 +14,12 @@ public class CustomerDao {
 
     public static ObservableList<Customer> getAllCustomers() {
 
-        //ObservableList<Customer> Custz = FXCollections.observableArrayList();
-
 
         Customers.clear();
 
 
         try {
-            //String sqlStatement = "SELECT * FROM customer";
+
 
             String sqlStatement = "SELECT customerId, customerName, address.address, address.phone, address.postalCode, city.city FROM customer INNER JOIN address ON customer.addressId = address.addressId INNER JOIN city ON address.cityId = city.cityId";
 
@@ -30,7 +27,30 @@ public class CustomerDao {
             QueryManager.makeQuery(sqlStatement);
             ResultSet result = QueryManager.getResult();
 
-            while(result.next()) {
+            while (result.next()) {
+
+//                City City = new City();
+//
+//                City.setCityName(result.getString("city"));
+
+                String customerName = result.getString("customerName");
+//                String phone = result.getString("phone");
+////                //String address = result.getString("address");
+////
+////                String postalCode = result.getString("postalCode");
+////
+////                ;
+
+                //City city = new City();
+                Customer customer = new Customer(customerName);
+
+
+/*
+                TableRow tr = new TableRow(new ReadOnlyStringWrapper(customerName),
+                        new ReadOnlyStringWrapper(phone),
+                        new ReadOnlyStringWrapper(address),
+                        new ReadOnlyStringWrapper(city),
+                        new ReadOnlyStringWrapper(postalCode)*/
 
 
 
@@ -38,20 +58,14 @@ public class CustomerDao {
 
 
 
-
+/*
                 Customer customer = new Customer(
                         result.getInt("customerId"),
                         result.getString("customerName")
-                        //result.getString("cityName")
+                        //result.getString("cityName")*/
 
 
-
-                );
-
-                Customers.addAll(customer);
-
-
-
+                Customers.add(customer);
 
 
             }

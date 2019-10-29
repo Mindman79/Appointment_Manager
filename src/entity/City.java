@@ -1,35 +1,30 @@
 package entity;
 
-import java.time.LocalDate;
+
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 public class City {
 
 
     private int cityId;
-    private String cityName;
-    private Country country;
-    private LocalDate createDate;
+    private String city;
+    private int countryId;
+    private LocalDateTime createDate;
     private String createdBy;
-    private LocalDateTime lastUpdate;
+    private Timestamp lastUpdate;
     private String lastUpdateBy;
 
-    public City(int cityId, String cityName, Country country, LocalDate createDate, String createdBy, LocalDateTime lastUpdate, String lastUpdateBy) {
+    public City(int cityId, String city, int countryId, LocalDateTime createDate, String createdBy, Timestamp lastUpdate, String lastUpdateBy) {
         this.cityId = cityId;
-        this.cityName = cityName;
-        this.country = country;
+        this.city = city;
+        this.countryId = countryId;
         this.createDate = createDate;
         this.createdBy = createdBy;
         this.lastUpdate = lastUpdate;
         this.lastUpdateBy = lastUpdateBy;
     }
 
-    public City() {
-    }
-
-    public City(String cityName) {
-        this.cityName = cityName;
-    }
 
     public int getCityId() {
         return cityId;
@@ -39,27 +34,27 @@ public class City {
         this.cityId = cityId;
     }
 
-    public String getCityName() {
-        return cityName;
+    public String getCity() {
+        return city;
     }
 
-    public void setCityName(String cityName) {
-        this.cityName = cityName;
+    public void setCity(String city) {
+        this.city = city;
     }
 
-    public Country getCountry() {
-        return country;
+    public int getCountryId() {
+        return countryId;
     }
 
-    public void setCountry(Country country) {
-        this.country = country;
+    public void setCountryId(int countryId) {
+        this.countryId = countryId;
     }
 
-    public LocalDate getCreateDate() {
+    public LocalDateTime getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(LocalDate createDate) {
+    public void setCreateDate(LocalDateTime createDate) {
         this.createDate = createDate;
     }
 
@@ -71,11 +66,11 @@ public class City {
         this.createdBy = createdBy;
     }
 
-    public LocalDateTime getLastUpdate() {
+    public Timestamp getLastUpdate() {
         return lastUpdate;
     }
 
-    public void setLastUpdate(LocalDateTime lastUpdate) {
+    public void setLastUpdate(Timestamp lastUpdate) {
         this.lastUpdate = lastUpdate;
     }
 

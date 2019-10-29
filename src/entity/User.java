@@ -1,5 +1,6 @@
 package entity;
 
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -9,25 +10,22 @@ public class User {
     private int userId;
     private String userName;
     private String userPassword;
-    private LocalDate createDate;
+    private LocalDateTime createDate;
+    private Boolean active;
     private String createdBy;
-    private int userIsActive;
-    private LocalDateTime userLastUpdate;
-    private String userLastUpdatedBy;
+    private Timestamp lastUpdate;
+    private String lastUpdateBy;
 
-    public User(int userId, String userName, String userPassword, LocalDate createDate, String createdBy, int userIsActive, LocalDateTime userLastUpdate, String userLastUpdatedBy) {
+
+    public User(int userId, String userName, String userPassword, LocalDateTime createDate, Boolean active, String createdBy, Timestamp lastUpdate, String lastUpdateBy) {
         this.userId = userId;
         this.userName = userName;
         this.userPassword = userPassword;
         this.createDate = createDate;
+        this.active = active;
         this.createdBy = createdBy;
-        this.userIsActive = userIsActive;
-        this.userLastUpdate = userLastUpdate;
-        this.userLastUpdatedBy = userLastUpdatedBy;
-    }
-
-
-    public User() {
+        this.lastUpdate = lastUpdate;
+        this.lastUpdateBy = lastUpdateBy;
     }
 
 
@@ -55,12 +53,20 @@ public class User {
         this.userPassword = userPassword;
     }
 
-    public LocalDate getCreateDate() {
+    public LocalDateTime getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(LocalDate createDate) {
+    public void setCreateDate(LocalDateTime createDate) {
         this.createDate = createDate;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
     public String getCreatedBy() {
@@ -71,27 +77,19 @@ public class User {
         this.createdBy = createdBy;
     }
 
-    public int getUserIsActive() {
-        return userIsActive;
+    public Timestamp getLastUpdate() {
+        return lastUpdate;
     }
 
-    public void setUserIsActive(int userIsActive) {
-        this.userIsActive = userIsActive;
+    public void setLastUpdate(Timestamp lastUpdate) {
+        this.lastUpdate = lastUpdate;
     }
 
-    public LocalDateTime getUserLastUpdate() {
-        return userLastUpdate;
+    public String getLastUpdateBy() {
+        return lastUpdateBy;
     }
 
-    public void setUserLastUpdate(LocalDateTime userLastUpdate) {
-        this.userLastUpdate = userLastUpdate;
-    }
-
-    public String getUserLastUpdatedBy() {
-        return userLastUpdatedBy;
-    }
-
-    public void setUserLastUpdatedBy(String userLastUpdatedBy) {
-        this.userLastUpdatedBy = userLastUpdatedBy;
+    public void setLastUpdateBy(String lastUpdateBy) {
+        this.lastUpdateBy = lastUpdateBy;
     }
 }

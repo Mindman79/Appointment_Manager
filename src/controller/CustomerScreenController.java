@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 import database.CustomerDao;
 import database.QueryManager;
 import entity.Customer;
+import entity.TableRow;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -85,10 +86,10 @@ public class CustomerScreenController {
         //Must match table name, or constructor name... or something like that
         CustomerTable.setItems(CustomerDao.getAllCustomers());
         cust_name_col.setCellValueFactory(new PropertyValueFactory<>("customerName"));
-        cust_address_col.setCellValueFactory(new PropertyValueFactory<>("custStreetAddress"));
-        cust_zip_col.setCellValueFactory(new PropertyValueFactory<>("custZip"));
-        cust_city_col.setCellValueFactory(new PropertyValueFactory<>("cityName"));
-        cust_phone_col.setCellValueFactory(new PropertyValueFactory<>("custPhone"));
+        cust_address_col.setCellValueFactory(new PropertyValueFactory<>("address"));
+        cust_zip_col.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
+        cust_city_col.setCellValueFactory(new PropertyValueFactory<>("city"));
+        cust_phone_col.setCellValueFactory(new PropertyValueFactory<>("phone"));
 
 
 

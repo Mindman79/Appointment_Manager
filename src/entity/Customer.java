@@ -1,5 +1,6 @@
 package entity;
 
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -7,18 +8,17 @@ public class Customer {
 
     private int customerId;
     private String customerName;
-    private Address address;
-    private int active;
-    private LocalDate createDate;
+    private int addressId;
+    private Boolean active;
+    private LocalDateTime createDate;
     private String createdBy;
-    private LocalDateTime lastUpdate;
+    private Timestamp lastUpdate;
     private String lastUpdateBy;
 
-
-    public Customer(int customerId, String customerName, Address address, int active, LocalDate createDate, String createdBy, LocalDateTime lastUpdate, String lastUpdateBy) {
+    public Customer(int customerId, String customerName, int addressId, Boolean active, LocalDateTime createDate, String createdBy, Timestamp lastUpdate, String lastUpdateBy) {
         this.customerId = customerId;
         this.customerName = customerName;
-        this.address = address;
+        this.addressId = addressId;
         this.active = active;
         this.createDate = createDate;
         this.createdBy = createdBy;
@@ -26,13 +26,11 @@ public class Customer {
         this.lastUpdateBy = lastUpdateBy;
     }
 
-    public Customer(int customerId, String customerName) {
-        this.customerId = customerId;
+
+    public Customer(String customerName) {
         this.customerName = customerName;
     }
 
-    public Customer() {
-    }
 
     public int getCustomerId() {
         return customerId;
@@ -50,27 +48,27 @@ public class Customer {
         this.customerName = customerName;
     }
 
-    public Address getAddress() {
-        return address;
+    public int getAddressId() {
+        return addressId;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setAddressId(int addressId) {
+        this.addressId = addressId;
     }
 
-    public int getActive() {
+    public Boolean getActive() {
         return active;
     }
 
-    public void setActive(int active) {
+    public void setActive(Boolean active) {
         this.active = active;
     }
 
-    public LocalDate getCreateDate() {
+    public LocalDateTime getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(LocalDate createDate) {
+    public void setCreateDate(LocalDateTime createDate) {
         this.createDate = createDate;
     }
 
@@ -82,11 +80,11 @@ public class Customer {
         this.createdBy = createdBy;
     }
 
-    public LocalDateTime getLastUpdate() {
+    public Timestamp getLastUpdate() {
         return lastUpdate;
     }
 
-    public void setLastUpdate(LocalDateTime lastUpdate) {
+    public void setLastUpdate(Timestamp lastUpdate) {
         this.lastUpdate = lastUpdate;
     }
 
