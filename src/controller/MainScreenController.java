@@ -12,7 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyEvent;
+import javafx.scene.control.ToggleButton;
 import javafx.stage.Stage;
 
 public class MainScreenController {
@@ -27,37 +27,40 @@ public class MainScreenController {
     private URL location;
 
     @FXML
-    private Button appt_search_button;
+    private Button search_appointments_button;
 
     @FXML
-    private TextField appt_search_field;
+    private TextField search_appointments_field;
 
     @FXML
-    private TableView<?> AppointmentTable;
+    private TableView<?> CustomerTable;
 
     @FXML
-    private TableColumn<?, ?> appt_description_col;
+    private TableColumn<?, ?> cust_name_col;
 
     @FXML
-    private TableColumn<?, ?> appt_contact_col;
+    private TableColumn<?, ?> cust_phone_col;
 
     @FXML
-    private TableColumn<?, ?> appt_location_col;
+    private TableColumn<?, ?> cust_address_col;
 
     @FXML
-    private TableColumn<?, ?> appt_start_date_col;
+    private TableColumn<?, ?> cust_city_col;
 
     @FXML
-    private TableColumn<?, ?> appt_end_date_col;
+    private TableColumn<?, ?> cust_zip_col;
 
     @FXML
-    private Button appt_add_button;
+    private Button add_button;
 
     @FXML
-    private Button appt_modify_button;
+    private Button modify_button;
 
     @FXML
-    private Button appt_delete_button;
+    private Button delete_button;
+
+    @FXML
+    private ToggleButton appointments_toggle_button;
 
     @FXML
     private Button customers_button;
@@ -72,13 +75,17 @@ public class MainScreenController {
     private Button logs_button;
 
     @FXML
-    void AddPartButtonHandler(ActionEvent event) {
+    void add_button_handler(ActionEvent event) {
 
     }
 
     @FXML
-    void CustomersButtonClickHandler(ActionEvent event) throws IOException {
+    void appointments_toggle_button_handler(ActionEvent event) {
 
+    }
+
+    @FXML
+    void customers_button_handler(ActionEvent event) throws IOException {
 
         stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/view/CustomerScreen.fxml"));
@@ -88,37 +95,42 @@ public class MainScreenController {
     }
 
     @FXML
-    void DeletePartButtonHandler(ActionEvent event) {
+    void delete_button_handler(ActionEvent event) {
 
     }
 
     @FXML
-    void ExitButtonHandler(ActionEvent event) {
+    void exit_button_handler(ActionEvent event) {
 
     }
 
     @FXML
-    void LogsButtonClickHandler(ActionEvent event) {
+    void logs_button_handler(ActionEvent event) {
 
     }
 
     @FXML
-    void ModifyPartButtonHandler(ActionEvent event) {
+    void modify_button_handler(ActionEvent event) {
 
     }
 
     @FXML
-    void ReportsButtonClickHandler(ActionEvent event) {
+    void reports_button_handler(ActionEvent event) {
 
     }
 
     @FXML
-    void SearchPartsButtonHandler(KeyEvent event) {
+    void search_appointments_button_handler(ActionEvent event) {
 
     }
 
     @FXML
-    void SearchPartsFieldHandler(ActionEvent event) {
+    void search_appointments_field_handler(ActionEvent event) {
+
+    }
+
+    @FXML
+    void initialize() {
 
     }
 

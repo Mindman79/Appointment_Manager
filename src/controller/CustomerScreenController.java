@@ -21,23 +21,15 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 
 
-
 public class CustomerScreenController {
 
 
-
+    @FXML
+    private Button search_customers_button;
 
     @FXML
-    private ResourceBundle resources;
+    private TextField search_customers_field;
 
-    @FXML
-    private URL location;
-
-    @FXML
-    private Button cust_search_button;
-
-    @FXML
-    private TextField cust_search_field;
 
     @FXML
     private TableView<Customer> CustomerTable;
@@ -58,13 +50,13 @@ public class CustomerScreenController {
     private TableColumn<Customer, String> cust_zip_col;
 
     @FXML
-    private Button appt_add_button;
+    private Button add_button;
 
     @FXML
-    private Button appt_modify_button;
+    private Button modify_button;
 
     @FXML
-    private Button appt_delete_button;
+    private Button delete_button;
 
     @FXML
     private Button appointments_button;
@@ -78,9 +70,9 @@ public class CustomerScreenController {
     @FXML
     private Button logs_button;
 
+
     @FXML
     void initialize() {
-
 
 
         //Must match table name, or constructor name... or something like that
@@ -92,67 +84,55 @@ public class CustomerScreenController {
         cust_phone_col.setCellValueFactory(new PropertyValueFactory<>("phone"));
 
 
-
-
-
     }
 
 
-
-
-
-
-
-
-
-
     @FXML
-    void AddPartButtonHandler(ActionEvent event) {
+    void add_button_handler(ActionEvent event) {
 
     }
 
     @FXML
-    void AppointmentsButtonClickHandler(ActionEvent event) {
+    void appointments_button_handler(ActionEvent event) {
 
     }
 
     @FXML
-    void DeletePartButtonHandler(ActionEvent event) {
+    void delete_button_handler(ActionEvent event) {
 
     }
 
     @FXML
-    void ExitButtonHandler(ActionEvent event) {
+    void exit_button_handler(ActionEvent event) {
 
     }
 
     @FXML
-    void LogsButtonClickHandler(ActionEvent event) {
+    void logs_button_handler(ActionEvent event) {
 
     }
 
     @FXML
-    void ModifyPartButtonHandler(ActionEvent event) {
+    void modify_button_handler(ActionEvent event) {
+
+
 
     }
 
     @FXML
-    void ReportsButtonClickHandler(ActionEvent event) {
+    void reports_button_handler(ActionEvent event) {
 
     }
 
     @FXML
-    void SearchPartsButtonHandler(KeyEvent event) {
+    void search_customers_button_handler(ActionEvent event) {
 
     }
 
     @FXML
-    void SearchPartsFieldHandler(ActionEvent event) {
+    void search_customers_field_handler(ActionEvent event) {
 
     }
-
-
-
 
 
 }

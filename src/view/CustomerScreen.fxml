@@ -20,8 +20,8 @@
         <AnchorPane layoutX="34.0" layoutY="100.0" prefHeight="354.0" prefWidth="626.0" style="-fx-border-color: black; -fx-border-radius: 10;">
             <children>
                 <Label layoutX="28.0" layoutY="27.0" text="Customers" />
-                <Button fx:id="appt_search_button" layoutX="188.0" layoutY="22.0" mnemonicParsing="false" onAction="#SearchPartsButtonHandler" onKeyPressed="#SearchPartsButtonHandler" text="Search" />
-                <TextField fx:id="appt_search_field" layoutX="265.0" layoutY="22.0" onAction="#SearchPartsFieldHandler" />
+                <Button fx:id="search_customers_button" layoutX="188.0" layoutY="22.0" mnemonicParsing="false" onAction="#search_customers_button_handler" text="Search" />
+                <TextField fx:id="search_customers_field" layoutX="265.0" layoutY="22.0" onAction="#search_customers_field_handler" />
                 <TableView fx:id="CustomerTable" layoutX="17.0" layoutY="78.0" prefHeight="208.0" prefWidth="551.0">
                     <columns>
                         <TableColumn fx:id="cust_name_col" prefWidth="110.0" text="Name" />
@@ -33,9 +33,9 @@
                 </TableView>
                 <HBox layoutX="233.0" layoutY="286.0" prefHeight="51.0" prefWidth="240.0" spacing="10.0">
                     <children>
-                        <Button fx:id="appt_add_button" mnemonicParsing="false" onAction="#AddPartButtonHandler" text="Add" />
-                        <Button fx:id="appt_modify_button" mnemonicParsing="false" onAction="#ModifyPartButtonHandler" prefHeight="0.0" prefWidth="72.0" text="Modify" />
-                        <Button fx:id="appt_delete_button" mnemonicParsing="false" onAction="#DeletePartButtonHandler" text="Delete" />
+                        <Button fx:id="add_button" mnemonicParsing="false" onAction="#add_button_handler" text="Add" />
+                        <Button fx:id="modify_button" mnemonicParsing="false" onAction="#modify_button_handler" prefHeight="0.0" prefWidth="72.0" text="Modify" />
+                        <Button fx:id="delete_button" mnemonicParsing="false" onAction="#delete_button_handler" text="Delete" />
                     </children>
                     <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -45,10 +45,10 @@
         </AnchorPane>
         <AnchorPane layoutX="695.0" layoutY="100.0" prefHeight="354.0" prefWidth="177.0">
             <children>
-                <Button fx:id="appointments_button" layoutX="26.0" layoutY="14.0" mnemonicParsing="false" onAction="#AppointmentsButtonClickHandler" text="Appointments" />
-                <Button fx:id="reports_button" layoutX="26.0" layoutY="65.0" mnemonicParsing="false" onAction="#ReportsButtonClickHandler" text="Reports" />
-                <Button fx:id="exit_button" layoutX="36.0" layoutY="300.0" mnemonicParsing="false" onAction="#ExitButtonHandler" prefHeight="31.0" prefWidth="96.0" text="Exit" />
-                <Button fx:id="logs_button" layoutX="26.0" layoutY="113.0" mnemonicParsing="false" onAction="#LogsButtonClickHandler" text="Logs" />
+                <Button fx:id="appointments_button" layoutX="26.0" layoutY="14.0" mnemonicParsing="false" onAction="#appointments_button_handler" text="Appointments" />
+                <Button fx:id="reports_button" layoutX="26.0" layoutY="65.0" mnemonicParsing="false" onAction="#reports_button_handler" text="Reports" />
+                <Button fx:id="exit_button" layoutX="36.0" layoutY="300.0" mnemonicParsing="false" onAction="#exit_button_handler" prefHeight="31.0" prefWidth="96.0" text="Exit" />
+                <Button fx:id="logs_button" layoutX="26.0" layoutY="113.0" mnemonicParsing="false" onAction="#logs_button_handler" text="Logs" />
             </children>
         </AnchorPane>
     </children>
