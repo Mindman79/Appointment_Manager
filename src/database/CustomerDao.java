@@ -21,52 +21,32 @@ public class CustomerDao {
         try {
 
 
-            String sqlStatement = "SELECT customerId, customerName, address.address, address.phone, address.postalCode, city.city FROM customer INNER JOIN address ON customer.addressId = address.addressId INNER JOIN city ON address.cityId = city.cityId";
+           /* String sqlStatement = "SELECT customerId, customerName, address.address, address.phone, address.postalCode, city.city FROM customer INNER JOIN address ON customer.addressId = address.addressId INNER JOIN city ON address.cityId = city.cityId";*/
 
+
+            String sqlStatement = "SELECT * FROM customer";
 
             QueryManager.makeQuery(sqlStatement);
             ResultSet result = QueryManager.getResult();
 
             while (result.next()) {
 
-//                City City = new City();
-//
-//                City.setCityName(result.getString("city"));
+
 
                 String customerName = result.getString("customerName");
-//                String phone = result.getString("phone");
-////                //String address = result.getString("address");
-////
-////                String postalCode = result.getString("postalCode");
-////
-////                ;
+                int addressId = result.getInt("addressId");
 
-                //City city = new City();
-                Customer customer = new Customer(customerName);
+                Customer customer = new Customer(customerName, addressId);
 
 
-/*
-                TableRow tr = new TableRow(new ReadOnlyStringWrapper(customerName),
+               /* TableRow tr = new TableRow(new ReadOnlyStringWrapper(customerName),
                         new ReadOnlyStringWrapper(phone),
                         new ReadOnlyStringWrapper(address),
                         new ReadOnlyStringWrapper(city),
                         new ReadOnlyStringWrapper(postalCode)*/
 
 
-
-
-
-
-
-/*
-                Customer customer = new Customer(
-                        result.getInt("customerId"),
-                        result.getString("customerName")
-                        //result.getString("cityName")*/
-
-
                 Customers.add(customer);
-
 
             }
 

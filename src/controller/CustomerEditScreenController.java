@@ -4,6 +4,11 @@ package controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import database.AddressDao;
+import database.CityDao;
+import entity.Address;
+import entity.City;
+import entity.Country;
 import entity.Customer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -46,6 +51,14 @@ public class CustomerEditScreenController {
     @FXML
     private Button cancel_button;
 
+    public static Customer selectedCust;
+
+    private Address custAddress;
+    //private City custCity = CityDao.getCityById(custAddress.getCityId());
+    //private Country custCountry = DBCountry.getCountryById(custCity.getCountryId());
+
+
+
     @FXML
     void cancel_button_handler(ActionEvent event) {
 
@@ -61,12 +74,21 @@ public class CustomerEditScreenController {
 
 
 
-
     }
 
-    public void receiveCustomer(Customer selectedItem) {
+    public void receiveCustomer(Customer selectedCust) {
 
-        customer_name_field.setText(String.valueOf(selectedItem.getCustomerName()));
+
+        System.out.println(selectedCust.getAddressId());
+       custAddress = AddressDao.getAddressById(selectedCust.getAddressId());
+
+
+
+        customer_name_field.setText(String.valueOf(selectedCust.getCustomerName()));
+        address_line_1_field.setText(String.valueOf(custAddress.getAddress1()));
+        address_line_2_field.setText(String.valueOf(custAddress.getAddress2()));
+        phone_number_field.setText(String.valueOf(custAddress.getPhone()));
+        postal_code_field.setText(String.valueOf(custAddress.getPostalCode()));
 
     }
 }

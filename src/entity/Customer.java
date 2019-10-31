@@ -27,8 +27,9 @@ public class Customer {
     }
 
 
-    public Customer(String customerName) {
+    public Customer(String customerName, int addressId) {
         this.customerName = customerName;
+        this.addressId = addressId;
     }
 
 

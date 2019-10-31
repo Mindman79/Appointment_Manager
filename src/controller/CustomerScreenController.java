@@ -32,6 +32,8 @@ public class CustomerScreenController {
     Stage stage;
     Parent scene;
 
+    public static Customer selectedCust;
+
     @FXML
     private Button search_customers_button;
 
@@ -79,6 +81,8 @@ public class CustomerScreenController {
     private Button logs_button;
 
 
+
+
     @FXML
     void initialize() {
 
@@ -86,10 +90,10 @@ public class CustomerScreenController {
         //Must match table name, or constructor name... or something like that
         CustomerTable.setItems(CustomerDao.getAllCustomers());
         cust_name_col.setCellValueFactory(new PropertyValueFactory<>("customerName"));
-        cust_address_col.setCellValueFactory(new PropertyValueFactory<>("address"));
+        /*cust_address_col.setCellValueFactory(new PropertyValueFactory<>("addressId"));
         cust_zip_col.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
         cust_city_col.setCellValueFactory(new PropertyValueFactory<>("city"));
-        cust_phone_col.setCellValueFactory(new PropertyValueFactory<>("phone"));
+        cust_phone_col.setCellValueFactory(new PropertyValueFactory<>("phone"));*/
 
 
     }
@@ -130,13 +134,16 @@ public class CustomerScreenController {
         //Get another controller
         CustomerEditScreenController Controller = modifyCustomerLoader.getController();
 
-        //Connect to receive method in ModifyPartController
-        Controller.receiveCustomer(CustomerTable.getSelectionModel().getSelectedItem());
+        //Connect to receive method in other controller
+        selectedCust = CustomerTable.getSelectionModel().getSelectedItem();
+        System.out.println(selectedCust.getAddressId());
+        Controller.receiveCustomer(selectedCust);
 
         stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
         Parent scene = modifyCustomerLoader.getRoot();
         stage.setScene(new Scene(scene));
         stage.show();
+
 
 
 

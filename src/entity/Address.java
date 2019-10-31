@@ -32,6 +32,16 @@ public class Address {
         this.lastUpdateBy = lastUpdateBy;
     }
 
+    public Address(String address1, String address2) {
+        this.address1 = address1;
+        this.address2 = address2;
+    }
+
+
+
+    public Address() {
+    }
+
     public int getAddressId() {
         return addressId;
     }
