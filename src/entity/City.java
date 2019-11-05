@@ -26,6 +26,9 @@ public class City {
     }
 
 
+    public City() {
+    }
+
     public int getCityId() {
         return cityId;
     }

@@ -1,22 +1,30 @@
 package database;
 
+import entity.Address;
 import entity.City;
 import entity.Customer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import static database.DBConnection.conn;
 
 public class CityDao {
 
     private static ObservableList<City> City = FXCollections.observableArrayList();
 
-    public static void getCityById(int id)  {
 
+    public static City getCityById(int id)  {
+
+        String sqlStatement = "SELECT * FROM city WHERE cityId = " + id + " ";
+
+        System.out.println(id);
+        City city = new City();
 
         try {
-            String sqlStatement = "SELECT city FROM city WHERE cityId = " + id + " ";
 
             QueryManager.makeQuery(sqlStatement);
 
@@ -24,16 +32,38 @@ public class CityDao {
 
             while (result.next()) {
 
-                String city = result.getString("city");
-
+                city.setCity(result.getString("city"));
+                city.setCountryId(result.getInt("countryId"));
             }
+
+
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("SQL Exception: " + e.getMessage());
         }
+        return city;
     }
 
 
+    public static void updateCity(City city) {
+
+        String updateCity = String.join(" ",
+                "UPDATE city",
+                "SET city=?, countryId=?, lastUpdate=NOW()",
+                "WHERE cityId=?");
+        try {
+            PreparedStatement statement = conn.prepareStatement(updateCity);
+            statement.setString(1, city.getCity());
+            statement.setInt(2, city.getCountryId());
+            //statement.setString(3, loggedUser.getUserName());
+            statement.setInt(3, city.getCityId());
+            statement.executeUpdate();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("SQL Exception: " + e.getMessage());
+        }
+    }
 
 
 }

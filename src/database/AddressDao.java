@@ -2,18 +2,22 @@ package database;
 
 import entity.Address;
 import entity.City;
+import entity.Customer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import static database.DBConnection.conn;
 
 public class AddressDao {
 
     private static ObservableList<Address> Addresses = FXCollections.observableArrayList();
     private static Address addresses;
 
-    //public Address address;
+
 
     public static Address getAddressById(int id)  {
 
@@ -45,5 +49,31 @@ public class AddressDao {
         }
         return address;
     }
+
+
+    public static void updateAddress(Address address) {
+
+        String updateAddress = String.join(" ",
+                "UPDATE address",
+                "SET address=?, address2=?, cityId=?, postalCode=?, phone=?, lastUpdate=NOW()",
+                "WHERE addressId=?");
+
+        try {
+            PreparedStatement statement = conn.prepareStatement(updateAddress);
+            statement.setString(1, address.getAddress1());
+            statement.setString(2, address.getAddress2());
+            statement.setInt(3, address.getCityId());
+            statement.setString(4, address.getPostalCode());
+            statement.setString(5, address.getPhone());
+            //statement.setString(6, loggedUser.getUserName());
+            statement.setInt(6, address.getAddressId());
+            statement.executeUpdate();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("SQL Exception: " + e.getMessage());
+        }
+    }
+
 
 }

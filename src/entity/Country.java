@@ -24,6 +24,9 @@ public class Country {
     }
 
 
+    public Country() {
+    }
+
     public int getCountryId() {
         return countryId;
     }
