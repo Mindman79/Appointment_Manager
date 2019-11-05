@@ -82,7 +82,6 @@ public class CustomerScreenController {
 
 
 
-
     @FXML
     void initialize() {
 
@@ -135,9 +134,11 @@ public class CustomerScreenController {
         CustomerEditScreenController Controller = modifyCustomerLoader.getController();
 
         //Connect to receive method in other controller
-        selectedCust = CustomerTable.getSelectionModel().getSelectedItem();
-        System.out.println(selectedCust.getAddressId());
+        Customer selectedCust = CustomerTable.getSelectionModel().getSelectedItem();
+        //System.out.println(selectedCust.get());
         Controller.receiveCustomer(selectedCust);
+        System.out.println("Customer ID test 3: " + selectedCust.getCustomerId());
+        System.out.println("Customer Name test 3: " + selectedCust.getCustomerName());
 
         stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
         Parent scene = modifyCustomerLoader.getRoot();

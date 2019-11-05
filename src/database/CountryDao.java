@@ -47,6 +47,8 @@ public class CountryDao {
 
     public static void updateCountry(Country country) {
 
+        //TODO : switch country and countryID here
+
         String updateCountry = String.join(" ",
                 "UPDATE country",
                 "SET country=?, lastUpdate=NOW()",

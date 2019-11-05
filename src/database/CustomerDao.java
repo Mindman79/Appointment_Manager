@@ -14,6 +14,36 @@ public class CustomerDao {
 
     private static ObservableList<Customer> Customers = FXCollections.observableArrayList();
 
+
+    public static Customer getCustomerById(int id)  {
+
+        String sqlStatement = "SELECT * FROM customer WHERE customerId = " + id + " ";
+
+        Customer customer = new Customer();
+
+        try {
+
+            QueryManager.makeQuery(sqlStatement);
+
+            ResultSet result = QueryManager.getResult();
+
+            while (result.next()) {
+
+                customer.setCustomerName(result.getString("customerName"));
+                customer.setAddressId(result.getInt("addressId"));
+                customer.setCustomerId(result.getInt("customerId"));
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("SQL Exception: " + e.getMessage());
+        }
+        return customer;
+    }
+
+
+
     public static ObservableList<Customer> getAllCustomers() {
 
 

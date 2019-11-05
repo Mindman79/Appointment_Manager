@@ -32,6 +32,8 @@ public class Customer {
         this.addressId = addressId;
     }
 
+    public Customer() {
+    }
 
     public int getCustomerId() {
         return customerId;

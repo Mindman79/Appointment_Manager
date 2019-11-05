@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import database.AddressDao;
 import database.CityDao;
 import database.CountryDao;
+import database.CustomerDao;
 import entity.Address;
 import entity.City;
 import entity.Country;
@@ -53,11 +54,12 @@ public class CustomerEditScreenController {
     @FXML
     private Button cancel_button;
 
-    public static Customer selectedCust;
-
+    private Customer selectedCustomer;
     private Address custAddress;
     private City custCity;
     private Country custCountry;
+    private int countryId;
+
 
 
     @FXML
@@ -69,6 +71,44 @@ public class CustomerEditScreenController {
     void save_button_handler(ActionEvent event) {
 
 
+        setCountryIDFromName();
+
+        int customerId = selectedCustomer.getCustomerId();
+
+        System.out.println("Country ID last test: " + countryId);
+
+        //Customer
+        selectedCustomer.setCustomerName(customer_name_field.getText());
+        selectedCustomer.setCustomerId(customerId);
+
+
+
+        //Address
+        custAddress.setAddress1(address_line_1_field.getText());
+        custAddress.setAddress2(address_line_2_field.getText());
+        custAddress.setPostalCode(postal_code_field.getText());
+        custAddress.setPhone(phone_number_field.getText());
+
+        //City
+        custCity.setCity(city_field.getText());
+        custCountry.setCountryId(countryId);
+
+        //custCountry.setCountryId(country_combo_box.getSelectionModel().getSelectedItem().get);
+
+
+        CustomerDao.updateCustomer(selectedCustomer);
+        AddressDao.updateAddress(custAddress);
+        CityDao.updateCity(custCity);
+        CountryDao.updateCountry(custCountry);
+
+
+        System.out.println("Save button customerID test: " + selectedCustomer.getCustomerId());
+
+        System.out.println("Save button addressID test: " + custAddress.getAddressId());
+
+        System.out.println("Save button cityID test: " + custCity.getCityId());
+
+        System.out.println("Save button countryID test: " + custCountry.getCountryId());
 
 
     }
@@ -79,20 +119,30 @@ public class CustomerEditScreenController {
 
     }
 
+//    public static void setSelectedCustomer(Customer customer) {
+//
+//        selectedCust = customer;
+//
+//
+//
+//    }
+
     public void receiveCustomer(Customer selectedCust) {
 
 
+        selectedCustomer = selectedCust;
+        //setSelectedCustomer(selectedCust);
 
-        custAddress = AddressDao.getAddressById(selectedCust.getAddressId());
+        custAddress = AddressDao.getAddressById(selectedCustomer.getAddressId());
         custCity = CityDao.getCityById(custAddress.getCityId());
         custCountry = CountryDao.getCountryById(custCity.getCountryId());
 
-        System.out.println(selectedCust.getAddressId());
-        System.out.println(custAddress.getCityId());
-        System.out.println(custCity.getCountryId());
+        //System.out.println("Selected customer ID test 2: " + selectedCust.getCustomerId());
+        System.out.println("Selected cityID test 2: " + custAddress.getCityId());
+//        System.out.println(custCity.getCountryId());
 
 
-        customer_name_field.setText(String.valueOf(selectedCust.getCustomerName()));
+        customer_name_field.setText(String.valueOf(selectedCustomer.getCustomerName()));
         address_line_1_field.setText(String.valueOf(custAddress.getAddress1()));
         address_line_2_field.setText(String.valueOf(custAddress.getAddress2()));
         phone_number_field.setText(String.valueOf(custAddress.getPhone()));
@@ -109,7 +159,7 @@ public class CustomerEditScreenController {
 
     public void getCountryNameFromID(int countryId) {
 
-        String country1 = "USA";
+        String country1 = "US";
         String country2 = "Canada";
         String country3 = "Norway";
 
@@ -135,11 +185,24 @@ public class CustomerEditScreenController {
     }
 
 
-    private int setCountryNameFromId(int countryId) {
+    private void setCountryIDFromName() {
 
         String value = (String) country_combo_box.getValue();
 
-        return countryId;
+
+
+        if(value.contains("US")) {
+            countryId = 1;
+
+        } else if(value.contains("Canada")) {
+            countryId = 2;
+
+        } else if(value.contains("Norway")) {
+            countryId = 3;
+
+        }
+
+
     }
 
 
