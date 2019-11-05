@@ -67,8 +67,9 @@ public class CustomerDao {
 
                 String customerName = result.getString("customerName");
                 int addressId = result.getInt("addressId");
+                int customerId = result.getInt("customerId");
 
-                Customer customer = new Customer(customerName, addressId);
+                Customer customer = new Customer(customerName, addressId, customerId);
 
 
                /* TableRow tr = new TableRow(new ReadOnlyStringWrapper(customerName),

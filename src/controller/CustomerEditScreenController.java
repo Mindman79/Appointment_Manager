@@ -1,6 +1,7 @@
 package controller;
 
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -14,9 +15,13 @@ import entity.Country;
 import entity.Customer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
 public class CustomerEditScreenController {
@@ -61,14 +66,21 @@ public class CustomerEditScreenController {
     private int countryId;
 
 
+    Stage stage;
+    Parent scene;
 
     @FXML
-    void cancel_button_handler(ActionEvent event) {
+    void cancel_button_handler(ActionEvent event) throws IOException {
+
+        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("/view/CustomerScreen.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.show();
 
     }
 
     @FXML
-    void save_button_handler(ActionEvent event) {
+    void save_button_handler(ActionEvent event) throws IOException {
 
 
         setCountryIDFromName();
@@ -101,6 +113,11 @@ public class CustomerEditScreenController {
         CityDao.updateCity(custCity);
         CountryDao.updateCountry(custCountry);
 
+
+        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("/view/CustomerScreen.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.show();
 
         System.out.println("Save button customerID test: " + selectedCustomer.getCustomerId());
 

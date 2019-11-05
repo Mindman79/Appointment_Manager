@@ -34,6 +34,7 @@ public class CityDao {
 
                 city.setCity(result.getString("city"));
                 city.setCountryId(result.getInt("countryId"));
+                city.setCityId(result.getInt("cityId"));
             }
 
 

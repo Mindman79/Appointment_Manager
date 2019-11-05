@@ -27,9 +27,10 @@ public class Customer {
     }
 
 
-    public Customer(String customerName, int addressId) {
+    public Customer(String customerName, int addressId, int customerId) {
         this.customerName = customerName;
         this.addressId = addressId;
+        this.customerId = customerId;
     }
 
     public Customer() {

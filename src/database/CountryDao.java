@@ -49,15 +49,22 @@ public class CountryDao {
 
         //TODO : switch country and countryID here
 
-        String updateCountry = String.join(" ",
+       String updateCountry = String.join(" ",
                 "UPDATE country",
                 "SET country=?, lastUpdate=NOW()",
                 "WHERE countryId=?");
+
+//        String updateCountry = String.join(" ",
+//                "UPDATE country",
+//                "SET countryId=?, lastUpdate=NOW()",
+//                "WHERE country=?");
+
+
         try {
             PreparedStatement statement = conn.prepareStatement(updateCountry);
-            statement.setString(1, country.getCountry());
+            statement.setInt(1, country.getCountryId());
             //statement.setString(2, loggedUser.getUserName());
-            statement.setInt(2, country.getCountryId());
+            statement.setString(2, country.getCountry());
             statement.executeUpdate();
         }
         catch (SQLException e) {
