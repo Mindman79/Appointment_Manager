@@ -56,6 +56,7 @@ public class CityDao {
             PreparedStatement statement = conn.prepareStatement(updateCity);
             statement.setString(1, city.getCity());
             statement.setInt(2, city.getCountryId());
+            System.out.println("Country ID test 5: " + city.getCountryId());
             //statement.setString(3, loggedUser.getUserName());
             statement.setInt(3, city.getCityId());
             statement.executeUpdate();

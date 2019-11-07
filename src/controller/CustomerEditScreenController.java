@@ -103,9 +103,8 @@ public class CustomerEditScreenController {
 
         //City
         custCity.setCity(city_field.getText());
-        custCountry.setCountryId(countryId);
+        custCity.setCountryId(countryId);
 
-        //custCountry.setCountryId(country_combo_box.getSelectionModel().getSelectedItem().get);
 
 
         CustomerDao.updateCustomer(selectedCustomer);
@@ -218,6 +217,7 @@ public class CustomerEditScreenController {
             countryId = 3;
 
         }
+
 
 
     }
