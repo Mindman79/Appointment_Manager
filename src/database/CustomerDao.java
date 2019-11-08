@@ -137,5 +137,6 @@ public class CustomerDao {
     }
 
 
-
+    public static void addCustomer(Customer newCustomer) {
+    }
 }

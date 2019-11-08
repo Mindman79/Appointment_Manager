@@ -33,6 +33,16 @@ public class Customer {
         this.customerId = customerId;
     }
 
+    public Customer(String customerName, int addressId, Boolean active, LocalDateTime createDate, String createdBy, Timestamp lastUpdate, String lastUpdateBy) {
+        this.customerName = customerName;
+        this.addressId = addressId;
+        this.active = active;
+        this.createDate = createDate;
+        this.createdBy = createdBy;
+        this.lastUpdate = lastUpdate;
+        this.lastUpdateBy = lastUpdateBy;
+    }
+
     public Customer() {
     }
 

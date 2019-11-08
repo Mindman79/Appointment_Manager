@@ -28,6 +28,8 @@ public class User {
         this.lastUpdateBy = lastUpdateBy;
     }
 
+    public User() {
+    }
 
     public int getUserId() {
         return userId;
