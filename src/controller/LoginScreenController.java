@@ -38,7 +38,7 @@ public class LoginScreenController {
 
     @FXML
     private TextField username_field;
-    static User currentUser;
+    static public User currentUser;
 
     @FXML
     void LoginButtonHandler(ActionEvent event) throws IOException, SQLException {

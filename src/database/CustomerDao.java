@@ -8,6 +8,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import static controller.LoginScreenController.currentUser;
 import static database.DBConnection.conn;
 
 public class CustomerDao {
@@ -119,15 +121,15 @@ public class CustomerDao {
 
         String updateCustomer = String.join(" ",
                 "UPDATE customer",
-                "SET customerName=?, addressId=?, lastUpdate=NOW()",
+                "SET customerName=?, addressId=?, lastUpdate=NOW(), lastUpdateBy=?",
                 "WHERE customerId = ?");
 
         try {
             PreparedStatement statement = conn.prepareStatement(updateCustomer);
             statement.setString(1, customer.getCustomerName());
             statement.setInt(2, customer.getAddressId());
-            //statement.setString(3, loggedUser.getUserName());
-            statement.setInt(3, customer.getCustomerId());
+            statement.setString(3, currentUser.getUserName());
+            statement.setInt(4, customer.getCustomerId());
             statement.executeUpdate();
         }
         catch (SQLException e) {

@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import static controller.LoginScreenController.currentUser;
 import static database.DBConnection.conn;
 
 public class AddressDao {
@@ -55,7 +56,7 @@ public class AddressDao {
 
         String updateAddress = String.join(" ",
                 "UPDATE address",
-                "SET address=?, address2=?, cityId=?, postalCode=?, phone=?, lastUpdate=NOW()",
+                "SET address=?, address2=?, cityId=?, postalCode=?, phone=?, lastUpdate=NOW(), lastUpdateBy=?",
                 "WHERE addressId=?");
 
         try {
@@ -65,8 +66,8 @@ public class AddressDao {
             statement.setInt(3, address.getCityId());
             statement.setString(4, address.getPostalCode());
             statement.setString(5, address.getPhone());
-            //statement.setString(6, loggedUser.getUserName());
-            statement.setInt(6, address.getAddressId());
+            statement.setString(6, currentUser.getUserName());
+            statement.setInt(7, address.getAddressId());
             statement.executeUpdate();
         }
         catch (SQLException e) {

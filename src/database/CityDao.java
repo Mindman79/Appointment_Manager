@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import static controller.LoginScreenController.currentUser;
 import static database.DBConnection.conn;
 
 public class CityDao {
@@ -50,15 +51,14 @@ public class CityDao {
 
         String updateCity = String.join(" ",
                 "UPDATE city",
-                "SET city=?, countryId=?, lastUpdate=NOW()",
+                "SET city=?, countryId=?, lastUpdate=NOW(), lastUpdateBy=?",
                 "WHERE cityId=?");
         try {
             PreparedStatement statement = conn.prepareStatement(updateCity);
             statement.setString(1, city.getCity());
             statement.setInt(2, city.getCountryId());
-            System.out.println("Country ID test 5: " + city.getCountryId());
-            //statement.setString(3, loggedUser.getUserName());
-            statement.setInt(3, city.getCityId());
+            statement.setString(3, currentUser.getUserName());
+            statement.setInt(4, city.getCityId());
             statement.executeUpdate();
         }
         catch (SQLException e) {
