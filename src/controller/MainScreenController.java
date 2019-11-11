@@ -75,7 +75,9 @@ public class MainScreenController {
     private Button logs_button;
 
     @FXML
-    void add_button_handler(ActionEvent event) {
+    void add_button_handler(ActionEvent event) throws IOException {
+
+
 
     }
 

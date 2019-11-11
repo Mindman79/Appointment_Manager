@@ -139,6 +139,59 @@ public class CustomerDao {
     }
 
 
-    public static void addCustomer(Customer newCustomer) {
+    public static Customer addCustomer(Customer customer) throws SQLException {
+
+        int nextCustomerId = getNextCustomerID();
+
+        String addCustomer = String.join(" ",
+                "INSERT INTO customer (customerId, customerName, addressId, active, createDate, createdBy, lastUpdate, lastUpdateBy)",
+                "VALUES (?, ?, ?, 1, NOW(), ?, NOW(), ?)");
+        
+        try {
+            PreparedStatement statement = conn.prepareStatement(addCustomer);
+            statement.setInt(1, nextCustomerId);
+            statement.setString(2, customer.getCustomerName());
+            statement.setInt(3, customer.getAddressId());
+            statement.setString(4, currentUser.getUserName());
+            statement.setString(5, currentUser.getUserName());
+            statement.executeUpdate();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("SQL Exception: " + e.getMessage());
+        }
+        return customer;
+
     }
+
+
+    private static int getNextCustomerID() throws SQLException {
+
+
+        int nextCustomerID = 0;
+
+        String sqlStatement = "SELECT COUNT(*) FROM customer";
+
+        try {
+            QueryManager.makeQuery(sqlStatement);
+
+            ResultSet result = QueryManager.getResult();
+
+            while (result.next()) {
+
+                nextCustomerID = result.getInt(1);
+
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("SQL Exception: " + e.getMessage());
+
+        }
+
+        return nextCustomerID + 1;
+
+    }
+    
+    
 }

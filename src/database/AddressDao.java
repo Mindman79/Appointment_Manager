@@ -6,6 +6,7 @@ import entity.Customer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import javax.swing.text.Caret;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,7 +25,6 @@ public class AddressDao {
 
         String sqlStatement = "SELECT * FROM address WHERE addressId = " + id + " ";
 
-        System.out.println(id);
         Address address = new Address();
 
         try {
@@ -76,5 +76,65 @@ public class AddressDao {
         }
     }
 
+
+    public static void addAddress(Address address) throws SQLException {
+
+
+        int addressId = getNextAddressId();
+
+        String addAddress = String.join(" ",
+                "INSERT INTO address (addressId, address, address2, cityId, postalCode, phone, createDate, createdBy, lastUpdate, lastUpdateBy)",
+                "VALUES (?, ?, ?, ?, ?, ?, NOW(), ?, NOW(), ?)");
+
+        try {
+            PreparedStatement statement = conn.prepareStatement(addAddress);
+            statement.setInt(1, addressId);
+            statement.setString(2, address.getAddress1());
+            statement.setString(3, address.getAddress2());
+            statement.setInt(4, address.getCityId());
+            statement.setString(5, address.getPostalCode());
+            statement.setString(6, address.getPhone());
+            statement.setString(7, currentUser.getUserName());
+            statement.setString(8, currentUser.getUserName());
+            statement.executeUpdate();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("SQL Exception (address): " + e.getMessage());
+        }
+
+
+
+
+    }
+
+
+    private static int getNextAddressId() throws SQLException {
+
+
+        int nextAddressID = 0;
+
+        String sqlStatement = "SELECT COUNT(*) FROM address";
+
+        try {
+            QueryManager.makeQuery(sqlStatement);
+
+            ResultSet result = QueryManager.getResult();
+
+            while (result.next()) {
+
+                nextAddressID = result.getInt(1);
+
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("SQL Exception: " + e.getMessage());
+
+        }
+
+        return nextAddressID + 1;
+
+    }
 
 }

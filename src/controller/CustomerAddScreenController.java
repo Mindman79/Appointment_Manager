@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class CustomerAddScreenController {
@@ -79,18 +80,18 @@ public class CustomerAddScreenController {
     }
 
     @FXML
-    void save_button_handler(ActionEvent event) throws IOException {
+    void save_button_handler(ActionEvent event) throws IOException, SQLException {
 
 
         setCountryIDFromName();
 
-        int customerId = newCustomer.getCustomerId();
+        //int customerId = newCustomer.getCustomerId();
 
-        System.out.println("Country ID last test: " + countryId);
+
 
         //Customer
         newCustomer.setCustomerName(customer_name_field.getText());
-        newCustomer.setCustomerId(customerId);
+        //newCustomer.setCustomerId(customerId);
 
 
 
@@ -107,9 +108,9 @@ public class CustomerAddScreenController {
 
 
         CustomerDao.addCustomer(newCustomer);
-        AddressDao.updateAddress(custAddress);
-        CityDao.updateCity(custCity);
-        CountryDao.updateCountry(custCountry);
+        AddressDao.addAddress(custAddress);
+        CityDao.addCity(custCity);
+        //CountryDao.addCountry(custCountry);
 
 
         stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
@@ -131,6 +132,13 @@ public class CustomerAddScreenController {
     @FXML
     void initialize() {
 
+        String country1 = "US";
+        String country2 = "Canada";
+        String country3 = "Norway";
+
+        country_combo_box.getItems().add(country1);
+        country_combo_box.getItems().add(country2);
+        country_combo_box.getItems().add(country3);
 
     }
 

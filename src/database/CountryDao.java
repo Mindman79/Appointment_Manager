@@ -74,4 +74,29 @@ public class CountryDao {
         }
     }
 
+    /*public static void addCountry(Country country) {
+        String addCountry = String.join(" ",
+                "INSERT INTO country (countryId, country, createDate, createdBy, lastUpdate, lastUpdateBy)",
+                "VALUES (?, ?, NOW(), ?, NOW(), ?)");
+
+        
+        try {
+            PreparedStatement statement = conn.prepareStatement(addCountry);
+            statement.setInt(???);
+            statement.setString(1, country.getCountry());
+            statement.setString(2, currentUser.getUserName());
+            statement.setString(3, currentUser.getUserName());
+            statement.executeUpdate();
+        }
+        catch (SQLException e) {
+
+            e.printStackTrace();
+            System.out.println("SQL Exception: " + e.getMessage());
+        }
+       
+    }*/
+
+    
+
+
 }

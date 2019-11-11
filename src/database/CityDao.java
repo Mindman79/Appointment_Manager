@@ -68,4 +68,57 @@ public class CityDao {
     }
 
 
+    public static City addCity(City city) throws SQLException {
+
+        int nextCityID = getNextCityId();
+
+        String addCity = String.join(" ",
+                "INSERT INTO city (cityId, city, countryId, createDate, createdBy, lastUpdate, lastUpdateBy)",
+                "VALUES (?, ?, ?, NOW(), ?, NOW(), ?)");
+
+        try {
+            PreparedStatement statement = conn.prepareStatement(addCity);
+            statement.setInt(1, nextCityID);
+            statement.setString(2, city.getCity());
+            statement.setInt(3, city.getCountryId());
+            statement.setString(4, currentUser.getUserName());
+            statement.setString(5, currentUser.getUserName());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("SQL Exception: " + e.getMessage());
+        }
+        return city;
+
+    }
+
+    private static int getNextCityId() throws SQLException {
+
+
+        int nextCityID = 0;
+
+        String sqlStatement = "SELECT COUNT(*) FROM city";
+
+        try {
+            QueryManager.makeQuery(sqlStatement);
+
+            ResultSet result = QueryManager.getResult();
+
+            while (result.next()) {
+
+                nextCityID = result.getInt(1);
+
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("SQL Exception: " + e.getMessage());
+
+        }
+
+        return nextCityID + 1;
+
+    }
+    
+    
 }
