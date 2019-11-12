@@ -116,6 +116,10 @@ public class CustomerScreenController {
     @FXML
     void delete_button_handler(ActionEvent event) {
 
+        Customer selectedCust = CustomerTable.getSelectionModel().getSelectedItem();
+        CustomerDao.deleteCustomer(selectedCust);
+
+        initialize();
     }
 
     @FXML

@@ -119,6 +119,23 @@ public class CityDao {
         return nextCityID + 1;
 
     }
-    
-    
+
+    public static void deleteCity(City city) {
+
+        String deleteCity = String.join(" ",
+                "DELETE city FROM city WHERE cityId = ?");
+
+        try {
+            PreparedStatement statement = conn.prepareStatement(deleteCity);
+            statement.setInt(1, city.getCityId());
+            statement.executeUpdate();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("SQL Exception: " + e.getMessage());
+        }
+    }
+
+
+
 }

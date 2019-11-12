@@ -98,7 +98,6 @@ public class CustomerAddScreenController {
         //newCustomer.setCustomerId(customerId);
 
 
-
         //Address
         custAddress.setAddressId(addressId);
         custAddress.setAddress1(address_line_1_field.getText());
@@ -116,9 +115,6 @@ public class CustomerAddScreenController {
         CityDao.addCity(custCity);
         AddressDao.addAddress(custAddress);
         CustomerDao.addCustomer(newCustomer);
-
-
-
 
 
         //CountryDao.addCountry(custCountry);
@@ -154,9 +150,6 @@ public class CustomerAddScreenController {
     }
 
 
-
-
-
     public void getCountryNameFromID(int countryId) {
 
         String country1 = "US";
@@ -170,13 +163,13 @@ public class CustomerAddScreenController {
 
         System.out.println("Country ID selected: " + countryId);
 
-        if(countryId == 1) {
+        if (countryId == 1) {
             country_combo_box.setValue(country1);
 
-        } else if(countryId == 2) {
+        } else if (countryId == 2) {
             country_combo_box.setValue(country2);
 
-        } else if(countryId == 3) {
+        } else if (countryId == 3) {
             country_combo_box.setValue(country3);
 
         }
@@ -190,39 +183,19 @@ public class CustomerAddScreenController {
         String value = (String) country_combo_box.getValue();
 
 
-
-        if(value.contains("US")) {
+        if (value.contains("US")) {
             countryId = 1;
 
-        } else if(value.contains("Canada")) {
+        } else if (value.contains("Canada")) {
             countryId = 2;
 
-        } else if(value.contains("Norway")) {
+        } else if (value.contains("Norway")) {
             countryId = 3;
 
         }
 
 
-
     }
-
-
-
-
-//    public void convertCountryToString() {
-//
-//        custCountry.setConverter(new StringConverter<Country>() {
-//            @Override
-//            public String toString(Country country) {
-//                return country.getCountry();
-//            }
-//
-//            @Override
-//            public Country fromString(String string) {
-//                return custCountry.getValue();
-//            }
-//        });
-//    }
 
 
 }

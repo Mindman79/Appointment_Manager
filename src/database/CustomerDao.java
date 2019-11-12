@@ -192,6 +192,23 @@ public class CustomerDao {
         return nextCustomerID + 1;
 
     }
-    
+
+
+    public static void deleteCustomer(Customer customer) {
+
+        String deleteCustomer = String.join(" ",
+                "DELETE customer FROM customer WHERE customerId = ?");
+
+        try {
+            PreparedStatement statement = conn.prepareStatement(deleteCustomer);
+            statement.setInt(1, customer.getCustomerId());
+            statement.executeUpdate();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("SQL Exception: " + e.getMessage());
+        }
+    }
+
     
 }

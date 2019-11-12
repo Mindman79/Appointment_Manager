@@ -137,4 +137,22 @@ public class AddressDao {
 
     }
 
+    public static void deleteAddress(Address address) {
+
+        String deleteAddress = String.join(" ",
+                "DELETE address FROM address WHERE addressId = ?");
+
+        try {
+            PreparedStatement statement = conn.prepareStatement(deleteAddress);
+            statement.setInt(1, address.getAddressId());
+            statement.executeUpdate();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("SQL Exception: " + e.getMessage());
+        }
+    }
+
+
+
 }
