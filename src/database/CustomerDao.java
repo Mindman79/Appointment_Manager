@@ -141,7 +141,7 @@ public class CustomerDao {
 
     public static Customer addCustomer(Customer customer) throws SQLException {
 
-        int nextCustomerId = getNextCustomerID();
+        //int nextCustomerId = getNextCustomerID();
 
         String addCustomer = String.join(" ",
                 "INSERT INTO customer (customerId, customerName, addressId, active, createDate, createdBy, lastUpdate, lastUpdateBy)",
@@ -149,7 +149,7 @@ public class CustomerDao {
         
         try {
             PreparedStatement statement = conn.prepareStatement(addCustomer);
-            statement.setInt(1, nextCustomerId);
+            statement.setInt(1, customer.getCustomerId());
             statement.setString(2, customer.getCustomerName());
             statement.setInt(3, customer.getAddressId());
             statement.setString(4, currentUser.getUserName());
@@ -165,7 +165,7 @@ public class CustomerDao {
     }
 
 
-    private static int getNextCustomerID() throws SQLException {
+    public static int getNextCustomerID() throws SQLException {
 
 
         int nextCustomerID = 0;

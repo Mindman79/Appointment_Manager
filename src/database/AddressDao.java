@@ -80,7 +80,7 @@ public class AddressDao {
     public static void addAddress(Address address) throws SQLException {
 
 
-        int addressId = getNextAddressId();
+        //int addressId = getNextAddressId();
 
         String addAddress = String.join(" ",
                 "INSERT INTO address (addressId, address, address2, cityId, postalCode, phone, createDate, createdBy, lastUpdate, lastUpdateBy)",
@@ -88,7 +88,7 @@ public class AddressDao {
 
         try {
             PreparedStatement statement = conn.prepareStatement(addAddress);
-            statement.setInt(1, addressId);
+            statement.setInt(1, address.getAddressId());
             statement.setString(2, address.getAddress1());
             statement.setString(3, address.getAddress2());
             statement.setInt(4, address.getCityId());
@@ -109,7 +109,7 @@ public class AddressDao {
     }
 
 
-    private static int getNextAddressId() throws SQLException {
+    public static int getNextAddressId() throws SQLException {
 
 
         int nextAddressID = 0;

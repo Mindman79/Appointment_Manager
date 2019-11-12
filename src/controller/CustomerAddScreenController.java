@@ -87,29 +87,40 @@ public class CustomerAddScreenController {
 
         //int customerId = newCustomer.getCustomerId();
 
-
+        int cityId = CityDao.getNextCityId();
+        int addressId = AddressDao.getNextAddressId();
+        int customerId = CustomerDao.getNextCustomerID();
 
         //Customer
         newCustomer.setCustomerName(customer_name_field.getText());
+        newCustomer.setCustomerId(customerId);
+        newCustomer.setAddressId(addressId);
         //newCustomer.setCustomerId(customerId);
 
 
 
         //Address
+        custAddress.setAddressId(addressId);
         custAddress.setAddress1(address_line_1_field.getText());
         custAddress.setAddress2(address_line_2_field.getText());
         custAddress.setPostalCode(postal_code_field.getText());
         custAddress.setPhone(phone_number_field.getText());
+        custAddress.setCityId(cityId);
 
         //City
         custCity.setCity(city_field.getText());
+        custCity.setCityId(cityId);
         custCity.setCountryId(countryId);
 
 
-
-        CustomerDao.addCustomer(newCustomer);
-        AddressDao.addAddress(custAddress);
         CityDao.addCity(custCity);
+        AddressDao.addAddress(custAddress);
+        CustomerDao.addCustomer(newCustomer);
+
+
+
+
+
         //CountryDao.addCountry(custCountry);
 
 

@@ -70,7 +70,7 @@ public class CityDao {
 
     public static City addCity(City city) throws SQLException {
 
-        int nextCityID = getNextCityId();
+        //int nextCityID = getNextCityId();
 
         String addCity = String.join(" ",
                 "INSERT INTO city (cityId, city, countryId, createDate, createdBy, lastUpdate, lastUpdateBy)",
@@ -78,7 +78,7 @@ public class CityDao {
 
         try {
             PreparedStatement statement = conn.prepareStatement(addCity);
-            statement.setInt(1, nextCityID);
+            statement.setInt(1, city.getCityId());
             statement.setString(2, city.getCity());
             statement.setInt(3, city.getCountryId());
             statement.setString(4, currentUser.getUserName());
@@ -92,7 +92,7 @@ public class CityDao {
 
     }
 
-    private static int getNextCityId() throws SQLException {
+    public static int getNextCityId() throws SQLException {
 
 
         int nextCityID = 0;
