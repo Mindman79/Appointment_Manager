@@ -1,157 +1,169 @@
 package entity;
 
 
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZonedDateTime;
 
 public class Appointment {
 
-    private int apptId;
-    private int custId;
-    private LocalDateTime apptStart;
-    private LocalDateTime apptEnd;
-    private String apptTitle;
-    private String apptDescription;
-    private String apptLocation;
-    private String apptContact;
-    private String apptType;
-    private String apptUrl;
-    private LocalDate apptCreateDate;
-    private String apptCreatedBy;
-    private LocalDateTime apptLastUpdate;
-    private String apptLastUpdatedBy;
+    private int appointmentId;
+    private int customerId;
+    private int userId;
+    private String title;
+    private String description;
+    private String location;
+    private String contact;
+    private String type;
+    private String url;
+    private LocalDateTime start;
+    private LocalDateTime end;
+    private LocalDate createDate;
+    private String createdBy;
+    private Timestamp lastUpdate;
+    private String lastUpdatedBy;
 
-    public Appointment(int apptId, int custId, LocalDateTime apptStart, LocalDateTime apptEnd, String apptTitle, String apptDescription, String apptLocation, String apptContact, String apptType, String apptUrl, LocalDate apptCreateDate, String apptCreatedBy, LocalDateTime apptLastUpdate, String apptLastUpdatedBy) {
-        this.apptId = apptId;
-        this.custId = custId;
-        this.apptStart = apptStart;
-        this.apptEnd = apptEnd;
-        this.apptTitle = apptTitle;
-        this.apptDescription = apptDescription;
-        this.apptLocation = apptLocation;
-        this.apptContact = apptContact;
-        this.apptType = apptType;
-        this.apptUrl = apptUrl;
-        this.apptCreateDate = apptCreateDate;
-        this.apptCreatedBy = apptCreatedBy;
-        this.apptLastUpdate = apptLastUpdate;
-        this.apptLastUpdatedBy = apptLastUpdatedBy;
+    public Appointment(int appointmentId, int customerId, int userId, String title, String description, String location, String contact, String type, String url, LocalDateTime start, LocalDateTime end, LocalDate createDate, String createdBy, Timestamp lastUpdate, String lastUpdatedBy) {
+        this.appointmentId = appointmentId;
+        this.customerId = customerId;
+        this.userId = userId;
+        this.title = title;
+        this.description = description;
+        this.location = location;
+        this.contact = contact;
+        this.type = type;
+        this.url = url;
+        this.start = start;
+        this.end = end;
+        this.createDate = createDate;
+        this.createdBy = createdBy;
+        this.lastUpdate = lastUpdate;
+        this.lastUpdatedBy = lastUpdatedBy;
     }
-
 
     public Appointment() {
     }
 
 
-    public int getApptId() {
-        return apptId;
+    public int getAppointmentId() {
+        return appointmentId;
     }
 
-    public void setApptId(int apptId) {
-        this.apptId = apptId;
+    public void setAppointmentId(int appointmentId) {
+        this.appointmentId = appointmentId;
     }
 
-    public int getCustId() {
-        return custId;
+    public int getCustomerId() {
+        return customerId;
     }
 
-    public void setCustId(int custId) {
-        this.custId = custId;
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
     }
 
-    public LocalDateTime getApptStart() {
-        return apptStart;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setApptStart(LocalDateTime apptStart) {
-        this.apptStart = apptStart;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
-    public LocalDateTime getApptEnd() {
-        return apptEnd;
+    public String getTitle() {
+        return title;
     }
 
-    public void setApptEnd(LocalDateTime apptEnd) {
-        this.apptEnd = apptEnd;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getApptTitle() {
-        return apptTitle;
+    public String getDescription() {
+        return description;
     }
 
-    public void setApptTitle(String apptTitle) {
-        this.apptTitle = apptTitle;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String getApptDescription() {
-        return apptDescription;
+    public String getLocation() {
+        return location;
     }
 
-    public void setApptDescription(String apptDescription) {
-        this.apptDescription = apptDescription;
+    public void setLocation(String location) {
+        this.location = location;
     }
 
-    public String getApptLocation() {
-        return apptLocation;
+    public String getContact() {
+        return contact;
     }
 
-    public void setApptLocation(String apptLocation) {
-        this.apptLocation = apptLocation;
+    public void setContact(String contact) {
+        this.contact = contact;
     }
 
-    public String getApptContact() {
-        return apptContact;
+    public String getType() {
+        return type;
     }
 
-    public void setApptContact(String apptContact) {
-        this.apptContact = apptContact;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public String getApptType() {
-        return apptType;
+    public String getUrl() {
+        return url;
     }
 
-    public void setApptType(String apptType) {
-        this.apptType = apptType;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
-    public String getApptUrl() {
-        return apptUrl;
+    public LocalDateTime getStart() {
+        return start;
     }
 
-    public void setApptUrl(String apptUrl) {
-        this.apptUrl = apptUrl;
+    public void setStart(LocalDateTime start) {
+        this.start = start;
     }
 
-    public LocalDate getApptCreateDate() {
-        return apptCreateDate;
+    public LocalDateTime getEnd() {
+        return end;
     }
 
-    public void setApptCreateDate(LocalDate apptCreateDate) {
-        this.apptCreateDate = apptCreateDate;
+    public void setEnd(LocalDateTime end) {
+        this.end = end;
     }
 
-    public String getApptCreatedBy() {
-        return apptCreatedBy;
+    public LocalDate getCreateDate() {
+        return createDate;
     }
 
-    public void setApptCreatedBy(String apptCreatedBy) {
-        this.apptCreatedBy = apptCreatedBy;
+    public void setCreateDate(LocalDate createDate) {
+        this.createDate = createDate;
     }
 
-    public LocalDateTime getApptLastUpdate() {
-        return apptLastUpdate;
+    public String getCreatedBy() {
+        return createdBy;
     }
 
-    public void setApptLastUpdate(LocalDateTime apptLastUpdate) {
-        this.apptLastUpdate = apptLastUpdate;
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
     }
 
-    public String getApptLastUpdatedBy() {
-        return apptLastUpdatedBy;
+    public Timestamp getLastUpdate() {
+        return lastUpdate;
     }
 
-    public void setApptLastUpdatedBy(String apptLastUpdatedBy) {
-        this.apptLastUpdatedBy = apptLastUpdatedBy;
+    public void setLastUpdate(Timestamp lastUpdate) {
+        this.lastUpdate = lastUpdate;
+    }
+
+    public String getLastUpdatedBy() {
+        return lastUpdatedBy;
+    }
+
+    public void setLastUpdatedBy(String lastUpdatedBy) {
+        this.lastUpdatedBy = lastUpdatedBy;
     }
 }

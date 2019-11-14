@@ -78,6 +78,10 @@ public class MainScreenController {
     void add_button_handler(ActionEvent event) throws IOException {
 
 
+        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("/view/AppointmentAddScreen.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.show();
 
     }
 
