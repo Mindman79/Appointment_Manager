@@ -2,7 +2,15 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
+
+import database.AddressDao;
+import database.AppointmentDao;
+import database.CustomerDao;
+import entity.Appointment;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,12 +21,17 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import utils.DateTime;
 
 public class MainScreenController {
 
+
     Stage stage;
     Parent scene;
+
+    private final DateTimeFormatter DTformatter = DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm a");
 
     @FXML
     private ResourceBundle resources;
@@ -33,22 +46,22 @@ public class MainScreenController {
     private TextField search_appointments_field;
 
     @FXML
-    private TableView<?> CustomerTable;
+    private TableView<Appointment> AppointmentTable;
 
     @FXML
-    private TableColumn<?, ?> cust_name_col;
+    private TableColumn<Appointment, String> appt_title_col;
 
     @FXML
-    private TableColumn<?, ?> cust_phone_col;
+    private TableColumn<Appointment, String> appt_description_col;
 
     @FXML
-    private TableColumn<?, ?> cust_address_col;
+    private TableColumn<Appointment, String> appt_location_col;
 
     @FXML
-    private TableColumn<?, ?> cust_city_col;
+    private TableColumn<Appointment, String> appt_start_col;
 
     @FXML
-    private TableColumn<?, ?> cust_zip_col;
+    private TableColumn<Appointment, String> appt_end_col;
 
     @FXML
     private Button add_button;
@@ -135,8 +148,23 @@ public class MainScreenController {
 
     }
 
+
+
+
     @FXML
     void initialize() {
+
+        AppointmentTable.setItems(AppointmentDao.getAllAppointments());
+        appt_title_col.setCellValueFactory(new PropertyValueFactory<>("title"));
+        appt_description_col.setCellValueFactory(new PropertyValueFactory<>("description"));
+        appt_location_col.setCellValueFactory(new PropertyValueFactory<>("location"));
+
+
+        //Lambda to insert/format cell data
+        appt_start_col.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEnd().format(DTformatter)));
+        appt_end_col.setCellValueFactory(cellData ->  new SimpleStringProperty(cellData.getValue().getEnd().format(DTformatter)));
+
+
 
     }
 

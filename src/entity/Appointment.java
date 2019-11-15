@@ -47,6 +47,14 @@ public class Appointment {
     }
 
 
+    public Appointment(String title, String description, String location, LocalDateTime start, LocalDateTime end) {
+        this.title = title;
+        this.description = description;
+        this.location = location;
+        this.start = start;
+        this.end = end;
+    }
+
     public int getAppointmentId() {
         return appointmentId;
     }

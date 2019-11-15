@@ -2,17 +2,68 @@ package database;
 
 import entity.Address;
 import entity.Appointment;
+import entity.Customer;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import utils.DateTime;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import static controller.LoginScreenController.currentUser;
 import static database.DBConnection.conn;
 
 public class AppointmentDao {
+
+    private static ObservableList<Appointment> Appointments = FXCollections.observableArrayList();
+
+
+    public static ObservableList<Appointment> getAllAppointments() {
+
+
+        Appointments.clear();
+
+
+        try {
+
+
+            /* String sqlStatement = "SELECT customerId, customerName, address.address, address.phone, address.postalCode, city.city FROM customer INNER JOIN address ON customer.addressId = address.addressId INNER JOIN city ON address.cityId = city.cityId";*/
+
+
+            String sqlStatement = "SELECT * FROM appointment";
+
+            QueryManager.makeQuery(sqlStatement);
+            ResultSet result = QueryManager.getResult();
+
+            while (result.next()) {
+
+
+
+                String appointmentTitle = result.getString("title");
+                String appointmentDescription = result.getString("description");
+                String appointmentLocation = result.getString("location");
+                LocalDateTime appointmentStartTime = result.getTimestamp("start").toLocalDateTime();
+                LocalDateTime appointmentEndTime = result.getTimestamp("end").toLocalDateTime();
+                Appointment appointment = new Appointment(appointmentTitle, appointmentDescription, appointmentLocation, appointmentStartTime, appointmentEndTime);
+
+
+
+
+
+                Appointments.add(appointment);
+
+            }
+
+            return Appointments;
+        } catch (SQLException e) {
+            System.out.println("SQL Exception: " + e.getMessage());
+            return null;
+        }
+    }
 
 
 
