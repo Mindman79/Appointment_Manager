@@ -34,6 +34,7 @@ public class AppointmentDao {
             statement.setInt(1, appointmentId);
             statement.setObject(2, appointment.getCustomerId());
             statement.setObject(3, currentUser.getUserId());
+            System.out.println("User ID test: " + currentUser.getUserId());
             statement.setObject(4, appointment.getTitle());
             statement.setObject(5, appointment.getDescription());
             statement.setObject(6, appointment.getLocation());

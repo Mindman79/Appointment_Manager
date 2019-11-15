@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -16,16 +17,25 @@ import entity.Customer;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import utils.DateTime;
 
+import static controller.LoginScreenController.currentUser;
+
 public class AppointmentAddScreenController {
+
+    Stage stage;
+    Parent scene;
 
     Appointment appointment = new Appointment();
 
@@ -108,12 +118,17 @@ public class AppointmentAddScreenController {
     }
 
     @FXML
-    void cancel_button_handler(ActionEvent event) {
+    void cancel_button_handler(ActionEvent event) throws IOException {
+
+        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("/view/MainScreen.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.show();
 
     }
 
     @FXML
-    void save_button_handler(ActionEvent event) throws SQLException {
+    void save_button_handler(ActionEvent event) throws SQLException, IOException {
 
 
         LocalDateTime start = LocalDateTime.of(start_date_selector.getValue(), LocalTime.parse(start_time_field.getText(), DateTimeFormatter.ofPattern("hh:mm a")));
@@ -121,6 +136,7 @@ public class AppointmentAddScreenController {
         LocalDateTime end = LocalDateTime.of(end_date_selector.getValue(), LocalTime.parse(end_time_field.getText(), DateTimeFormatter.ofPattern("hh:mm a")));
 
         appointment.setCustomerId(customer_combo_box.getValue().getCustomerId());
+        //appointment.setUserId(currentUser.getUserId());
         appointment.setTitle(title_field.getText());
         appointment.setDescription(description_field.getText());
         appointment.setLocation(location_field.getText());
@@ -132,6 +148,10 @@ public class AppointmentAddScreenController {
 
         AppointmentDao.addAppointment(appointment);
 
+        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("/view/MainScreen.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.show();
 
     }
 

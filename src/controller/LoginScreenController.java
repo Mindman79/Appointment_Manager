@@ -46,13 +46,13 @@ public class LoginScreenController {
         String username = username_field.getText();
         String password = password_field.getText();
 
+
         currentUser = new User();
 
 
-
-
-            currentUser.setUserName(username);
+        currentUser.setUserName(username);
         currentUser.setUserPassword(password);
+        currentUser.setUserId(1);
 
 
 
@@ -72,7 +72,7 @@ public class LoginScreenController {
 
         for (User user : Users) {
 
-            if(user.getUserName().equals(username) && user.getUserPassword().equals(password)) {
+            if (user.getUserName().equals(username) && user.getUserPassword().equals(password)) {
 
 //                System.out.println(user.getUserName());
 //                System.out.println(user.getUserPassword());
@@ -90,8 +90,6 @@ public class LoginScreenController {
 
 
         }
-
-
 
 
     }
