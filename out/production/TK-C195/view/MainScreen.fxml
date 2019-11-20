@@ -24,7 +24,7 @@
                 <Label layoutX="28.0" layoutY="27.0" text="Appointments" />
                 <Button fx:id="search_appointments_button" layoutX="188.0" layoutY="22.0" mnemonicParsing="false" onAction="#search_appointments_button_handler" text="Search" />
                 <TextField fx:id="search_appointments_field" layoutX="265.0" layoutY="22.0" onAction="#search_appointments_field_handler" />
-                <TableView fx:id="CustomerTable" layoutX="17.0" layoutY="78.0" prefHeight="208.0" prefWidth="551.0">
+                <TableView fx:id="AppointmentTable" layoutX="17.0" layoutY="78.0" prefHeight="208.0" prefWidth="551.0">
                     <columns>
                         <TableColumn fx:id="appt_title_col" prefWidth="110.0" text="Title" />
                         <TableColumn fx:id="appt_description_col" prefWidth="110.0" text="Description" />
