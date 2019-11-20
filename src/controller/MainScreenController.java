@@ -161,7 +161,7 @@ public class MainScreenController {
 
 
         //Lambda to insert/format cell data
-        appt_start_col.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEnd().format(DTformatter)));
+        appt_start_col.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStart().format(DTformatter)));
         appt_end_col.setCellValueFactory(cellData ->  new SimpleStringProperty(cellData.getValue().getEnd().format(DTformatter)));
 
 

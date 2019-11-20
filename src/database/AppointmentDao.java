@@ -28,6 +28,10 @@ public class AppointmentDao {
     public static ObservableList<Appointment> getAllAppointments() {
 
 
+        ZoneId localZoneId = ZoneId.of(TimeZone.getDefault().getID());
+
+        System.out.println("Local Zone ID: " + localZoneId);
+        //ZoneOffset offset = ZoneId.ofOffset(lo);
         Appointments.clear();
 
 
@@ -104,75 +108,45 @@ public class AppointmentDao {
         }
     }
 
-    public static Appointment dateTimeConverter(Appointment appointment) {
+    public static Timestamp startDateTimeConverter(Appointment appointment) {
 
-        //Get local Time Zone ID
         ZoneId localZoneId = ZoneId.of(TimeZone.getDefault().getID());
 
-        //Get startDateTime
         LocalDateTime appointmentStartDateTime = appointment.getStart();
-        //System.out.println("Appointment start date/time non-UTC: " + appointmentStartDateTime);
         ZonedDateTime startLDT = ZonedDateTime.of(appointmentStartDateTime, localZoneId);
 
+        Instant startTimeToUTC = startLDT.toInstant();
+        Timestamp timestampStart = Timestamp.from(startTimeToUTC);
 
-        //Get endDateTime
+        return timestampStart;
+
+    }
+
+
+    public static Timestamp endDateTimeConverter(Appointment appointment) {
+
+        ZoneId localZoneId = ZoneId.of(TimeZone.getDefault().getID());
+
         LocalDateTime appointmentEndDateTime = appointment.getEnd();
         ZonedDateTime endLDT = ZonedDateTime.of(appointmentEndDateTime, localZoneId);
 
-        Instant startTimeToUTC = startLDT.toInstant();
         Instant endTimeToUTC = endLDT.toInstant();
-        Timestamp timestampStart = Timestamp.from(startTimeToUTC);
-        Timestamp timestampEnd = Timestamp.from(startTimeToUTC);
+        Timestamp timestampEnd = Timestamp.from(endTimeToUTC);
 
+        return timestampEnd;
 
-        return appointment;
     }
 
 
     public static void addAppointment(Appointment appointment) throws SQLException {
 
-        //Get local Time Zone ID
-        ZoneId localZoneId = ZoneId.of(TimeZone.getDefault().getID());
 
-        //Get startDateTime
-        LocalDateTime appointmentStartDateTime = appointment.getStart();
-        System.out.println("Appointment start date/time non-UTC: " + appointmentStartDateTime);
-        ZonedDateTime startLDT = ZonedDateTime.of(appointmentStartDateTime, localZoneId);
-
-
-        //Get endDateTime
-        LocalDateTime appointmentEndDateTime = appointment.getEnd();
-        ZonedDateTime endLDT = ZonedDateTime.of(appointmentEndDateTime, localZoneId);
-
-
-        //LocalTime localTime = LocalTime.now();
-        //LocalDateTime localDate = LocalDateTime.now();
-
-
-
-
-        Instant startTimeToUTC = startLDT.toInstant();
-        Instant endTimeToUTC = endLDT.toInstant();
-        Timestamp timestampStart = Timestamp.from(startTimeToUTC);
-        Timestamp timestampEnd = Timestamp.from(endTimeToUTC);
-
-//        System.out.println("Start time UTC: " + startTimeToUTC.truncatedTo(ChronoUnit.SECONDS));
-//        System.out.println("End time UTC " + endTimeToUTC.truncatedTo(ChronoUnit.MINUTES));
-
-//        String datetime = String.valueOf(startTimeToUTC);
-//        datetime = datetime.substring(0, datetime.length() - 4);
-//        System.out.println("date time test: " + datetime);
-
-//        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm AA"); // your template here
-//        java.util.Date dateStr = formatter.parse(startTimeToUTC);
-
-//
-//        String fullPattern = "MM/dd/yyyy HH:mm AA";
-//        SimpleDateFormat fullDateFormat = new SimpleDateFormat(startTimeToUTC);
 
 
         int appointmentId = getNextApptId();
 
+        Timestamp timestampStart = startDateTimeConverter(appointment);
+        Timestamp timestampEnd = endDateTimeConverter(appointment);
 
         String addAppointment = String.join(" ",
                 "INSERT INTO appointment (appointmentId, customerId, userId, title, "
@@ -185,7 +159,6 @@ public class AppointmentDao {
             statement.setInt(1, appointmentId);
             statement.setObject(2, appointment.getCustomerId());
             statement.setObject(3, currentUser.getUserId());
-            System.out.println("User ID test: " + currentUser.getUserId());
             statement.setObject(4, appointment.getTitle());
             statement.setObject(5, appointment.getDescription());
             statement.setObject(6, appointment.getLocation());
