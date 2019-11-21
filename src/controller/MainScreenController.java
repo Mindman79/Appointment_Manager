@@ -1,10 +1,13 @@
 package controller;
 
+import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
+import java.util.TimeZone;
 
 import database.AddressDao;
 import database.AppointmentDao;
@@ -16,11 +19,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleButton;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import utils.DateTime;
@@ -30,6 +31,8 @@ public class MainScreenController {
 
     Stage stage;
     Parent scene;
+
+    private static ZoneId localZoneId = ZoneId.of(TimeZone.getDefault().getID());
 
     private final DateTimeFormatter DTformatter = DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm a");
 
@@ -55,9 +58,6 @@ public class MainScreenController {
     private TableColumn<Appointment, String> appt_description_col;
 
     @FXML
-    private TableColumn<Appointment, String> appt_location_col;
-
-    @FXML
     private TableColumn<Appointment, String> appt_start_col;
 
     @FXML
@@ -72,8 +72,7 @@ public class MainScreenController {
     @FXML
     private Button delete_button;
 
-    @FXML
-    private ToggleButton appointments_toggle_button;
+
 
     @FXML
     private Button customers_button;
@@ -88,6 +87,49 @@ public class MainScreenController {
     private Button logs_button;
 
     @FXML
+    private ToggleGroup appt_toggle_grp;
+
+    @FXML
+    private RadioButton appt_weekly_button;
+
+    @FXML
+    private RadioButton appt_monthly_button;
+
+    @FXML
+    private RadioButton appt_all_button;
+
+
+    @FXML
+    void appt_monthly_button_handler(ActionEvent event) {
+
+    }
+
+    @FXML
+    void appt_weekly_button_handler(ActionEvent event) {
+
+        AppointmentTable.setItems(AppointmentDao.getWeeklyAppointments());
+        appt_title_col.setCellValueFactory(new PropertyValueFactory<>("title"));
+        appt_description_col.setCellValueFactory(new PropertyValueFactory<>("description"));
+
+
+
+        //Lambda to insert/format cell data
+        appt_start_col.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStart().toLocalDateTime().atZone(localZoneId).format(DTformatter)));
+        appt_end_col.setCellValueFactory(cellData ->  new SimpleStringProperty(cellData.getValue().getEnd().toLocalDateTime().atZone(localZoneId).format(DTformatter)));
+
+
+
+    }
+
+    @FXML
+    void appt_all_button_handler(ActionEvent event) {
+
+        initialize();
+
+    }
+
+
+    @FXML
     void add_button_handler(ActionEvent event) throws IOException {
 
 
@@ -98,10 +140,6 @@ public class MainScreenController {
 
     }
 
-    @FXML
-    void appointments_toggle_button_handler(ActionEvent event) {
-
-    }
 
     @FXML
     void customers_button_handler(ActionEvent event) throws IOException {
@@ -154,17 +192,16 @@ public class MainScreenController {
     @FXML
     void initialize() {
 
+
         AppointmentTable.setItems(AppointmentDao.getAllAppointments());
         appt_title_col.setCellValueFactory(new PropertyValueFactory<>("title"));
         appt_description_col.setCellValueFactory(new PropertyValueFactory<>("description"));
-        appt_location_col.setCellValueFactory(new PropertyValueFactory<>("location"));
+
 
 
         //Lambda to insert/format cell data
-        appt_start_col.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStart().format(DTformatter)));
-        appt_end_col.setCellValueFactory(cellData ->  new SimpleStringProperty(cellData.getValue().getEnd().format(DTformatter)));
-
-
+        appt_start_col.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStart().toLocalDateTime().atZone(localZoneId).format(DTformatter)));
+        appt_end_col.setCellValueFactory(cellData ->  new SimpleStringProperty(cellData.getValue().getEnd().toLocalDateTime().atZone(localZoneId).format(DTformatter)));
 
     }
 

@@ -22,13 +22,14 @@ import static database.DBConnection.conn;
 
 public class AppointmentDao {
 
+    private static ZoneId localZoneId = ZoneId.of(TimeZone.getDefault().getID());
+
     private static ObservableList<Appointment> Appointments = FXCollections.observableArrayList();
 
 
     public static ObservableList<Appointment> getAllAppointments() {
 
 
-        ZoneId localZoneId = ZoneId.of(TimeZone.getDefault().getID());
 
         System.out.println("Local Zone ID: " + localZoneId);
         //ZoneOffset offset = ZoneId.ofOffset(lo);
@@ -41,7 +42,7 @@ public class AppointmentDao {
             /* String sqlStatement = "SELECT customerId, customerName, address.address, address.phone, address.postalCode, city.city FROM customer INNER JOIN address ON customer.addressId = address.addressId INNER JOIN city ON address.cityId = city.cityId";*/
 
 
-            String sqlStatement = "SELECT * FROM appointment";
+            String sqlStatement = "SELECT * FROM appointment ORDER BY start ASC";
 
             QueryManager.makeQuery(sqlStatement);
             ResultSet result = QueryManager.getResult();
@@ -52,8 +53,8 @@ public class AppointmentDao {
                 String appointmentTitle = result.getString("title");
                 String appointmentDescription = result.getString("description");
                 String appointmentLocation = result.getString("location");
-                LocalDateTime appointmentStartTime = result.getTimestamp("start").toLocalDateTime();
-                LocalDateTime appointmentEndTime = result.getTimestamp("end").toLocalDateTime();
+                ZonedDateTime appointmentStartTime = result.getTimestamp("start").toLocalDateTime().atZone(localZoneId);
+                ZonedDateTime appointmentEndTime = result.getTimestamp("end").toLocalDateTime().atZone(localZoneId);
                 Appointment appointment = new Appointment(appointmentTitle, appointmentDescription, appointmentLocation, appointmentStartTime, appointmentEndTime);
 
 
@@ -78,8 +79,8 @@ public class AppointmentDao {
         try {
 
 
-            String sqlStatement = "select * from appointment where start between utc_date + 0  and utc_date + 7" +
-                    "order by start desc;";
+            String sqlStatement = "select * from appointment where start between utc_date + 0  and utc_date + 6 ORDER BY start ASC";
+                    //"order by start desc;";
 
             QueryManager.makeQuery(sqlStatement);
             ResultSet result = QueryManager.getResult();
@@ -90,8 +91,8 @@ public class AppointmentDao {
                 String appointmentTitle = result.getString("title");
                 String appointmentDescription = result.getString("description");
                 String appointmentLocation = result.getString("location");
-                LocalDateTime appointmentStartTime = result.getTimestamp("start").toLocalDateTime();
-                LocalDateTime appointmentEndTime = result.getTimestamp("end").toLocalDateTime();
+                ZonedDateTime appointmentStartTime = result.getTimestamp("start").toLocalDateTime().atZone(localZoneId);
+                ZonedDateTime appointmentEndTime = result.getTimestamp("end").toLocalDateTime().atZone(localZoneId);
                 Appointment appointment = new Appointment(appointmentTitle, appointmentDescription, appointmentLocation, appointmentStartTime, appointmentEndTime);
 
 
@@ -110,10 +111,10 @@ public class AppointmentDao {
 
     public static Timestamp startDateTimeConverter(Appointment appointment) {
 
-        ZoneId localZoneId = ZoneId.of(TimeZone.getDefault().getID());
 
-        LocalDateTime appointmentStartDateTime = appointment.getStart();
-        ZonedDateTime startLDT = ZonedDateTime.of(appointmentStartDateTime, localZoneId);
+
+        ZonedDateTime appointmentStartDateTime = appointment.getStart();
+        ZonedDateTime startLDT = appointmentStartDateTime;
 
         Instant startTimeToUTC = startLDT.toInstant();
         Timestamp timestampStart = Timestamp.from(startTimeToUTC);
@@ -125,13 +126,15 @@ public class AppointmentDao {
 
     public static Timestamp endDateTimeConverter(Appointment appointment) {
 
-        ZoneId localZoneId = ZoneId.of(TimeZone.getDefault().getID());
 
-        LocalDateTime appointmentEndDateTime = appointment.getEnd();
-        ZonedDateTime endLDT = ZonedDateTime.of(appointmentEndDateTime, localZoneId);
+        ZonedDateTime appointmentEndDateTime = appointment.getEnd();
+        ZonedDateTime endLDT = appointmentEndDateTime;
 
         Instant endTimeToUTC = endLDT.toInstant();
+        System.out.println("Timestamp UTC: " + endTimeToUTC);
+
         Timestamp timestampEnd = Timestamp.from(endTimeToUTC);
+        System.out.println("Timestamp end: " + timestampEnd);
 
         return timestampEnd;
 

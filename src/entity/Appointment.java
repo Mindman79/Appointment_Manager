@@ -3,7 +3,7 @@ package entity;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.time.LocalTime;
 import java.time.ZonedDateTime;
 
@@ -18,14 +18,14 @@ public class Appointment {
     private String contact;
     private String type;
     private String url;
-    private LocalDateTime start;
-    private LocalDateTime end;
+    private ZonedDateTime start;
+    private ZonedDateTime end;
     private LocalDate createDate;
     private String createdBy;
     private Timestamp lastUpdate;
     private String lastUpdatedBy;
 
-    public Appointment(int appointmentId, int customerId, int userId, String title, String description, String location, String contact, String type, String url, LocalDateTime start, LocalDateTime end, LocalDate createDate, String createdBy, Timestamp lastUpdate, String lastUpdatedBy) {
+    public Appointment(int appointmentId, int customerId, int userId, String title, String description, String location, String contact, String type, String url, ZonedDateTime start, ZonedDateTime end, LocalDate createDate, String createdBy, Timestamp lastUpdate, String lastUpdatedBy) {
         this.appointmentId = appointmentId;
         this.customerId = customerId;
         this.userId = userId;
@@ -47,7 +47,7 @@ public class Appointment {
     }
 
 
-    public Appointment(String title, String description, String location, LocalDateTime start, LocalDateTime end) {
+    public Appointment(String title, String description, String location, ZonedDateTime start, ZonedDateTime end) {
         this.title = title;
         this.description = description;
         this.location = location;
@@ -127,19 +127,19 @@ public class Appointment {
         this.url = url;
     }
 
-    public LocalDateTime getStart() {
+    public ZonedDateTime getStart() {
         return start;
     }
 
-    public void setStart(LocalDateTime start) {
+    public void setStart(ZonedDateTime start) {
         this.start = start;
     }
 
-    public LocalDateTime getEnd() {
+    public ZonedDateTime getEnd() {
         return end;
     }
 
-    public void setEnd(LocalDateTime end) {
+    public void setEnd(ZonedDateTime end) {
         this.end = end;
     }
 

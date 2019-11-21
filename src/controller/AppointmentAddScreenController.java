@@ -3,12 +3,10 @@ package controller;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.ZonedDateTime;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
+import java.util.TimeZone;
 
 import database.AppointmentDao;
 import database.CustomerDao;
@@ -36,6 +34,8 @@ public class AppointmentAddScreenController {
 
     Stage stage;
     Parent scene;
+
+    private static ZoneId localZoneId = ZoneId.of(TimeZone.getDefault().getID());
 
     Appointment appointment = new Appointment();
 
@@ -130,10 +130,17 @@ public class AppointmentAddScreenController {
     @FXML
     void save_button_handler(ActionEvent event) throws SQLException, IOException {
 
+        //Get start date
+        LocalDate startDate = start_date_selector.getValue();
+        LocalTime startTime = LocalTime.parse(start_time_field.getText(), DateTimeFormatter.ofPattern("hh:mm a"));
+        ZonedDateTime start = ZonedDateTime.of(startDate, startTime, localZoneId);
 
-        LocalDateTime start = LocalDateTime.of(start_date_selector.getValue(), LocalTime.parse(start_time_field.getText(), DateTimeFormatter.ofPattern("hh:mm a")));
+        //Get end date
+        LocalDate endDate = end_date_selector.getValue();
+        LocalTime endTime = LocalTime.parse(end_time_field.getText(), DateTimeFormatter.ofPattern("hh:mm a"));
+        ZonedDateTime end = ZonedDateTime.of(endDate, endTime, localZoneId);
 
-        LocalDateTime end = LocalDateTime.of(end_date_selector.getValue(), LocalTime.parse(end_time_field.getText(), DateTimeFormatter.ofPattern("hh:mm a")));
+//        LocalDateTime end = LocalDateTime.of(end_date_selector.getValue(), LocalTime.parse(end_time_field.getText(), DateTimeFormatter.ofPattern("hh:mm a")));
 
         appointment.setCustomerId(customer_combo_box.getValue().getCustomerId());
         //appointment.setUserId(currentUser.getUserId());

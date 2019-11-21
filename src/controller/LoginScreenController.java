@@ -49,14 +49,20 @@ public class LoginScreenController {
 
         currentUser = new User();
 
-
-        currentUser.setUserName(username);
+        //TODO: Change this back to the variable name
+        currentUser.setUserName("test");
         currentUser.setUserPassword(password);
         currentUser.setUserId(1);
 
 
+        isValidUser = true;
+        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("/view/MainScreen.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.show();
 
 
+        //TODO: Setup this logger stuff
 
       /*  FileHandler userLogFH = new FileHandler("userlog.txt", true);
         SimpleFormatter sf = new SimpleFormatter();
@@ -65,17 +71,21 @@ public class LoginScreenController {
         userLog.setLevel(Level.INFO);
 */
 
-        ObservableList<User> Users = UserDao.getActiveUsers();
 
 
-        //TODO: Login loop
+
+        //TODO: Uncomment this stuff for the final login
+
+       /* ObservableList<User> Users = UserDao.getActiveUsers();
+
+
+
 
         for (User user : Users) {
 
             if (user.getUserName().equals(username) && user.getUserPassword().equals(password)) {
 
-//                System.out.println(user.getUserName());
-//                System.out.println(user.getUserPassword());
+
                 isValidUser = true;
                 stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
                 scene = FXMLLoader.load(getClass().getResource("/view/MainScreen.fxml"));
@@ -90,7 +100,7 @@ public class LoginScreenController {
 
 
         }
-
+*/
 
     }
 
