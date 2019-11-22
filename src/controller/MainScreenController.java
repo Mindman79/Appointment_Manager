@@ -32,7 +32,7 @@ public class MainScreenController {
     Stage stage;
     Parent scene;
 
-    private static ZoneId localZoneId = ZoneId.of(TimeZone.getDefault().getID());
+    private static ZoneId localZoneId = ZoneId.systemDefault();
 
     private final DateTimeFormatter DTformatter = DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm a");
 
@@ -115,8 +115,9 @@ public class MainScreenController {
 
         //Lambda to insert/format cell data
         appt_start_col.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStart().toLocalDateTime().atZone(localZoneId).format(DTformatter)));
-        appt_end_col.setCellValueFactory(cellData ->  new SimpleStringProperty(cellData.getValue().getEnd().toLocalDateTime().atZone(localZoneId).format(DTformatter)));
+        appt_end_col.setCellValueFactory(cellData ->  new SimpleStringProperty(cellData.getValue().getEnd().toLocalDateTime().format(DTformatter)));
 
+        //appt_end_col.setCellValueFactory(new PropertyValueFactory<>("end"));
 
 
     }
@@ -199,8 +200,12 @@ public class MainScreenController {
 
 
 
-        //Lambda to insert/format cell data
-        appt_start_col.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStart().toLocalDateTime().atZone(localZoneId).format(DTformatter)));
+
+//        appt_start_col.setCellValueFactory(new PropertyValueFactory<>("start"));
+//        appt_end_col.setCellValueFactory(new PropertyValueFactory<>("end"));
+//
+//        //Lambda to insert/format cell data
+       appt_start_col.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStart().toLocalDateTime().atZone(localZoneId).format(DTformatter)));
         appt_end_col.setCellValueFactory(cellData ->  new SimpleStringProperty(cellData.getValue().getEnd().toLocalDateTime().atZone(localZoneId).format(DTformatter)));
 
     }

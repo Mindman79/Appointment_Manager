@@ -22,7 +22,7 @@ import static database.DBConnection.conn;
 
 public class AppointmentDao {
 
-    private static ZoneId localZoneId = ZoneId.of(TimeZone.getDefault().getID());
+    private static ZoneId localZoneId = ZoneId.systemDefault();
 
     private static ObservableList<Appointment> Appointments = FXCollections.observableArrayList();
 
@@ -33,7 +33,7 @@ public class AppointmentDao {
 
         System.out.println("Local Zone ID: " + localZoneId);
         //ZoneOffset offset = ZoneId.ofOffset(lo);
-        Appointments.clear();
+        //Appointments.clear();
 
 
         try {
@@ -49,14 +49,23 @@ public class AppointmentDao {
 
             while (result.next()) {
 
+                Appointment appointment = new Appointment();
+                appointment.setTitle(result.getString("title"));
+                appointment.setDescription(result.getString("description"));
 
-                String appointmentTitle = result.getString("title");
-                String appointmentDescription = result.getString("description");
-                String appointmentLocation = result.getString("location");
-                ZonedDateTime appointmentStartTime = result.getTimestamp("start").toLocalDateTime().atZone(localZoneId);
-                ZonedDateTime appointmentEndTime = result.getTimestamp("end").toLocalDateTime().atZone(localZoneId);
-                Appointment appointment = new Appointment(appointmentTitle, appointmentDescription, appointmentLocation, appointmentStartTime, appointmentEndTime);
+                LocalDateTime startUTC = result.getTimestamp("start").toLocalDateTime();
+                LocalDateTime endUTC = result.getTimestamp("end").toLocalDateTime();
+                ZonedDateTime startLocal = ZonedDateTime.ofInstant(startUTC.toInstant(ZoneOffset.UTC), localZoneId);
+                ZonedDateTime endLocal = ZonedDateTime.ofInstant(endUTC.toInstant(ZoneOffset.UTC), localZoneId);
 
+                appointment.setStart(startLocal);
+                appointment.setEnd(endLocal);
+
+
+
+
+
+//                Appointment appointment = new Appointment(appointmentTitle, appointmentDescription, appointmentLocation, appointmentStartTime, appointmentEndTime);
 
                 Appointments.add(appointment);
 
@@ -116,8 +125,11 @@ public class AppointmentDao {
         ZonedDateTime appointmentStartDateTime = appointment.getStart();
         ZonedDateTime startLDT = appointmentStartDateTime;
 
-        Instant startTimeToUTC = startLDT.toInstant();
-        Timestamp timestampStart = Timestamp.from(startTimeToUTC);
+        ZonedDateTime startToUTC = startLDT.withZoneSameInstant(ZoneId.of("UTC"));
+
+        LocalDateTime startTime = startToUTC.toLocalDateTime();
+        Timestamp timestampStart = Timestamp.valueOf(startTime);
+        System.out.println("Timestamp start: " + timestampStart);
 
         return timestampStart;
 
@@ -130,10 +142,13 @@ public class AppointmentDao {
         ZonedDateTime appointmentEndDateTime = appointment.getEnd();
         ZonedDateTime endLDT = appointmentEndDateTime;
 
-        Instant endTimeToUTC = endLDT.toInstant();
-        System.out.println("Timestamp UTC: " + endTimeToUTC);
+//        Instant endTimeToUTC = endLDT.toInstant();
+//        System.out.println("Timestamp UTC: " + endTimeToUTC);
 
-        Timestamp timestampEnd = Timestamp.from(endTimeToUTC);
+        ZonedDateTime endToUTC = endLDT.withZoneSameInstant(ZoneId.of("UTC"));
+
+        LocalDateTime endTime = endToUTC.toLocalDateTime();
+        Timestamp timestampEnd = Timestamp.valueOf(endTime);
         System.out.println("Timestamp end: " + timestampEnd);
 
         return timestampEnd;
