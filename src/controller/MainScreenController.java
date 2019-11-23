@@ -13,6 +13,7 @@ import database.AddressDao;
 import database.AppointmentDao;
 import database.CustomerDao;
 import entity.Appointment;
+import entity.Customer;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -155,6 +156,12 @@ public class MainScreenController {
     @FXML
     void delete_button_handler(ActionEvent event) {
 
+        Appointment selectedAppt = AppointmentTable.getSelectionModel().getSelectedItem();
+        AppointmentDao.deleteAppointment(selectedAppt);
+
+
+        initialize();
+
     }
 
     @FXML
@@ -168,8 +175,29 @@ public class MainScreenController {
     }
 
     @FXML
-    void modify_button_handler(ActionEvent event) {
+    void modify_button_handler(ActionEvent event) throws IOException {
 
+
+        FXMLLoader modifyAppointmentLoader = new FXMLLoader();
+        modifyAppointmentLoader.setLocation(getClass().getResource("/view/AppointmentEditScreen.fxml"));
+        modifyAppointmentLoader.load();
+
+        //Get another controller
+        AppointmentEditScreenController Controller = modifyAppointmentLoader.getController();
+
+        //Connect to receive method in other controller
+        Appointment selectedAppt = AppointmentTable.getSelectionModel().getSelectedItem();
+        Controller.receiveAppointment(selectedAppt);
+      System.out.println("Appointment ID test 3: " + selectedAppt.getAppointmentId());
+       System.out.println("Appointment Name test 3: " + selectedAppt.getTitle());
+       System.out.println("Appointment Customer  ID test 3: " + selectedAppt.getCustomerId());
+
+        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+        Parent scene = modifyAppointmentLoader.getRoot();
+        stage.setScene(new Scene(scene));
+        stage.show();
+        
+        
     }
 
     @FXML

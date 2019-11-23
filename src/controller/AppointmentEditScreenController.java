@@ -3,7 +3,10 @@ package controller;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.time.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import java.util.TimeZone;
@@ -21,23 +24,20 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
-import utils.DateTime;
 
 import static controller.LoginScreenController.currentUser;
 
-public class AppointmentAddScreenController {
-
-    Stage stage;
-    Parent scene;
+public class AppointmentEditScreenController {
 
     private static ZoneId localZoneId = ZoneId.of(TimeZone.getDefault().getID());
 
-    Appointment appointment = new Appointment();
+    private Appointment appointment = new Appointment();
+
+    Stage stage;
+    Parent scene;
 
     @FXML
     private ResourceBundle resources;
@@ -46,10 +46,19 @@ public class AppointmentAddScreenController {
     private URL location;
 
     @FXML
+    private ComboBox<Customer> customer_combo_box;
+
+    @FXML
     private TextField title_field;
 
     @FXML
+    private TextField description_field;
+
+    @FXML
     private TextField location_field;
+
+    @FXML
+    private TextField contact_field;
 
     @FXML
     private TextField type_field;
@@ -58,34 +67,16 @@ public class AppointmentAddScreenController {
     private TextField url_field;
 
     @FXML
-    private TextField description_field;
-
-    @FXML
-    private ComboBox<Customer> customer_combo_box;
-
-    @FXML
-    private TextField contact_field;
-
-    @FXML
     private DatePicker start_date_selector;
-
-    @FXML
-    private DatePicker end_date_selector;
 
     @FXML
     private TextField start_time_field;
 
     @FXML
+    private DatePicker end_date_selector;
+
+    @FXML
     private TextField end_time_field;
-
-    @FXML
-    private RadioButton EndTimeAMRadioButton;
-
-    @FXML
-    private ToggleGroup EndTimeToggle;
-
-    @FXML
-    private RadioButton EndTimePMRadioButton;
 
     @FXML
     private Button save_button;
@@ -94,41 +85,13 @@ public class AppointmentAddScreenController {
     private Button cancel_button;
 
     @FXML
-    private RadioButton StartTimeAMRadioButton;
-
-    @FXML
-    private RadioButton StartTimePMRadioButton;
-
-    @FXML
-    private ToggleGroup StartTimeToggle;
-
-    @FXML
-    void EndTimeAMRadioButtonHandler(ActionEvent event) {
-
-    }
-
-    @FXML
-    void EndTimePMRadioButtonHandler(ActionEvent event) {
-
-    }
-
-    @FXML
-    void StartTimeAMRadioButtonHandler(ActionEvent event) {
-
-    }
-
-    @FXML
-    void cancel_button_handler(ActionEvent event) throws IOException {
-
-        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/view/MainScreen.fxml"));
-        stage.setScene(new Scene(scene));
-        stage.show();
+    void cancel_button_handler(ActionEvent event) {
 
     }
 
     @FXML
     void save_button_handler(ActionEvent event) throws SQLException, IOException {
+
 
         //Get start date
         LocalDate startDate = start_date_selector.getValue();
@@ -143,6 +106,7 @@ public class AppointmentAddScreenController {
 //        LocalDateTime end = LocalDateTime.of(end_date_selector.getValue(), LocalTime.parse(end_time_field.getText(), DateTimeFormatter.ofPattern("hh:mm a")));
 
         appointment.setCustomerId(customer_combo_box.getValue().getCustomerId());
+        appointment.setAppointmentId(appointment.getAppointmentId());
         //appointment.setUserId(currentUser.getUserId());
         appointment.setTitle(title_field.getText());
         appointment.setDescription(description_field.getText());
@@ -153,33 +117,68 @@ public class AppointmentAddScreenController {
         appointment.setStart(start);
         appointment.setEnd(end);
 
-        AppointmentDao.addAppointment(appointment);
+        //System.out.println("Customer ID test: " + customer_combo_box.getValue().getCustomerId());
+        AppointmentDao.updateAppointment(appointment);
 
         stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/view/MainScreen.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
 
+
     }
 
     @FXML
     void initialize() {
 
-        ObservableList<Customer> customers = CustomerDao.getAllCustomers();
-
-
         customer_combo_box.setConverter(new StringConverter<Customer>() {
             @Override
             public String toString(Customer customer) {
+
                 return customer.getCustomerName();
+
             }
 
             @Override
             public Customer fromString(String string) {
-                return null;
+
+                return customer_combo_box.getValue();
+
             }
         });
 
-        customer_combo_box.setItems(customers);
+    }
+
+
+
+
+    public void receiveAppointment(Appointment selectedAppt) {
+
+
+        appointment = selectedAppt;
+        
+        
+        customer_combo_box.setItems(CustomerDao.getAllCustomers());
+
+        int selectedCustId = appointment.getCustomerId();
+        Customer selectedCust = CustomerDao.getCustomerById(selectedCustId);
+
+        customer_combo_box.getSelectionModel().select(selectedCust);
+        customer_combo_box.setValue(selectedCust);
+
+        title_field.setText(appointment.getTitle());
+        description_field.setText(appointment.getDescription());
+        location_field.setText(appointment.getLocation());
+        contact_field.setText(appointment.getContact());
+        type_field.setText(appointment.getType());
+        url_field.setText(appointment.getUrl());
+
+        start_time_field.setText(appointment.getStart().format(DateTimeFormatter.ofPattern("hh:mm a")));
+        end_time_field.setText(appointment.getEnd().format(DateTimeFormatter.ofPattern("hh:mm a")));
+        start_date_selector.setValue(appointment.getStart().toLocalDate());
+        end_date_selector.setValue(appointment.getEnd().toLocalDate());
+
+
+
     }
 }

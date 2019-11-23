@@ -32,7 +32,7 @@ public class CustomerScreenController {
     Stage stage;
     Parent scene;
 
-    public static Customer selectedCust;
+    //public static Customer selectedCust;
 
     @FXML
     private Button search_customers_button;

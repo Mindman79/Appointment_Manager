@@ -29,17 +29,9 @@ public class AppointmentDao {
 
     public static ObservableList<Appointment> getAllAppointments() {
 
-
-
-        System.out.println("Local Zone ID: " + localZoneId);
-        //ZoneOffset offset = ZoneId.ofOffset(lo);
-        //Appointments.clear();
-
+        Appointments.clear();
 
         try {
-
-
-            /* String sqlStatement = "SELECT customerId, customerName, address.address, address.phone, address.postalCode, city.city FROM customer INNER JOIN address ON customer.addressId = address.addressId INNER JOIN city ON address.cityId = city.cityId";*/
 
 
             String sqlStatement = "SELECT * FROM appointment ORDER BY start ASC";
@@ -50,8 +42,14 @@ public class AppointmentDao {
             while (result.next()) {
 
                 Appointment appointment = new Appointment();
+                appointment.setAppointmentId(result.getInt("appointmentId"));
+                appointment.setCustomerId(result.getInt("customerId"));
                 appointment.setTitle(result.getString("title"));
                 appointment.setDescription(result.getString("description"));
+                appointment.setLocation(result.getString("location"));
+                appointment.setContact(result.getString("contact"));
+                appointment.setType(result.getString("type"));
+                appointment.setUrl(result.getString("url"));
 
                 LocalDateTime startUTC = result.getTimestamp("start").toLocalDateTime();
                 LocalDateTime endUTC = result.getTimestamp("end").toLocalDateTime();
@@ -61,11 +59,6 @@ public class AppointmentDao {
                 appointment.setStart(startLocal);
                 appointment.setEnd(endLocal);
 
-
-
-
-
-//                Appointment appointment = new Appointment(appointmentTitle, appointmentDescription, appointmentLocation, appointmentStartTime, appointmentEndTime);
 
                 Appointments.add(appointment);
 
@@ -84,27 +77,33 @@ public class AppointmentDao {
 
         Appointments.clear();
 
-
         try {
 
 
             String sqlStatement = "select * from appointment where start between utc_date + 0  and utc_date + 6 ORDER BY start ASC";
-                    //"order by start desc;";
 
             QueryManager.makeQuery(sqlStatement);
             ResultSet result = QueryManager.getResult();
 
             while (result.next()) {
 
+                Appointment appointment = new Appointment();
+                appointment.setAppointmentId(result.getInt("appointmentId"));
+                appointment.setCustomerId(result.getInt("customerId"));
+                appointment.setTitle(result.getString("title"));
+                appointment.setDescription(result.getString("description"));
+                appointment.setLocation(result.getString("location"));
+                appointment.setContact(result.getString("contact"));
+                appointment.setType(result.getString("type"));
+                appointment.setUrl(result.getString("url"));
 
-                String appointmentTitle = result.getString("title");
-                String appointmentDescription = result.getString("description");
-                String appointmentLocation = result.getString("location");
-                ZonedDateTime appointmentStartTime = result.getTimestamp("start").toLocalDateTime().atZone(localZoneId);
-                ZonedDateTime appointmentEndTime = result.getTimestamp("end").toLocalDateTime().atZone(localZoneId);
-                Appointment appointment = new Appointment(appointmentTitle, appointmentDescription, appointmentLocation, appointmentStartTime, appointmentEndTime);
+                LocalDateTime startUTC = result.getTimestamp("start").toLocalDateTime();
+                LocalDateTime endUTC = result.getTimestamp("end").toLocalDateTime();
+                ZonedDateTime startLocal = ZonedDateTime.ofInstant(startUTC.toInstant(ZoneOffset.UTC), localZoneId);
+                ZonedDateTime endLocal = ZonedDateTime.ofInstant(endUTC.toInstant(ZoneOffset.UTC), localZoneId);
 
-
+                appointment.setStart(startLocal);
+                appointment.setEnd(endLocal);
 
 
                 Appointments.add(appointment);
@@ -118,8 +117,55 @@ public class AppointmentDao {
         }
     }
 
-    public static Timestamp startDateTimeConverter(Appointment appointment) {
 
+    public static ObservableList<Appointment> getMonthlyAppointments() {
+
+
+        Appointments.clear();
+
+        try {
+
+
+            String sqlStatement = "select * from appointment where start between utc_date + 0  and utc_date + 30 ORDER BY start ASC";
+
+            QueryManager.makeQuery(sqlStatement);
+            ResultSet result = QueryManager.getResult();
+
+            while (result.next()) {
+
+                Appointment appointment = new Appointment();
+                appointment.setAppointmentId(result.getInt("appointmentId"));
+                appointment.setCustomerId(result.getInt("customerId"));
+                appointment.setTitle(result.getString("title"));
+                appointment.setDescription(result.getString("description"));
+                appointment.setLocation(result.getString("location"));
+                appointment.setContact(result.getString("contact"));
+                appointment.setType(result.getString("type"));
+                appointment.setUrl(result.getString("url"));
+
+                LocalDateTime startUTC = result.getTimestamp("start").toLocalDateTime();
+                LocalDateTime endUTC = result.getTimestamp("end").toLocalDateTime();
+                ZonedDateTime startLocal = ZonedDateTime.ofInstant(startUTC.toInstant(ZoneOffset.UTC), localZoneId);
+                ZonedDateTime endLocal = ZonedDateTime.ofInstant(endUTC.toInstant(ZoneOffset.UTC), localZoneId);
+
+                appointment.setStart(startLocal);
+                appointment.setEnd(endLocal);
+
+
+                Appointments.add(appointment);
+
+            }
+
+            return Appointments;
+        } catch (SQLException e) {
+            System.out.println("SQL Exception: " + e.getMessage());
+            return null;
+        }
+    }
+
+
+
+    public static Timestamp startDateTimeConverter(Appointment appointment) {
 
 
         ZonedDateTime appointmentStartDateTime = appointment.getStart();
@@ -157,8 +203,6 @@ public class AppointmentDao {
 
 
     public static void addAppointment(Appointment appointment) throws SQLException {
-
-
 
 
         int appointmentId = getNextApptId();
@@ -226,5 +270,101 @@ public class AppointmentDao {
 
     }
 
+
+    public static void deleteAppointment(Appointment appointment) {
+
+        String deleteAppointment = String.join(" ",
+                "DELETE appointment FROM appointment WHERE appointmentId = ?");
+
+        try {
+            PreparedStatement statement = conn.prepareStatement(deleteAppointment);
+            statement.setInt(1, appointment.getAppointmentId());
+            statement.executeUpdate();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("SQL Exception: " + e.getMessage());
+        }
+    }
+
+
+    public static void updateAppointment(Appointment appointment) throws SQLException {
+
+
+
+
+        Timestamp timestampStart = startDateTimeConverter(appointment);
+        Timestamp timestampEnd = endDateTimeConverter(appointment);
+
+        String updateAppointment = String.join(" ",
+                "UPDATE appointment",
+                "SET customerId=?, userId=?, title=?, description=?, location=?," +
+                        "contact=?, type=?, url=?, start=?, end=?, lastUpdate=NOW(), lastUpdateBy=?",
+                "WHERE appointmentId=?");
+
+        try {
+            PreparedStatement statement = conn.prepareStatement(updateAppointment);
+            statement.setInt(1, appointment.getCustomerId());
+            statement.setInt(2, currentUser.getUserId());
+            statement.setObject(3, appointment.getTitle());
+            statement.setObject(4, appointment.getDescription());
+            statement.setObject(5, appointment.getLocation());
+            statement.setObject(6, appointment.getContact());
+            statement.setObject(7, appointment.getType());
+            statement.setObject(8, appointment.getUrl());
+            statement.setTimestamp(9, timestampStart);
+            statement.setTimestamp(10, timestampEnd);
+            statement.setObject(11, currentUser.getUserName());
+            statement.setInt(12, appointment.getAppointmentId());
+
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("SQL Exception (appointment): " + e.getMessage());
+        }
+
+
+    }
+
+
+    public static Appointment getAppointmentById(int id)  {
+
+
+        Appointment appointment = new Appointment();
+
+        try {
+
+
+            String sqlStatement = "SELECT * FROM appointment WHERE appointmentId = " + id + " ";
+
+            QueryManager.makeQuery(sqlStatement);
+            ResultSet result = QueryManager.getResult();
+
+            while (result.next()) {
+
+
+                //appointment.setCustomerId(result.getInt());
+                appointment.setTitle(result.getString("title"));
+                appointment.setDescription(result.getString("description"));
+
+                LocalDateTime startUTC = result.getTimestamp("start").toLocalDateTime();
+                LocalDateTime endUTC = result.getTimestamp("end").toLocalDateTime();
+                ZonedDateTime startLocal = ZonedDateTime.ofInstant(startUTC.toInstant(ZoneOffset.UTC), localZoneId);
+                ZonedDateTime endLocal = ZonedDateTime.ofInstant(endUTC.toInstant(ZoneOffset.UTC), localZoneId);
+
+                appointment.setStart(startLocal);
+                appointment.setEnd(endLocal);
+
+
+                Appointments.add(appointment);
+
+            }
+
+            return appointment;
+        } catch (SQLException e) {
+            System.out.println("SQL Exception: " + e.getMessage());
+            return null;
+        }
+    }
 
 }
