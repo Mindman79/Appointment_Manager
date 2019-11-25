@@ -1,0 +1,4 @@
+Nov 25, 2019 3:09:59 PM controller.LoginScreenController LoginButtonHandler
+INFO: User test logged in successfully
+Nov 25, 2019 3:12:42 PM controller.LoginScreenController LoginButtonHandler
+INFO: User test logged in successfully

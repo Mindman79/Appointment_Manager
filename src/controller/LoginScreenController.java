@@ -13,7 +13,9 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
@@ -23,12 +25,12 @@ import java.util.logging.SimpleFormatter;
 
 public class LoginScreenController {
 
-    Logger userLog = Logger.getLogger("userlog.txt");
+    Logger userLogger = Logger.getLogger("userlog.txt");
 
     Stage stage;
     Parent scene;
 
-    Boolean isValidUser;
+    Boolean isValidUser = false;
 
     @FXML
     private Button login_button;
@@ -61,20 +63,20 @@ public class LoginScreenController {
         stage.setScene(new Scene(scene));
         stage.show();
 
+        if(isValidUser = true) {
 
-        //TODO: Setup this logger stuff
+            FileHandler userLF = new FileHandler("userlog.txt", true);
+            SimpleFormatter sf = new SimpleFormatter();
+            userLF.setFormatter(sf);
+            userLogger.addHandler(userLF);
+            userLogger.log(Level.INFO, "User " + currentUser.getUserName() + " logged in successfully");
 
-      /*  FileHandler userLogFH = new FileHandler("userlog.txt", true);
-        SimpleFormatter sf = new SimpleFormatter();
-        userLogFH.setFormatter(sf);
-        userLog.addHandler(userLogFH);
-        userLog.setLevel(Level.INFO);
-*/
-
-
+        }
 
 
-        //TODO: Uncomment this stuff for the final login
+
+
+        //TODO: Uncomment this stuff for the final login and move the logger down here
 
        /* ObservableList<User> Users = UserDao.getActiveUsers();
 

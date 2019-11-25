@@ -2,6 +2,7 @@ package controller;
 
 import java.awt.*;
 import java.io.IOException;
+import java.lang.management.PlatformLoggingMXBean;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -14,6 +15,7 @@ import database.AppointmentDao;
 import database.CustomerDao;
 import entity.Appointment;
 import entity.Customer;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -167,10 +169,20 @@ public class MainScreenController {
     @FXML
     void exit_button_handler(ActionEvent event) {
 
+        Platform.exit();
+
     }
 
     @FXML
     void logs_button_handler(ActionEvent event) {
+
+        try {
+            ProcessBuilder pb = new ProcessBuilder("Notepad.exe", "userlog.txt");
+            pb.start();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
