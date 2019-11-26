@@ -367,4 +367,58 @@ public class AppointmentDao {
         }
     }
 
+
+
+    public static ObservableList<Appointment> getUpcomingAppointments() {
+
+
+        Appointments.clear();
+
+        try {
+
+
+            String upcomingAppointment = "SELECT * FROM appointment WHERE (start BETWEEN NOW() AND ADDTIME(NOW(), '00:15:00'))";
+
+//            QueryManager.makeQuery(sqlStatement);
+//            ResultSet result = QueryManager.getResult();
+
+
+            PreparedStatement statement = conn.prepareStatement(upcomingAppointment);
+//            statement.setTimestamp(1, Timestamp.valueOf(String.valueOf(localZoneId)));
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()) {
+
+                Appointment appointment = new Appointment();
+                appointment.setAppointmentId(result.getInt("appointmentId"));
+                appointment.setCustomerId(result.getInt("customerId"));
+                appointment.setTitle(result.getString("title"));
+                appointment.setDescription(result.getString("description"));
+                appointment.setLocation(result.getString("location"));
+                appointment.setContact(result.getString("contact"));
+                appointment.setType(result.getString("type"));
+                appointment.setUrl(result.getString("url"));
+
+                LocalDateTime startUTC = result.getTimestamp("start").toLocalDateTime();
+                LocalDateTime endUTC = result.getTimestamp("end").toLocalDateTime();
+                ZonedDateTime startLocal = ZonedDateTime.ofInstant(startUTC.toInstant(ZoneOffset.UTC), localZoneId);
+                ZonedDateTime endLocal = ZonedDateTime.ofInstant(endUTC.toInstant(ZoneOffset.UTC), localZoneId);
+
+                appointment.setStart(startLocal);
+                appointment.setEnd(endLocal);
+
+
+                Appointments.add(appointment);
+
+            }
+
+            return Appointments;
+        } catch (SQLException e) {
+            System.out.println("SQL Exception: " + e.getMessage());
+            return null;
+        }
+    }
+
+
+
 }
