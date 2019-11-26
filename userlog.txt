@@ -2,3 +2,11 @@ Nov 25, 2019 3:09:59 PM controller.LoginScreenController LoginButtonHandler
 INFO: User test logged in successfully
 Nov 25, 2019 3:12:42 PM controller.LoginScreenController LoginButtonHandler
 INFO: User test logged in successfully
+Nov 25, 2019 11:16:49 PM controller.LoginScreenController LoginButtonHandler
+INFO: User test logged in successfully
+Nov 25, 2019 11:19:44 PM controller.LoginScreenController LoginButtonHandler
+INFO: User test logged in successfully
+Nov 25, 2019 11:34:33 PM controller.LoginScreenController LoginButtonHandler
+INFO: User test logged in successfully
+Nov 25, 2019 11:39:46 PM controller.LoginScreenController LoginButtonHandler
+INFO: User test logged in successfully

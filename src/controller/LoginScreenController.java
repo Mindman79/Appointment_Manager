@@ -16,7 +16,10 @@ import javafx.stage.Stage;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URL;
 import java.sql.SQLException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -48,6 +51,12 @@ public class LoginScreenController {
         String username = username_field.getText();
         String password = password_field.getText();
 
+//        Locale espanol = new Locale("es", "ES");
+//        ResourceBundle rb = ResourceBundle.getBundle("locale/Nat", espanol);
+//        if(Locale.getDefault().getLanguage().equals("es"));
+//        System.out.println(rb.getString("username"));
+//        username_field.setPromptText(rb.getString("username"));
+//        password_field.setPromptText(rb.getString("password"));
 
         currentUser = new User();
 
@@ -55,6 +64,10 @@ public class LoginScreenController {
         currentUser.setUserName("test");
         currentUser.setUserPassword(password);
         currentUser.setUserId(1);
+
+
+
+
 
 
         isValidUser = true;
@@ -104,6 +117,23 @@ public class LoginScreenController {
         }
 */
 
+    }
+
+
+
+
+    @FXML
+    void initialize() {
+
+
+        Locale espanol = new Locale("es", "ES");
+        ResourceBundle rb = ResourceBundle.getBundle("locale/Nat", espanol);
+        if(Locale.getDefault().getLanguage().equals("es"));
+        System.out.println(rb.getString("username"));
+
+        username_field.setPromptText(rb.getString("username"));
+        password_field.setPromptText(rb.getString("password"));
+        login_button.setText(rb.getString("login"));
     }
 
 }
