@@ -369,14 +369,13 @@ public class AppointmentDao {
 
 
 
-    public static ObservableList<Appointment> getUpcomingAppointments() {
+    public static Appointment getUpcomingAppointments() {
 
-
-        Appointments.clear();
 
         try {
 
 
+            Appointment appointment = new Appointment();
             String upcomingAppointment = "SELECT * FROM appointment WHERE (start BETWEEN NOW() AND ADDTIME(NOW(), '00:15:00'))";
 
 //            QueryManager.makeQuery(sqlStatement);
@@ -389,7 +388,7 @@ public class AppointmentDao {
 
             while (result.next()) {
 
-                Appointment appointment = new Appointment();
+                //Appointment appointment = new Appointment();
                 appointment.setAppointmentId(result.getInt("appointmentId"));
                 appointment.setCustomerId(result.getInt("customerId"));
                 appointment.setTitle(result.getString("title"));
@@ -408,11 +407,11 @@ public class AppointmentDao {
                 appointment.setEnd(endLocal);
 
 
-                Appointments.add(appointment);
+
 
             }
 
-            return Appointments;
+            return appointment;
         } catch (SQLException e) {
             System.out.println("SQL Exception: " + e.getMessage());
             return null;
