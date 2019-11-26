@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -43,7 +44,11 @@ public class LoginScreenController {
 
     @FXML
     private TextField username_field;
+
     static public User currentUser;
+    private String loginError;
+    private String upcomingAppt;
+
 
     @FXML
     void LoginButtonHandler(ActionEvent event) throws IOException, SQLException {
@@ -51,49 +56,16 @@ public class LoginScreenController {
         String username = username_field.getText();
         String password = password_field.getText();
 
-//        Locale espanol = new Locale("es", "ES");
-//        ResourceBundle rb = ResourceBundle.getBundle("locale/Nat", espanol);
-//        if(Locale.getDefault().getLanguage().equals("es"));
-//        System.out.println(rb.getString("username"));
-//        username_field.setPromptText(rb.getString("username"));
-//        password_field.setPromptText(rb.getString("password"));
 
         currentUser = new User();
 
-        //TODO: Change this back to the variable name
-        currentUser.setUserName("test");
+
+        currentUser.setUserName(username);
         currentUser.setUserPassword(password);
         currentUser.setUserId(1);
 
 
-
-
-
-
-        isValidUser = true;
-        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/view/MainScreen.fxml"));
-        stage.setScene(new Scene(scene));
-        stage.show();
-
-        if(isValidUser = true) {
-
-            FileHandler userLF = new FileHandler("userlog.txt", true);
-            SimpleFormatter sf = new SimpleFormatter();
-            userLF.setFormatter(sf);
-            userLogger.addHandler(userLF);
-            userLogger.log(Level.INFO, "User " + currentUser.getUserName() + " logged in successfully");
-
-        }
-
-
-
-
-        //TODO: Uncomment this stuff for the final login and move the logger down here
-
-       /* ObservableList<User> Users = UserDao.getActiveUsers();
-
-
+        ObservableList<User> Users = UserDao.getActiveUsers();
 
 
         for (User user : Users) {
@@ -107,33 +79,47 @@ public class LoginScreenController {
                 stage.setScene(new Scene(scene));
                 stage.show();
 
+                if (isValidUser = true) {
+
+                    FileHandler userLF = new FileHandler("userlog.txt", true);
+                    SimpleFormatter sf = new SimpleFormatter();
+                    userLF.setFormatter(sf);
+                    userLogger.addHandler(userLF);
+                    userLogger.log(Level.INFO, "User " + currentUser.getUserName() + " logged in successfully");
+
+                }
+
 
             } else {
 
-                System.out.println("Incorrect user name or password!");
+                Alert loginAlert = new Alert(Alert.AlertType.INFORMATION);
+                loginAlert.setTitle(loginError);
+                loginAlert.setHeaderText(loginError);
+                System.out.println(loginError);
+                loginAlert.showAndWait();
+
+
             }
 
-
         }
-*/
-
     }
-
-
-
 
     @FXML
     void initialize() {
 
 
         Locale espanol = new Locale("es", "ES");
-        ResourceBundle rb = ResourceBundle.getBundle("locale/Nat", espanol);
-        if(Locale.getDefault().getLanguage().equals("es"));
-        System.out.println(rb.getString("username"));
+        Locale german = new Locale("de", "DE");
+        Locale userLocale = Locale.getDefault();
+
+        ResourceBundle rb = ResourceBundle.getBundle("locale/Nat", userLocale);
 
         username_field.setPromptText(rb.getString("username"));
         password_field.setPromptText(rb.getString("password"));
         login_button.setText(rb.getString("login"));
+        loginError = rb.getString("loginerror");
+        upcomingAppt = rb.getString("upcomingappt");
+
     }
 
 }

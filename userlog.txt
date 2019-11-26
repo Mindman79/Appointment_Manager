@@ -10,3 +10,5 @@ Nov 25, 2019 11:34:33 PM controller.LoginScreenController LoginButtonHandler
 INFO: User test logged in successfully
 Nov 25, 2019 11:39:46 PM controller.LoginScreenController LoginButtonHandler
 INFO: User test logged in successfully
+Nov 26, 2019 9:28:01 AM controller.LoginScreenController LoginButtonHandler
+INFO: User test logged in successfully
