@@ -149,13 +149,7 @@ public class CustomerAddScreenController {
                 stage.show();
 
             }
-//            System.out.println("Save button customerID test: " + newCustomer.getCustomerId());
-//
-//            System.out.println("Save button addressID test: " + custAddress.getAddressId());
-//
-//            System.out.println("Save button cityID test: " + custCity.getCityId());
-//
-//            System.out.println("Save button countryID test: " + custCountry.getCountryId());
+
         } catch (SQLException e) {
             e.printStackTrace();
 

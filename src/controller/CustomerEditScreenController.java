@@ -18,6 +18,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
@@ -87,7 +88,6 @@ public class CustomerEditScreenController {
 
         int customerId = selectedCustomer.getCustomerId();
 
-        System.out.println("Country ID last test: " + countryId);
 
         //Customer
         selectedCustomer.setCustomerName(customer_name_field.getText());
@@ -106,25 +106,41 @@ public class CustomerEditScreenController {
         custCity.setCountryId(countryId);
 
 
+        //Customer input validation. Country selection does not validate here, as one must already be selected
+        if(customer_name_field.getText().trim().isEmpty()) {
 
-        CustomerDao.updateCustomer(selectedCustomer);
-        AddressDao.updateAddress(custAddress);
-        CityDao.updateCity(custCity);
-        CountryDao.updateCountry(custCountry);
+            alertGenerator("Customer name cannot be blank!");
+
+        } else if(address_line_1_field.getText().trim().isEmpty()){
+
+            alertGenerator("Address (first line) cannot be blank!");
+
+        } else if(city_field.getText().trim().isEmpty()){
+
+            alertGenerator("City name cannot be blank!");
+
+        } else if(postal_code_field.getText().trim().isEmpty()){
+
+            alertGenerator("Postal code cannot be blank!");
+
+        } else if(phone_number_field.getText().trim().isEmpty()){
+
+            alertGenerator("Phone number cannot be blank!");
+
+        } else {
+
+            CustomerDao.updateCustomer(selectedCustomer);
+            AddressDao.updateAddress(custAddress);
+            CityDao.updateCity(custCity);
+            CountryDao.updateCountry(custCountry);
 
 
-        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/view/CustomerScreen.fxml"));
-        stage.setScene(new Scene(scene));
-        stage.show();
+            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            scene = FXMLLoader.load(getClass().getResource("/view/CustomerScreen.fxml"));
+            stage.setScene(new Scene(scene));
+            stage.show();
 
-        System.out.println("Save button customerID test: " + selectedCustomer.getCustomerId());
-
-        System.out.println("Save button addressID test: " + custAddress.getAddressId());
-
-        System.out.println("Save button cityID test: " + custCity.getCityId());
-
-        System.out.println("Save button countryID test: " + custCountry.getCountryId());
+        }
 
 
     }
@@ -147,15 +163,10 @@ public class CustomerEditScreenController {
 
 
         selectedCustomer = selectedCust;
-        //setSelectedCustomer(selectedCust);
-
         custAddress = AddressDao.getAddressById(selectedCustomer.getAddressId());
         custCity = CityDao.getCityById(custAddress.getCityId());
         custCountry = CountryDao.getCountryById(custCity.getCountryId());
 
-        //System.out.println("Selected customer ID test 2: " + selectedCust.getCustomerId());
-        System.out.println("Selected cityID test 2: " + custAddress.getCityId());
-//        System.out.println(custCity.getCountryId());
 
 
         customer_name_field.setText(String.valueOf(selectedCustomer.getCustomerName()));
@@ -223,22 +234,14 @@ public class CustomerEditScreenController {
     }
 
 
+    public void alertGenerator(String message) {
+
+        Alert apptAlert = new Alert(Alert.AlertType.INFORMATION);
+        apptAlert.setTitle(message);
+        apptAlert.setHeaderText(message);
+        apptAlert.showAndWait();
 
 
-//    public void convertCountryToString() {
-//
-//        custCountry.setConverter(new StringConverter<Country>() {
-//            @Override
-//            public String toString(Country country) {
-//                return country.getCountry();
-//            }
-//
-//            @Override
-//            public Country fromString(String string) {
-//                return custCountry.getValue();
-//            }
-//        });
-//    }
-
+    }
 
 }
