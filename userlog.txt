@@ -36,3 +36,15 @@ Nov 26, 2019 4:05:00 PM controller.LoginScreenController lambda$LoginButtonHandl
 INFO: User  logged in successfully
 Nov 26, 2019 4:07:06 PM controller.LoginScreenController lambda$LoginButtonHandler$0
 INFO: User  logged in successfully
+Nov 27, 2019 1:56:55 PM controller.LoginScreenController lambda$LoginButtonHandler$0
+INFO: User test logged in successfully
+Nov 27, 2019 2:02:17 PM controller.LoginScreenController lambda$LoginButtonHandler$0
+INFO: User test logged in successfully
+Nov 27, 2019 2:05:22 PM controller.LoginScreenController lambda$LoginButtonHandler$0
+INFO: User test logged in successfully
+Nov 27, 2019 2:07:48 PM controller.LoginScreenController lambda$LoginButtonHandler$0
+INFO: User test logged in successfully
+Nov 27, 2019 2:25:52 PM controller.LoginScreenController lambda$LoginButtonHandler$0
+INFO: User test logged in successfully
+Nov 27, 2019 2:41:24 PM controller.LoginScreenController lambda$LoginButtonHandler$0
+INFO: User test logged in successfully
