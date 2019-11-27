@@ -75,11 +75,12 @@ public class LoginScreenController {
 
         //        for (User user : Users)
 
-        //Llamda to simplify the user login loop
+        //Lambda to simplify the user login loop
         Users.forEach((user -> {
 
             try {
-                if (user.getUserName().equals(username) && user.getUserPassword().equals(password)) {
+                assert user.getUserName().equals(username) && user.getUserPassword().equals(password) : "Incorrect login!";
+
 
 
                     isValidUser = true;
@@ -121,20 +122,17 @@ public class LoginScreenController {
                     }
 
 
-                } else {
-
-                    Alert loginAlert = new Alert(Alert.AlertType.INFORMATION);
-                    loginAlert.setTitle(loginError);
-                    loginAlert.setHeaderText(loginError);
-                    System.out.println(loginError);
-                    loginAlert.showAndWait();
-
-
-                }
             } catch (IOException e) {
                 e.printStackTrace();
-            } catch (SecurityException e) {
+            } catch (AssertionError e) {
                 e.printStackTrace();
+                Alert loginAlert = new Alert(Alert.AlertType.INFORMATION);
+                loginAlert.setTitle(loginError);
+                loginAlert.setHeaderText(loginError);
+                System.out.println(loginError);
+                loginAlert.showAndWait();
+
+
             }
 
         }))
