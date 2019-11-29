@@ -76,11 +76,13 @@ public class AppointmentDao {
 
 
         Appointments.clear();
+        LocalDate begin = LocalDate.now();
+        LocalDate end = LocalDate.now().plusWeeks(1);
 
         try {
 
 
-            String sqlStatement = "select * from appointment where start between utc_date + 0  and utc_date + 6 ORDER BY start ASC";
+            String sqlStatement = "select * from appointment where start >= '" + begin + "' and start <= '" + end + "'";
 
             QueryManager.makeQuery(sqlStatement);
             ResultSet result = QueryManager.getResult();
@@ -122,11 +124,13 @@ public class AppointmentDao {
 
 
         Appointments.clear();
+        LocalDate begin = LocalDate.now();
+        LocalDate end = LocalDate.now().plusMonths(1);
 
         try {
 
 
-            String sqlStatement = "select * from appointment where start between utc_date + 0  and utc_date + 30 ORDER BY start ASC";
+            String sqlStatement = "select * from appointment where start >= '" + begin + "' and start <= '" + end + "'";
 
             QueryManager.makeQuery(sqlStatement);
             ResultSet result = QueryManager.getResult();

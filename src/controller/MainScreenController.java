@@ -105,7 +105,17 @@ public class MainScreenController {
     @FXML
     void appt_monthly_button_handler(ActionEvent event) {
 
+        AppointmentTable.setItems(AppointmentDao.getMonthlyAppointments());
+        appt_title_col.setCellValueFactory(new PropertyValueFactory<>("title"));
+        appt_description_col.setCellValueFactory(new PropertyValueFactory<>("description"));
+
+
+        //Lambda to insert/format cell data
+        appt_start_col.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStart().toLocalDateTime().atZone(localZoneId).format(DTformatter)));
+        appt_end_col.setCellValueFactory(cellData ->  new SimpleStringProperty(cellData.getValue().getEnd().toLocalDateTime().format(DTformatter)));
+
     }
+
 
     @FXML
     void appt_weekly_button_handler(ActionEvent event) {
@@ -200,9 +210,6 @@ public class MainScreenController {
         //Connect to receive method in other controller
         Appointment selectedAppt = AppointmentTable.getSelectionModel().getSelectedItem();
         Controller.receiveAppointment(selectedAppt);
-      System.out.println("Appointment ID test 3: " + selectedAppt.getAppointmentId());
-       System.out.println("Appointment Name test 3: " + selectedAppt.getTitle());
-       System.out.println("Appointment Customer  ID test 3: " + selectedAppt.getCustomerId());
 
         stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
         Parent scene = modifyAppointmentLoader.getRoot();
@@ -239,11 +246,6 @@ public class MainScreenController {
         appt_description_col.setCellValueFactory(new PropertyValueFactory<>("description"));
 
 
-
-
-//        appt_start_col.setCellValueFactory(new PropertyValueFactory<>("start"));
-//        appt_end_col.setCellValueFactory(new PropertyValueFactory<>("end"));
-//
 //        //Lambda to insert/format cell data
        appt_start_col.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStart().toLocalDateTime().atZone(localZoneId).format(DTformatter)));
         appt_end_col.setCellValueFactory(cellData ->  new SimpleStringProperty(cellData.getValue().getEnd().toLocalDateTime().atZone(localZoneId).format(DTformatter)));
