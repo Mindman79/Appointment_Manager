@@ -3,8 +3,10 @@ package controller;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ResourceBundle;
 import java.util.TimeZone;
 
@@ -18,17 +20,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import utils.DateTime;
 
 import static controller.LoginScreenController.currentUser;
+import static java.util.Calendar.PM;
 
 public class AppointmentAddScreenController {
 
@@ -130,36 +128,77 @@ public class AppointmentAddScreenController {
     @FXML
     void save_button_handler(ActionEvent event) throws SQLException, IOException {
 
-        //Get start date
-        LocalDate startDate = start_date_selector.getValue();
-        LocalTime startTime = LocalTime.parse(start_time_field.getText(), DateTimeFormatter.ofPattern("hh:mm a"));
-        ZonedDateTime start = ZonedDateTime.of(startDate, startTime, localZoneId);
 
-        //Get end date
-        LocalDate endDate = end_date_selector.getValue();
-        LocalTime endTime = LocalTime.parse(end_time_field.getText(), DateTimeFormatter.ofPattern("hh:mm a"));
-        ZonedDateTime end = ZonedDateTime.of(endDate, endTime, localZoneId);
+        try {
 
-//        LocalDateTime end = LocalDateTime.of(end_date_selector.getValue(), LocalTime.parse(end_time_field.getText(), DateTimeFormatter.ofPattern("hh:mm a")));
+            //Set business hours open and close times
+            LocalTime openTime = LocalTime.of(7, 00);
+            LocalTime closeTime = LocalTime.of(19, 00);
 
-        appointment.setCustomerId(customer_combo_box.getValue().getCustomerId());
-        //appointment.setUserId(currentUser.getUserId());
-        appointment.setTitle(title_field.getText());
-        appointment.setDescription(description_field.getText());
-        appointment.setLocation(location_field.getText());
-        appointment.setContact(contact_field.getText());
-        appointment.setType(type_field.getText());
-        appointment.setUrl(url_field.getText());
-        appointment.setStart(start);
-        appointment.setEnd(end);
+            //Get start date
+            LocalDate startDate = start_date_selector.getValue();
+            LocalTime startTime = LocalTime.parse(start_time_field.getText(), DateTimeFormatter.ofPattern("hh:mm a"));
+            ZonedDateTime start = ZonedDateTime.of(startDate, startTime, localZoneId);
 
-        AppointmentDao.addAppointment(appointment);
+            //Get end date
+            LocalDate endDate = end_date_selector.getValue();
+            LocalTime endTime = LocalTime.parse(end_time_field.getText(), DateTimeFormatter.ofPattern("hh:mm a"));
+            ZonedDateTime end = ZonedDateTime.of(endDate, endTime, localZoneId);
 
-        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/view/MainScreen.fxml"));
-        stage.setScene(new Scene(scene));
-        stage.show();
 
+
+
+            //Appointment validator checker (checks that start/end times are within the hours of 7:00 AM - 7:00 PM and that fields are not blank, etc. Other values are check via the try/catch block
+            if (startTime.isBefore(openTime)) {
+
+                alertGenerator("Appointment must start no earlier than " + openTime.format(DateTimeFormatter.ofPattern("hh:mm a")));
+
+            } else if (endTime.isAfter(closeTime)) {
+
+                alertGenerator("Appointment must end no later than " + endTime.format(DateTimeFormatter.ofPattern("hh:mm a")));
+
+            } else if (startDate.isBefore(LocalDate.now())) {
+
+                alertGenerator("Appointment cannot start earlier than today's date!");
+
+            } else if (endDate.isBefore(LocalDate.now())) {
+
+                alertGenerator("Appointment cannot end earlier than today's date!");
+
+            } else {
+
+                appointment.setCustomerId(customer_combo_box.getValue().getCustomerId());
+                appointment.setTitle(title_field.getText());
+                appointment.setDescription(description_field.getText());
+                appointment.setLocation(location_field.getText());
+                appointment.setContact(contact_field.getText());
+                appointment.setType(type_field.getText());
+                appointment.setUrl(url_field.getText());
+                appointment.setStart(start);
+                appointment.setEnd(end);
+
+                AppointmentDao.addAppointment(appointment);
+
+                stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+                scene = FXMLLoader.load(getClass().getResource("/view/MainScreen.fxml"));
+                stage.setScene(new Scene(scene));
+                stage.show();
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        } catch (DateTimeParseException e) {
+            e.printStackTrace();
+            alertGenerator("Start and/or end time cannot be blank, and must be formatted correctly! (HH:MM AM/PM)");
+
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+            alertGenerator("Customer must be selected!");
+        }
     }
 
     @FXML
@@ -181,5 +220,24 @@ public class AppointmentAddScreenController {
         });
 
         customer_combo_box.setItems(customers);
+
+        start_date_selector.setValue(LocalDate.now());
+        end_date_selector.setValue(LocalDate.now());
+        start_time_field.setText(String.valueOf(LocalTime.now().format(DateTimeFormatter.ofPattern("hh:mm a"))));
+        end_time_field.setText(String.valueOf(LocalTime.now().plusHours(1).format(DateTimeFormatter.ofPattern("hh:mm a"))));
+
+
     }
+
+
+    public void alertGenerator(String message) {
+
+        Alert apptAlert = new Alert(Alert.AlertType.INFORMATION);
+        apptAlert.setTitle(message);
+        apptAlert.setHeaderText(message);
+        apptAlert.showAndWait();
+
+
+    }
+
 }
