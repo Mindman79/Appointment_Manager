@@ -239,7 +239,7 @@ public class AppointmentDao {
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("SQL Exception (address): " + e.getMessage());
+            System.out.println("SQL Exception (appointment): " + e.getMessage());
         }
 
 
@@ -387,7 +387,6 @@ public class AppointmentDao {
 
 
             PreparedStatement statement = conn.prepareStatement(upcomingAppointment);
-//            statement.setTimestamp(1, Timestamp.valueOf(String.valueOf(localZoneId)));
             ResultSet result = statement.executeQuery();
 
             while (result.next()) {
@@ -422,6 +421,32 @@ public class AppointmentDao {
         }
     }
 
+
+    public static boolean overlappingAppointment(Appointment appointment, ZonedDateTime start, ZonedDateTime end) {
+
+        try {
+
+            //int appointmentId = 0;
+
+            String overlappingAppt = "SELECT * FROM appointment WHERE start between start and end";
+
+
+            PreparedStatement statement = conn.prepareStatement(overlappingAppt);
+            ResultSet result = statement.executeQuery();
+
+
+            if(result.next()) {
+                appointment.setAppointmentId(result.getInt("appointmentId"));
+                return true;
+            } else {
+
+                return false;
+            }
+        } catch (SQLException e) {
+            System.out.println("SQLException (overlap): " + e.getMessage());
+            return true;
+        }
+    }
 
 
 }
