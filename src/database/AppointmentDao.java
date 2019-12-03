@@ -426,14 +426,28 @@ public class AppointmentDao {
 
             //String sqlStatement = "select * FROM appointment WHERE (start between '" + timestampStart'" + AND + "'"timestampEnd"''");
 
-            String sqlStatement = "select * from appointment where start between '" + timestampStart + "' and '" + timestampEnd + "'";
+            String sqlStatement = "SELECT * FROM appointment "
+                    + "WHERE (start >= ? AND end <= ?) "
+                    + "OR (start <= ? AND end >= ?) "
+                    + "OR (start BETWEEN ? AND ? OR end BETWEEN ? AND ?)";
 
             System.out.println("Start time: " + timestampStart);
             System.out.println("End time:" + timestampEnd);
 
-
             PreparedStatement statement = conn.prepareStatement(sqlStatement);
+            statement.setTimestamp(1, timestampStart);
+            statement.setTimestamp(2, timestampEnd);
+            statement.setTimestamp(3, timestampStart);
+            statement.setTimestamp(4, timestampStart);
+            statement.setTimestamp(5, timestampStart);
+            statement.setTimestamp(6, timestampEnd);
+            statement.setTimestamp(7, timestampStart);
+            statement.setTimestamp(8, timestampEnd);
             ResultSet result = statement.executeQuery();
+
+
+
+
 
 
             if (result.next()) {

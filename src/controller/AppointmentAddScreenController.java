@@ -26,6 +26,7 @@ import javafx.util.StringConverter;
 import utils.DateTime;
 
 import static controller.LoginScreenController.currentUser;
+import static java.util.Calendar.NARROW_FORMAT;
 import static java.util.Calendar.PM;
 
 public class AppointmentAddScreenController {
@@ -146,7 +147,6 @@ public class AppointmentAddScreenController {
             ZonedDateTime end = ZonedDateTime.of(endDate, endTime, localZoneId);
 
 
-
             //Appointment validator checker (checks that start/end times are within the hours of 7:00 AM - 7:00 PM and that fields are not blank, etc. Other values are check via the try/catch block
             if (startTime.isBefore(openTime)) {
 
@@ -178,17 +178,20 @@ public class AppointmentAddScreenController {
 
 
                 //Appointment overlap checker
-                Appointment appointmentOverlap = AppointmentDao.overlappingAppointment(appointment);
-                if (appointmentOverlap.getAppointmentId() != 0) {
+                Appointment overlappingAppointment = overlapChecker(appointment);
+                if (overlappingAppointment != null) {
 
-                    System.out.println("Appointment ID test: " + appointmentOverlap.getAppointmentId());
 
-                    Customer overlapCustomer = CustomerDao.getCustomerById(appointmentOverlap.getCustomerId());
+                    //System.out.println("Appointment ID test: " + appointmentOverlap.getAppointmentId());
+
+                    Customer overlapCustomer = CustomerDao.getCustomerById(overlappingAppointment.getCustomerId());
 
                     Alert overlappingAlert = new Alert(Alert.AlertType.INFORMATION);
                     overlappingAlert.setTitle("You have an overlapping appointment!");
-                    overlappingAlert.setHeaderText("Appointment is with " + overlapCustomer.getCustomerName() + " from " + appointmentOverlap.getStart().format(DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm a")) + " to " + appointmentOverlap.getEnd().format(DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm a")));
+                    overlappingAlert.setHeaderText("Appointment is with " + overlapCustomer.getCustomerName() + " from " + overlappingAppointment.getStart().format(DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm a")) + " to " + overlappingAppointment.getEnd().format(DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm a")));
                     overlappingAlert.showAndWait();
+
+
 
 
                 } else {
@@ -262,4 +265,18 @@ public class AppointmentAddScreenController {
 
     }
 
+    public Appointment overlapChecker(Appointment appointmentToCheck) {
+
+        Appointment appointmentChecked = AppointmentDao.overlappingAppointment(appointmentToCheck);
+
+        if (appointmentChecked.getAppointmentId() != 0) {
+
+            return appointmentChecked;
+
+        } else {
+
+            return null;
+        }
+
+    }
 }
