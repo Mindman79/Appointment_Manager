@@ -129,7 +129,6 @@ public class AppointmentAddScreenController {
     void save_button_handler(ActionEvent event) throws SQLException, IOException {
 
 
-
         try {
 
             //Set business hours open and close times
@@ -146,39 +145,54 @@ public class AppointmentAddScreenController {
             LocalTime endTime = LocalTime.parse(end_time_field.getText(), DateTimeFormatter.ofPattern("hh:mm a"));
             ZonedDateTime end = ZonedDateTime.of(endDate, endTime, localZoneId);
 
-            AppointmentDao.overlappingAppointment(appointment, start, end);
 
-            //Appointment overlap checker
-            if(AppointmentDao.overlappingAppointment(appointment, start, end) == false) {
 
-                //Appointment validator checker (checks that start/end times are within the hours of 7:00 AM - 7:00 PM and that fields are not blank, etc. Other values are check via the try/catch block
-                if (startTime.isBefore(openTime)) {
+            //Appointment validator checker (checks that start/end times are within the hours of 7:00 AM - 7:00 PM and that fields are not blank, etc. Other values are check via the try/catch block
+            if (startTime.isBefore(openTime)) {
 
-                    alertGenerator("Appointment must start no earlier than " + openTime.format(DateTimeFormatter.ofPattern("hh:mm a")));
+                alertGenerator("Appointment must start no earlier than " + openTime.format(DateTimeFormatter.ofPattern("hh:mm a")));
 
-                } else if (endTime.isAfter(closeTime)) {
+            } else if (endTime.isAfter(closeTime)) {
 
-                    alertGenerator("Appointment must end no later than " + endTime.format(DateTimeFormatter.ofPattern("hh:mm a")));
+                alertGenerator("Appointment must end no later than " + closeTime.format(DateTimeFormatter.ofPattern("hh:mm a")));
 
-                } else if (startDate.isBefore(LocalDate.now())) {
+            } else if (startDate.isBefore(LocalDate.now())) {
 
-                    alertGenerator("Appointment cannot start earlier than today's date!");
+                alertGenerator("Appointment cannot start earlier than today's date!");
 
-                } else if (endDate.isBefore(LocalDate.now())) {
+            } else if (endDate.isBefore(LocalDate.now())) {
 
-                    alertGenerator("Appointment cannot end earlier than today's date!");
+                alertGenerator("Appointment cannot end earlier than today's date!");
+
+            } else {
+
+                appointment.setCustomerId(customer_combo_box.getValue().getCustomerId());
+                appointment.setTitle(title_field.getText());
+                appointment.setDescription(description_field.getText());
+                appointment.setLocation(location_field.getText());
+                appointment.setContact(contact_field.getText());
+                appointment.setType(type_field.getText());
+                appointment.setUrl(url_field.getText());
+                appointment.setStart(start);
+                appointment.setEnd(end);
+
+
+                //Appointment overlap checker
+                Appointment appointmentOverlap = AppointmentDao.overlappingAppointment(appointment);
+                if (appointmentOverlap.getAppointmentId() != 0) {
+
+                    System.out.println("Appointment ID test: " + appointmentOverlap.getAppointmentId());
+
+                    Customer overlapCustomer = CustomerDao.getCustomerById(appointmentOverlap.getCustomerId());
+
+                    Alert overlappingAlert = new Alert(Alert.AlertType.INFORMATION);
+                    overlappingAlert.setTitle("You have an overlapping appointment!");
+                    overlappingAlert.setHeaderText("Appointment is with " + overlapCustomer.getCustomerName() + " from " + appointmentOverlap.getStart().format(DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm a")) + " to " + appointmentOverlap.getEnd().format(DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm a")));
+                    overlappingAlert.showAndWait();
+
 
                 } else {
 
-                    appointment.setCustomerId(customer_combo_box.getValue().getCustomerId());
-                    appointment.setTitle(title_field.getText());
-                    appointment.setDescription(description_field.getText());
-                    appointment.setLocation(location_field.getText());
-                    appointment.setContact(contact_field.getText());
-                    appointment.setType(type_field.getText());
-                    appointment.setUrl(url_field.getText());
-                    appointment.setStart(start);
-                    appointment.setEnd(end);
 
                     AppointmentDao.addAppointment(appointment);
 
@@ -188,20 +202,11 @@ public class AppointmentAddScreenController {
                     stage.show();
 
 
-
-
-
-
-
                 }
 
 
-
-            } else {
-
-                alertGenerator("Overlapping appointment!!!!!!!");
-
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
 
@@ -240,8 +245,8 @@ public class AppointmentAddScreenController {
 
         start_date_selector.setValue(LocalDate.now());
         end_date_selector.setValue(LocalDate.now());
-        start_time_field.setText(String.valueOf(LocalTime.now().format(DateTimeFormatter.ofPattern("hh:mm a"))));
-        end_time_field.setText(String.valueOf(LocalTime.now().plusHours(1).format(DateTimeFormatter.ofPattern("hh:mm a"))));
+        //start_time_field.setText(String.valueOf(LocalTime.now().format(DateTimeFormatter.ofPattern("hh:mm a"))));
+        //end_time_field.setText(String.valueOf(LocalTime.now().plusHours(1).format(DateTimeFormatter.ofPattern("hh:mm a"))));
 
 
     }

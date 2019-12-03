@@ -168,7 +168,6 @@ public class AppointmentDao {
     }
 
 
-
     public static Timestamp startDateTimeConverter(Appointment appointment) {
 
 
@@ -284,8 +283,7 @@ public class AppointmentDao {
             PreparedStatement statement = conn.prepareStatement(deleteAppointment);
             statement.setInt(1, appointment.getAppointmentId());
             statement.executeUpdate();
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("SQL Exception: " + e.getMessage());
         }
@@ -293,8 +291,6 @@ public class AppointmentDao {
 
 
     public static void updateAppointment(Appointment appointment) throws SQLException {
-
-
 
 
         Timestamp timestampStart = startDateTimeConverter(appointment);
@@ -331,7 +327,7 @@ public class AppointmentDao {
     }
 
 
-    public static Appointment getAppointmentById(int id)  {
+    public static Appointment getAppointmentById(int id) {
 
 
         Appointment appointment = new Appointment();
@@ -372,7 +368,6 @@ public class AppointmentDao {
     }
 
 
-
     public static Appointment getUpcomingAppointments() {
 
 
@@ -410,8 +405,6 @@ public class AppointmentDao {
                 appointment.setEnd(endLocal);
 
 
-
-
             }
 
             return appointment;
@@ -422,31 +415,56 @@ public class AppointmentDao {
     }
 
 
-    public static boolean overlappingAppointment(Appointment appointment, ZonedDateTime start, ZonedDateTime end) {
+    public static Appointment overlappingAppointment(Appointment appointment) {
+
+        Timestamp timestampStart = startDateTimeConverter(appointment);
+        Timestamp timestampEnd = endDateTimeConverter(appointment);
+
 
         try {
 
-            //int appointmentId = 0;
 
-            String overlappingAppt = "SELECT * FROM appointment WHERE start between start and end";
+            //String sqlStatement = "select * FROM appointment WHERE (start between '" + timestampStart'" + AND + "'"timestampEnd"''");
+
+            String sqlStatement = "select * from appointment where start between '" + timestampStart + "' and '" + timestampEnd + "'";
+
+            System.out.println("Start time: " + timestampStart);
+            System.out.println("End time:" + timestampEnd);
 
 
-            PreparedStatement statement = conn.prepareStatement(overlappingAppt);
+            PreparedStatement statement = conn.prepareStatement(sqlStatement);
             ResultSet result = statement.executeQuery();
 
 
-            if(result.next()) {
+            if (result.next()) {
                 appointment.setAppointmentId(result.getInt("appointmentId"));
-                return true;
-            } else {
+                appointment.setCustomerId(result.getInt("customerId"));
+                appointment.setTitle(result.getString("title"));
+                appointment.setDescription(result.getString("description"));
+                appointment.setLocation(result.getString("location"));
+                appointment.setContact(result.getString("contact"));
+                appointment.setType(result.getString("type"));
+                appointment.setUrl(result.getString("url"));
 
-                return false;
+                LocalDateTime startUTC = result.getTimestamp("start").toLocalDateTime();
+                LocalDateTime endUTC = result.getTimestamp("end").toLocalDateTime();
+                ZonedDateTime startLocal = ZonedDateTime.ofInstant(startUTC.toInstant(ZoneOffset.UTC), localZoneId);
+                ZonedDateTime endLocal = ZonedDateTime.ofInstant(endUTC.toInstant(ZoneOffset.UTC), localZoneId);
+
+                appointment.setStart(startLocal);
+                appointment.setEnd(endLocal);
+
             }
         } catch (SQLException e) {
             System.out.println("SQLException (overlap): " + e.getMessage());
-            return true;
+
+
         }
+
+        return appointment;
+
     }
+
 
 
 }
