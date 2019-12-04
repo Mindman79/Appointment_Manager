@@ -26,6 +26,51 @@ public class AppointmentDao {
 
     private static ObservableList<Appointment> Appointments = FXCollections.observableArrayList();
 
+    public static ObservableList<Appointment> getAllAppointmentsByUser() {
+
+        Appointments.clear();
+
+        try {
+
+
+            String sqlStatement = "select * from appointment ORDER BY userId";
+
+            QueryManager.makeQuery(sqlStatement);
+            ResultSet result = QueryManager.getResult();
+
+            while (result.next()) {
+
+                Appointment appointment = new Appointment();
+                appointment.setAppointmentId(result.getInt("appointmentId"));
+                appointment.setCustomerId(result.getInt("customerId"));
+                appointment.setUserId(result.getInt("userId"));
+                appointment.setTitle(result.getString("title"));
+                appointment.setDescription(result.getString("description"));
+                appointment.setLocation(result.getString("location"));
+                appointment.setContact(result.getString("contact"));
+                appointment.setType(result.getString("type"));
+                appointment.setUrl(result.getString("url"));
+
+                LocalDateTime startUTC = result.getTimestamp("start").toLocalDateTime();
+                LocalDateTime endUTC = result.getTimestamp("end").toLocalDateTime();
+                ZonedDateTime startLocal = ZonedDateTime.ofInstant(startUTC.toInstant(ZoneOffset.UTC), localZoneId);
+                ZonedDateTime endLocal = ZonedDateTime.ofInstant(endUTC.toInstant(ZoneOffset.UTC), localZoneId);
+
+                appointment.setStart(startLocal);
+                appointment.setEnd(endLocal);
+
+
+                Appointments.add(appointment);
+
+            }
+
+            return Appointments;
+        } catch (SQLException e) {
+            System.out.println("SQL Exception: " + e.getMessage());
+            return null;
+        }
+    }
+
 
     public static ObservableList<Appointment> getAllAppointments() {
 
@@ -35,6 +80,56 @@ public class AppointmentDao {
 
 
             String sqlStatement = "SELECT * FROM appointment ORDER BY start ASC";
+
+            QueryManager.makeQuery(sqlStatement);
+            ResultSet result = QueryManager.getResult();
+
+            while (result.next()) {
+
+                Appointment appointment = new Appointment();
+                appointment.setAppointmentId(result.getInt("appointmentId"));
+                appointment.setCustomerId(result.getInt("customerId"));
+                appointment.setTitle(result.getString("title"));
+                appointment.setDescription(result.getString("description"));
+                appointment.setLocation(result.getString("location"));
+                appointment.setContact(result.getString("contact"));
+                appointment.setType(result.getString("type"));
+                appointment.setUrl(result.getString("url"));
+
+                LocalDateTime startUTC = result.getTimestamp("start").toLocalDateTime();
+                LocalDateTime endUTC = result.getTimestamp("end").toLocalDateTime();
+                ZonedDateTime startLocal = ZonedDateTime.ofInstant(startUTC.toInstant(ZoneOffset.UTC), localZoneId);
+                ZonedDateTime endLocal = ZonedDateTime.ofInstant(endUTC.toInstant(ZoneOffset.UTC), localZoneId);
+
+                appointment.setStart(startLocal);
+                appointment.setEnd(endLocal);
+
+
+                Appointments.add(appointment);
+
+            }
+
+            return Appointments;
+        } catch (SQLException e) {
+            System.out.println("SQL Exception: " + e.getMessage());
+            return null;
+        }
+    }
+
+
+    public static ObservableList<Appointment> getAppointmentTypes() {
+
+        Appointments.clear();
+
+        LocalDate begin = LocalDate.now();
+        LocalDate end = LocalDate.now().plusMonths(1);
+
+
+        try {
+
+
+            //String sqlStatement = "select * from appointment GROUP BY type";
+            String sqlStatement = "select * from appointment where start >= '" + begin + "' and start <= '" + end + "' GROUP BY type";
 
             QueryManager.makeQuery(sqlStatement);
             ResultSet result = QueryManager.getResult();
@@ -274,7 +369,7 @@ public class AppointmentDao {
     }
 
 
-    public static void deleteAppointment(Appointment appointment) {
+       public static void deleteAppointment(Appointment appointment) {
 
         String deleteAppointment = String.join(" ",
                 "DELETE appointment FROM appointment WHERE appointmentId = ?");
@@ -288,6 +383,23 @@ public class AppointmentDao {
             System.out.println("SQL Exception: " + e.getMessage());
         }
     }
+
+
+    public static void Appointment(Appointment appointment) {
+
+        String deleteAppointment = String.join(" ",
+                "DELETE appointment FROM appointment WHERE appointmentId = ?");
+
+        try {
+            PreparedStatement statement = conn.prepareStatement(deleteAppointment);
+            statement.setInt(1, appointment.getAppointmentId());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("SQL Exception: " + e.getMessage());
+        }
+    }
+
 
 
     public static void updateAppointment(Appointment appointment) throws SQLException {
@@ -415,6 +527,8 @@ public class AppointmentDao {
     }
 
 
+
+    //Model future queries after this one
     public static Appointment overlappingAppointment(Appointment appointment) {
 
         Timestamp timestampStart = startDateTimeConverter(appointment);
@@ -431,8 +545,6 @@ public class AppointmentDao {
                     + "OR (start <= ? AND end >= ?) "
                     + "OR (start BETWEEN ? AND ? OR end BETWEEN ? AND ?)";
 
-            System.out.println("Start time: " + timestampStart);
-            System.out.println("End time:" + timestampEnd);
 
             PreparedStatement statement = conn.prepareStatement(sqlStatement);
             statement.setTimestamp(1, timestampStart);

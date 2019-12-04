@@ -1,9 +1,15 @@
 package controller;
 
 import database.AppointmentDao;
+import database.CustomerDao;
+import database.UserDao;
 import entity.Appointment;
+import entity.Customer;
+import entity.User;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,8 +21,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Observable;
 import java.util.ResourceBundle;
 
 public class ReportsScreenController {
@@ -36,42 +44,13 @@ public class ReportsScreenController {
     private URL location;
 
     @FXML
-    private Button search_appointments_button;
-
-    @FXML
-    private TextField search_appointments_field;
-
-    @FXML
-    private TableView<Appointment> AppointmentTable;
-
-    @FXML
-    private TableColumn<Appointment, String> appt_title_col;
-
-    @FXML
-    private TableColumn<Appointment, String> appt_description_col;
-
-    @FXML
-    private TableColumn<Appointment, String> appt_start_col;
-
-    @FXML
-    private TableColumn<Appointment, String> appt_end_col;
-
-    @FXML
-    private Button add_button;
-
-    @FXML
-    private Button modify_button;
-
-    @FXML
-    private Button delete_button;
-
-
+    private TextArea report_textarea;
 
     @FXML
     private Button customers_button;
 
     @FXML
-    private Button reports_button;
+    private Button appointments_button;
 
     @FXML
     private Button exit_button;
@@ -80,67 +59,111 @@ public class ReportsScreenController {
     private Button logs_button;
 
     @FXML
-    private ToggleGroup appt_toggle_grp;
+    private ToggleGroup report_toggle_grp;
 
     @FXML
-    private RadioButton appt_weekly_button;
+    private RadioButton report_types_button;
 
     @FXML
-    private RadioButton appt_monthly_button;
+    private RadioButton report_consultant_button;
 
     @FXML
-    private RadioButton appt_all_button;
-
+    private RadioButton active_customers_button;
 
     @FXML
-    void appt_monthly_button_handler(ActionEvent event) {
-
-        AppointmentTable.setItems(AppointmentDao.getMonthlyAppointments());
-        appt_title_col.setCellValueFactory(new PropertyValueFactory<>("title"));
-        appt_description_col.setCellValueFactory(new PropertyValueFactory<>("description"));
+    void report_types_button_handler(ActionEvent event) {
 
 
-        //Lambda to insert/format cell data
-        appt_start_col.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStart().toLocalDateTime().atZone(localZoneId).format(DTformatter)));
-        appt_end_col.setCellValueFactory(cellData ->  new SimpleStringProperty(cellData.getValue().getEnd().toLocalDateTime().format(DTformatter)));
+        try {
+            report_textarea.clear();
+            ObservableList<Appointment> appointmentTypes = AppointmentDao.getAppointmentTypes();
+            StringBuilder report = new StringBuilder();
+
+
+            for (Appointment appointment : appointmentTypes) {
+
+                report.append("Appointment Type Found: " + appointment.getType());
+                report.append(System.getProperty("line.separator"));
+
+            }
+
+            int count = appointmentTypes.size();
+            report.append("Total of appointment types for the month: " + count);
+
+
+            String finishedReport = report.toString();
+
+            report_textarea.setText(finishedReport);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
 
     @FXML
-    void appt_weekly_button_handler(ActionEvent event) {
-
-        AppointmentTable.setItems(AppointmentDao.getWeeklyAppointments());
-        appt_title_col.setCellValueFactory(new PropertyValueFactory<>("title"));
-        appt_description_col.setCellValueFactory(new PropertyValueFactory<>("description"));
+    void report_consultant_button_handler(ActionEvent event) throws SQLException {
 
 
+        try {
+            report_textarea.clear();
+            ObservableList<Appointment> appointmentsByUser = AppointmentDao.getAllAppointmentsByUser();
 
-        //Lambda to insert/format cell data
-        appt_start_col.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStart().toLocalDateTime().atZone(localZoneId).format(DTformatter)));
-        appt_end_col.setCellValueFactory(cellData ->  new SimpleStringProperty(cellData.getValue().getEnd().toLocalDateTime().format(DTformatter)));
+            StringBuilder report = new StringBuilder();
 
-        //appt_end_col.setCellValueFactory(new PropertyValueFactory<>("end"));
+
+            User user = new User();
+
+            for (Appointment appointment : appointmentsByUser) {
+
+
+                user = UserDao.getUserById(appointment.getUserId());
+                report.append("Appointment for user: " + user.getUserName() + ", titled: "  + appointment.getTitle() + ", starting at " + appointment.getStart().toLocalDateTime().format(DTformatter)+ " and lasting until " + appointment.getEnd().toLocalDateTime().format(DTformatter));
+                report.append(System.getProperty("line.separator"));
+
+            }
+
+
+            String finishedReport = report.toString();
+
+            report_textarea.setText(finishedReport);
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+            alertGenerator("Data required to the run this report is not available. Please populate the database first.");
+        }
 
 
     }
 
     @FXML
-    void appt_all_button_handler(ActionEvent event) {
-
-        initialize();
-
-    }
+    void active_customers_button_handler(ActionEvent event) {
 
 
-    @FXML
-    void add_button_handler(ActionEvent event) throws IOException {
+        try {
+            report_textarea.clear();
+            ObservableList<Customer> activeCustomers = CustomerDao.getAllCustomers();
+            StringBuilder report = new StringBuilder();
 
 
-        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/view/AppointmentAddScreen.fxml"));
-        stage.setScene(new Scene(scene));
-        stage.show();
+            for (Customer customer : activeCustomers) {
+
+                report.append("Customer " + customer.getCustomerName() + " is active");
+                report.append(System.getProperty("line.separator"));
+
+            }
+
+
+            String finishedReport = report.toString();
+
+            report_textarea.setText(finishedReport);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
 
     }
 
@@ -155,16 +178,7 @@ public class ReportsScreenController {
 
     }
 
-    @FXML
-    void delete_button_handler(ActionEvent event) {
 
-        Appointment selectedAppt = AppointmentTable.getSelectionModel().getSelectedItem();
-        AppointmentDao.deleteAppointment(selectedAppt);
-
-
-        initialize();
-
-    }
 
     @FXML
     void exit_button_handler(ActionEvent event) {
@@ -186,61 +200,30 @@ public class ReportsScreenController {
 
     }
 
-    @FXML
-    void modify_button_handler(ActionEvent event) throws IOException {
 
-
-        FXMLLoader modifyAppointmentLoader = new FXMLLoader();
-        modifyAppointmentLoader.setLocation(getClass().getResource("/view/AppointmentEditScreen.fxml"));
-        modifyAppointmentLoader.load();
-
-        //Get another controller
-        AppointmentEditScreenController Controller = modifyAppointmentLoader.getController();
-
-        //Connect to receive method in other controller
-        Appointment selectedAppt = AppointmentTable.getSelectionModel().getSelectedItem();
-        Controller.receiveAppointment(selectedAppt);
-
-        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-        Parent scene = modifyAppointmentLoader.getRoot();
-        stage.setScene(new Scene(scene));
-        stage.show();
-        
-        
-    }
 
     @FXML
-    void reports_button_handler(ActionEvent event) {
+    void appointments_button_handler(ActionEvent event) {
 
     }
-
-    @FXML
-    void search_appointments_button_handler(ActionEvent event) {
-
-    }
-
-    @FXML
-    void search_appointments_field_handler(ActionEvent event) {
-
-    }
-
-
 
 
     @FXML
     void initialize() {
 
 
-        AppointmentTable.setItems(AppointmentDao.getAllAppointments());
-        appt_title_col.setCellValueFactory(new PropertyValueFactory<>("title"));
-        appt_description_col.setCellValueFactory(new PropertyValueFactory<>("description"));
 
-
-//        //Lambda to insert/format cell data
-       appt_start_col.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStart().toLocalDateTime().atZone(localZoneId).format(DTformatter)));
-        appt_end_col.setCellValueFactory(cellData ->  new SimpleStringProperty(cellData.getValue().getEnd().toLocalDateTime().atZone(localZoneId).format(DTformatter)));
 
     }
 
+    public void alertGenerator(String message) {
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(message);
+        alert.setHeaderText(message);
+        alert.showAndWait();
+
+
+    }
 
 }
