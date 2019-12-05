@@ -203,7 +203,12 @@ public class ReportsScreenController {
 
 
     @FXML
-    void appointments_button_handler(ActionEvent event) {
+    void appointments_button_handler(ActionEvent event) throws IOException {
+
+        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("/view/MainScreen.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.show();
 
     }
 
