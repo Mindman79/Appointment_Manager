@@ -127,8 +127,6 @@ public class AppointmentDao {
 
         try {
 
-
-            //String sqlStatement = "select * from appointment GROUP BY type";
             String sqlStatement = "select * from appointment where start >= '" + begin + "' and start <= '" + end + "' GROUP BY type";
 
             QueryManager.makeQuery(sqlStatement);
@@ -177,7 +175,7 @@ public class AppointmentDao {
         try {
 
 
-            String sqlStatement = "select * from appointment where start >= '" + begin + "' and start <= '" + end + "'";
+            String sqlStatement = "select * from appointment where start >= '" + begin + "' and start <= '" + end + "' order by start";
 
             QueryManager.makeQuery(sqlStatement);
             ResultSet result = QueryManager.getResult();
@@ -225,7 +223,7 @@ public class AppointmentDao {
         try {
 
 
-            String sqlStatement = "select * from appointment where start >= '" + begin + "' and start <= '" + end + "'";
+            String sqlStatement = "select * from appointment where start >= '" + begin + "' and start <= '" + end + "' order by start";
 
             QueryManager.makeQuery(sqlStatement);
             ResultSet result = QueryManager.getResult();
@@ -273,7 +271,6 @@ public class AppointmentDao {
 
         LocalDateTime startTime = startToUTC.toLocalDateTime();
         Timestamp timestampStart = Timestamp.valueOf(startTime);
-        System.out.println("Timestamp start: " + timestampStart);
 
         return timestampStart;
 
@@ -286,14 +283,10 @@ public class AppointmentDao {
         ZonedDateTime appointmentEndDateTime = appointment.getEnd();
         ZonedDateTime endLDT = appointmentEndDateTime;
 
-//        Instant endTimeToUTC = endLDT.toInstant();
-//        System.out.println("Timestamp UTC: " + endTimeToUTC);
-
         ZonedDateTime endToUTC = endLDT.withZoneSameInstant(ZoneId.of("UTC"));
 
         LocalDateTime endTime = endToUTC.toLocalDateTime();
         Timestamp timestampEnd = Timestamp.valueOf(endTime);
-        System.out.println("Timestamp end: " + timestampEnd);
 
         return timestampEnd;
 
@@ -369,7 +362,7 @@ public class AppointmentDao {
     }
 
 
-       public static void deleteAppointment(Appointment appointment) {
+    public static void deleteAppointment(Appointment appointment) {
 
         String deleteAppointment = String.join(" ",
                 "DELETE appointment FROM appointment WHERE appointmentId = ?");
@@ -399,7 +392,6 @@ public class AppointmentDao {
             System.out.println("SQL Exception: " + e.getMessage());
         }
     }
-
 
 
     public static void updateAppointment(Appointment appointment) throws SQLException {
@@ -454,8 +446,6 @@ public class AppointmentDao {
 
             while (result.next()) {
 
-
-                //appointment.setCustomerId(result.getInt());
                 appointment.setTitle(result.getString("title"));
                 appointment.setDescription(result.getString("description"));
 
@@ -489,16 +479,13 @@ public class AppointmentDao {
             Appointment appointment = new Appointment();
             String upcomingAppointment = "SELECT * FROM appointment WHERE (start BETWEEN NOW() AND ADDTIME(NOW(), '00:15:00'))";
 
-//            QueryManager.makeQuery(sqlStatement);
-//            ResultSet result = QueryManager.getResult();
-
 
             PreparedStatement statement = conn.prepareStatement(upcomingAppointment);
             ResultSet result = statement.executeQuery();
 
             while (result.next()) {
 
-                //Appointment appointment = new Appointment();
+
                 appointment.setAppointmentId(result.getInt("appointmentId"));
                 appointment.setCustomerId(result.getInt("customerId"));
                 appointment.setTitle(result.getString("title"));
@@ -527,9 +514,8 @@ public class AppointmentDao {
     }
 
 
-
     //Model future queries after this one
-    public static Appointment overlappingAppointment(Appointment appointment) {
+    public static Appointment overlappingAppointmentAdd(Appointment appointment) {
 
         Timestamp timestampStart = startDateTimeConverter(appointment);
         Timestamp timestampEnd = endDateTimeConverter(appointment);
@@ -537,8 +523,6 @@ public class AppointmentDao {
 
         try {
 
-
-            //String sqlStatement = "select * FROM appointment WHERE (start between '" + timestampStart'" + AND + "'"timestampEnd"''");
 
             String sqlStatement = "SELECT * FROM appointment "
                     + "WHERE (start >= ? AND end <= ?) "
@@ -556,10 +540,6 @@ public class AppointmentDao {
             statement.setTimestamp(7, timestampStart);
             statement.setTimestamp(8, timestampEnd);
             ResultSet result = statement.executeQuery();
-
-
-
-
 
 
             if (result.next()) {
@@ -592,44 +572,22 @@ public class AppointmentDao {
     }
 
 
-    public static Appointment overlappingAppointment2(Appointment appointment, int appId) {
+    public static Appointment overlappingAppointmentEdit(Appointment appointment, int appId) {
 
         Timestamp timestampStart = startDateTimeConverter(appointment);
         Timestamp timestampEnd = endDateTimeConverter(appointment);
-
-        System.out.println("Timestamp start test 4: " + timestampStart);
-        System.out.println("Timestamp end test 4: " + timestampEnd);
-        System.out.println("AppID test 4: " + appId);
 
 
         try {
 
 
-            //String sqlStatement = "select * FROM appointment WHERE (start between '" + timestampStart'" + AND + "'"timestampEnd"''");
-
-//            String sqlStatement = "SELECT * FROM appointment WHERE (start BETWEEN ? and ?)" +
-//                    "AND appointmentId != ?";
-
-
-            //String sqlStatement = "SELECT * FROM appointment WHERE (start BETWEEN '" + timestampStart + "' and '" + timestampEnd + "') AND appointmentId != 1";
             String sqlStatement = "SELECT * FROM appointment WHERE (start BETWEEN '" + timestampStart + "' and '" + timestampEnd + "') AND appointmentId != 1" + appId + "";
 
             QueryManager.makeQuery(sqlStatement);
             ResultSet result = QueryManager.getResult();
 
-            /*PreparedStatement statement = conn.prepareStatement(sqlStatement);
-            statement.setTimestamp(1, timestampStart);
-            statement.setTimestamp(2, timestampEnd);
-            statement.setInt(3, appId);
-            ResultSet result = statement.executeQuery();*/
-
-
-
-
-
 
             if (result.next()) {
-
 
 
                 appointment.setAppointmentId(result.getInt("appointmentId"));
@@ -650,9 +608,6 @@ public class AppointmentDao {
                 appointment.setStart(startLocal);
                 appointment.setEnd(endLocal);
 
-
-
-                System.out.println("Appointment ID test 4: " + appointment.getAppointmentId());
             }
         } catch (SQLException e) {
             System.out.println("SQLException (overlap): " + e.getMessage());
@@ -664,8 +619,6 @@ public class AppointmentDao {
 
 
     }
-
-
 
 
 }

@@ -6,7 +6,6 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -22,8 +21,6 @@
         <AnchorPane layoutX="34.0" layoutY="100.0" prefHeight="354.0" prefWidth="670.0" style="-fx-border-color: black; -fx-border-radius: 10;">
             <children>
                 <Label layoutX="28.0" layoutY="27.0" text="Appointments" />
-                <Button fx:id="search_appointments_button" layoutX="141.0" layoutY="22.0" mnemonicParsing="false" onAction="#search_appointments_button_handler" text="Search" />
-                <TextField fx:id="search_appointments_field" layoutX="204.0" layoutY="23.0" onAction="#search_appointments_field_handler" />
                 <TableView fx:id="AppointmentTable" layoutX="24.0" layoutY="73.0" prefHeight="208.0" prefWidth="621.0">
                     <columns>
                         <TableColumn fx:id="appt_title_col" prefWidth="105.0" text="Title" />

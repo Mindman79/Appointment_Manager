@@ -46,12 +46,6 @@ public class MainScreenController {
     private URL location;
 
     @FXML
-    private Button search_appointments_button;
-
-    @FXML
-    private TextField search_appointments_field;
-
-    @FXML
     private TableView<Appointment> AppointmentTable;
 
     @FXML
@@ -74,8 +68,6 @@ public class MainScreenController {
 
     @FXML
     private Button delete_button;
-
-
 
     @FXML
     private Button customers_button;
@@ -110,9 +102,9 @@ public class MainScreenController {
         appt_description_col.setCellValueFactory(new PropertyValueFactory<>("description"));
 
 
-        //Lambda to insert/format cell data
+        //Lambda #2 to efficiently insert/format cell data
         appt_start_col.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStart().toLocalDateTime().atZone(localZoneId).format(DTformatter)));
-        appt_end_col.setCellValueFactory(cellData ->  new SimpleStringProperty(cellData.getValue().getEnd().toLocalDateTime().format(DTformatter)));
+        appt_end_col.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEnd().toLocalDateTime().format(DTformatter)));
 
     }
 
@@ -125,12 +117,9 @@ public class MainScreenController {
         appt_description_col.setCellValueFactory(new PropertyValueFactory<>("description"));
 
 
-
-        //Lambda to insert/format cell data
+        //Lambda #2 to efficiently insert/format cell data
         appt_start_col.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStart().toLocalDateTime().atZone(localZoneId).format(DTformatter)));
-        appt_end_col.setCellValueFactory(cellData ->  new SimpleStringProperty(cellData.getValue().getEnd().toLocalDateTime().format(DTformatter)));
-
-        //appt_end_col.setCellValueFactory(new PropertyValueFactory<>("end"));
+        appt_end_col.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEnd().toLocalDateTime().format(DTformatter)));
 
 
     }
@@ -189,8 +178,7 @@ public class MainScreenController {
         try {
             ProcessBuilder pb = new ProcessBuilder("Notepad.exe", "userlog.txt");
             pb.start();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -215,8 +203,8 @@ public class MainScreenController {
         Parent scene = modifyAppointmentLoader.getRoot();
         stage.setScene(new Scene(scene));
         stage.show();
-        
-        
+
+
     }
 
     @FXML
@@ -229,18 +217,6 @@ public class MainScreenController {
 
     }
 
-    @FXML
-    void search_appointments_button_handler(ActionEvent event) {
-
-    }
-
-    @FXML
-    void search_appointments_field_handler(ActionEvent event) {
-
-    }
-
-
-
 
     @FXML
     void initialize() {
@@ -251,9 +227,9 @@ public class MainScreenController {
         appt_description_col.setCellValueFactory(new PropertyValueFactory<>("description"));
 
 
-//        //Lambda to insert/format cell data
-       appt_start_col.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStart().toLocalDateTime().atZone(localZoneId).format(DTformatter)));
-        appt_end_col.setCellValueFactory(cellData ->  new SimpleStringProperty(cellData.getValue().getEnd().toLocalDateTime().atZone(localZoneId).format(DTformatter)));
+        //Lambda #2 to efficiently insert/format cell data
+        appt_start_col.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStart().toLocalDateTime().atZone(localZoneId).format(DTformatter)));
+        appt_end_col.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEnd().toLocalDateTime().atZone(localZoneId).format(DTformatter)));
 
     }
 

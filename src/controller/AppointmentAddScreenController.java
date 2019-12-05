@@ -77,44 +77,6 @@ public class AppointmentAddScreenController {
     @FXML
     private TextField end_time_field;
 
-    @FXML
-    private RadioButton EndTimeAMRadioButton;
-
-    @FXML
-    private ToggleGroup EndTimeToggle;
-
-    @FXML
-    private RadioButton EndTimePMRadioButton;
-
-    @FXML
-    private Button save_button;
-
-    @FXML
-    private Button cancel_button;
-
-    @FXML
-    private RadioButton StartTimeAMRadioButton;
-
-    @FXML
-    private RadioButton StartTimePMRadioButton;
-
-    @FXML
-    private ToggleGroup StartTimeToggle;
-
-    @FXML
-    void EndTimeAMRadioButtonHandler(ActionEvent event) {
-
-    }
-
-    @FXML
-    void EndTimePMRadioButtonHandler(ActionEvent event) {
-
-    }
-
-    @FXML
-    void StartTimeAMRadioButtonHandler(ActionEvent event) {
-
-    }
 
     @FXML
     void cancel_button_handler(ActionEvent event) throws IOException {
@@ -149,7 +111,7 @@ public class AppointmentAddScreenController {
             ZonedDateTime end = ZonedDateTime.of(endDate, endTime, localZoneId);
 
 
-            //Appointment validator checker (checks that start/end times are within the hours of 7:00 AM - 7:00 PM and that fields are not blank, etc. Other values are check via the try/catch block
+            //Appointment field validator (checks that start/end times are within the hours of 7:00 AM - 7:00 PM and that fields are not blank, etc. Other values are checked via the try/catch block.
             if (startTime.isBefore(openTime)) {
 
                 alertGenerator("Appointment must start no earlier than " + openTime.format(DateTimeFormatter.ofPattern("hh:mm a")));
@@ -183,8 +145,6 @@ public class AppointmentAddScreenController {
                 Appointment overlappingAppointment = overlapChecker(appointment);
                 if (overlappingAppointment != null) {
 
-
-                    //System.out.println("Appointment ID test: " + appointmentOverlap.getAppointmentId());
 
                     Customer overlapCustomer = CustomerDao.getCustomerById(overlappingAppointment.getCustomerId());
 
@@ -250,8 +210,7 @@ public class AppointmentAddScreenController {
 
         start_date_selector.setValue(LocalDate.now());
         end_date_selector.setValue(LocalDate.now());
-        //start_time_field.setText(String.valueOf(LocalTime.now().format(DateTimeFormatter.ofPattern("hh:mm a"))));
-        //end_time_field.setText(String.valueOf(LocalTime.now().plusHours(1).format(DateTimeFormatter.ofPattern("hh:mm a"))));
+
 
 
     }
@@ -269,7 +228,7 @@ public class AppointmentAddScreenController {
 
     public Appointment overlapChecker(Appointment appointmentToCheck) {
 
-        Appointment appointmentChecked = AppointmentDao.overlappingAppointment(appointmentToCheck);
+        Appointment appointmentChecked = AppointmentDao.overlappingAppointmentAdd(appointmentToCheck);
 
         if (appointmentChecked.getAppointmentId() != 0) {
 
