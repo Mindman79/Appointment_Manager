@@ -67,7 +67,6 @@ public class CustomerAddScreenController {
     private Country custCountry = new Country();
     private int countryId;
 
-
     Stage stage;
     Parent scene;
 
@@ -88,8 +87,6 @@ public class CustomerAddScreenController {
         try {
             setCountryIDFromName();
 
-            //int customerId = newCustomer.getCustomerId();
-
             int cityId = CityDao.getNextCityId();
             int addressId = AddressDao.getNextAddressId();
             int customerId = CustomerDao.getNextCustomerID();
@@ -98,7 +95,6 @@ public class CustomerAddScreenController {
             newCustomer.setCustomerName(customer_name_field.getText());
             newCustomer.setCustomerId(customerId);
             newCustomer.setAddressId(addressId);
-            //newCustomer.setCustomerId(customerId);
 
 
             //Address
@@ -114,24 +110,24 @@ public class CustomerAddScreenController {
             custCity.setCityId(cityId);
             custCity.setCountryId(countryId);
 
-            //Customer input validation. Country selection validates with the NullPointerException in the try/catch block
-            if(customer_name_field.getText().trim().isEmpty()) {
+            //Customer input validation. Country selection validates with the NullPointerException in the try/catch block.
+            if (customer_name_field.getText().trim().isEmpty()) {
 
                 alertGenerator("Customer name cannot be blank!");
 
-            } else if(address_line_1_field.getText().trim().isEmpty()){
+            } else if (address_line_1_field.getText().trim().isEmpty()) {
 
                 alertGenerator("Address (first line) cannot be blank!");
 
-            } else if(city_field.getText().trim().isEmpty()){
+            } else if (city_field.getText().trim().isEmpty()) {
 
                 alertGenerator("City name cannot be blank!");
 
-            } else if(postal_code_field.getText().trim().isEmpty()){
+            } else if (postal_code_field.getText().trim().isEmpty()) {
 
                 alertGenerator("Postal code cannot be blank!");
 
-            } else if(phone_number_field.getText().trim().isEmpty()){
+            } else if (phone_number_field.getText().trim().isEmpty()) {
 
                 alertGenerator("Phone number cannot be blank!");
 
@@ -177,34 +173,6 @@ public class CustomerAddScreenController {
         country_combo_box.getItems().add(country1);
         country_combo_box.getItems().add(country2);
         country_combo_box.getItems().add(country3);
-
-    }
-
-
-    public void getCountryNameFromID(int countryId) {
-
-        String country1 = "US";
-        String country2 = "Canada";
-        String country3 = "Norway";
-
-        country_combo_box.getItems().add(country1);
-        country_combo_box.getItems().add(country2);
-        country_combo_box.getItems().add(country3);
-
-
-        System.out.println("Country ID selected: " + countryId);
-
-        if (countryId == 1) {
-            country_combo_box.setValue(country1);
-
-        } else if (countryId == 2) {
-            country_combo_box.setValue(country2);
-
-        } else if (countryId == 3) {
-            country_combo_box.setValue(country3);
-
-        }
-
 
     }
 

@@ -5,7 +5,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
@@ -17,18 +16,12 @@
                 <Font name="System Bold" size="15.0" />
             </font>
         </Label>
-        <AnchorPane layoutX="34.0" layoutY="100.0" prefHeight="354.0" prefWidth="626.0" style="-fx-border-color: black; -fx-border-radius: 10;">
+        <AnchorPane layoutX="34.0" layoutY="100.0" prefHeight="354.0" prefWidth="670.0" style="-fx-border-color: black; -fx-border-radius: 10;">
             <children>
                 <Label layoutX="28.0" layoutY="27.0" text="Customers" />
-                <Button fx:id="search_customers_button" layoutX="188.0" layoutY="22.0" mnemonicParsing="false" onAction="#search_customers_button_handler" text="Search" />
-                <TextField fx:id="search_customers_field" layoutX="265.0" layoutY="22.0" onAction="#search_customers_field_handler" />
-                <TableView fx:id="CustomerTable" layoutX="17.0" layoutY="78.0" prefHeight="208.0" prefWidth="551.0">
+                <TableView fx:id="CustomerTable" layoutX="24.0" layoutY="73.0" prefHeight="208.0" prefWidth="621.0">
                     <columns>
-                        <TableColumn fx:id="cust_name_col" prefWidth="110.0" text="Name" />
-                        <TableColumn fx:id="cust_phone_col" prefWidth="110.0" text="Phone" />
-                        <TableColumn fx:id="cust_address_col" prefWidth="129.5999755859375" text="Address" />
-                        <TableColumn fx:id="cust_city_col" prefWidth="99.20001220703125" text="City" />
-                  <TableColumn fx:id="cust_zip_col" prefWidth="99.20001220703125" text="Zip" />
+                        <TableColumn fx:id="cust_name_col" prefWidth="250.0" text="Name" />
                     </columns>
                 </TableView>
                 <HBox layoutX="233.0" layoutY="286.0" prefHeight="51.0" prefWidth="240.0" spacing="10.0">
@@ -43,7 +36,7 @@
                 </HBox>
             </children>
         </AnchorPane>
-        <AnchorPane layoutX="695.0" layoutY="100.0" prefHeight="354.0" prefWidth="177.0">
+        <AnchorPane layoutX="717.0" layoutY="100.0" prefHeight="354.0" prefWidth="177.0">
             <children>
                 <Button fx:id="appointments_button" layoutX="26.0" layoutY="14.0" mnemonicParsing="false" onAction="#appointments_button_handler" text="Appointments" />
                 <Button fx:id="reports_button" layoutX="26.0" layoutY="65.0" mnemonicParsing="false" onAction="#reports_button_handler" text="Reports" />

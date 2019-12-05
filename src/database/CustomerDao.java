@@ -74,13 +74,6 @@ public class CustomerDao {
                 Customer customer = new Customer(customerName, addressId, customerId);
 
 
-               /* TableRow tr = new TableRow(new ReadOnlyStringWrapper(customerName),
-                        new ReadOnlyStringWrapper(phone),
-                        new ReadOnlyStringWrapper(address),
-                        new ReadOnlyStringWrapper(city),
-                        new ReadOnlyStringWrapper(postalCode)*/
-
-
                 Customers.add(customer);
 
             }
@@ -93,27 +86,6 @@ public class CustomerDao {
     }
 
 
-//    public static void updateCustomer(Customer customer) {
-//
-//        int customerId = customer.getCustomerId();
-//        String customerName = customer.getCustomerName();
-//
-//        String sqlStatement = "UPDATE customer" +
-//                "SET customerName=" + customerName + "customerId" + customerId"addressId=" +  +
-//
-//                "WHERE customerId=" + customerId + " " +
-//                ;
-//
-//
-//
-//
-//
-//
-//
-//        QueryManager.makeQuery(sqlStatement);
-//
-//
-//    }
 
 
 
@@ -141,7 +113,7 @@ public class CustomerDao {
 
     public static Customer addCustomer(Customer customer) throws SQLException {
 
-        //int nextCustomerId = getNextCustomerID();
+
 
         String addCustomer = String.join(" ",
                 "INSERT INTO customer (customerId, customerName, addressId, active, createDate, createdBy, lastUpdate, lastUpdateBy)",

@@ -106,7 +106,7 @@ public class CustomerEditScreenController {
         custCity.setCountryId(countryId);
 
 
-        //Customer input validation. Country selection does not validate here, as one must already be selected
+        //Customer input validation. Country selection does not validate here, as one must already be selected.
         if(customer_name_field.getText().trim().isEmpty()) {
 
             alertGenerator("Customer name cannot be blank!");
@@ -151,13 +151,7 @@ public class CustomerEditScreenController {
 
     }
 
-//    public static void setSelectedCustomer(Customer customer) {
-//
-//        selectedCust = customer;
-//
-//
-//
-//    }
+
 
     public void receiveCustomer(Customer selectedCust) {
 
@@ -175,8 +169,6 @@ public class CustomerEditScreenController {
         phone_number_field.setText(String.valueOf(custAddress.getPhone()));
         postal_code_field.setText(String.valueOf(custAddress.getPostalCode()));
         city_field.setText(String.valueOf(custCity.getCity()));
-        //country_combo_box.setValue(custCountry);
-
         getCountryNameFromID(custCountry.getCountryId());
 
 
@@ -194,8 +186,6 @@ public class CustomerEditScreenController {
         country_combo_box.getItems().add(country2);
         country_combo_box.getItems().add(country3);
 
-
-        System.out.println("Country ID selected: " + countryId);
 
         if(countryId == 1) {
             country_combo_box.setValue(country1);
