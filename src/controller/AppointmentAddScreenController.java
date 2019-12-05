@@ -132,7 +132,6 @@ public class AppointmentAddScreenController {
 
 
 
-
                 } else {
 
                 appointment.setCustomerId(customer_combo_box.getValue().getCustomerId());
