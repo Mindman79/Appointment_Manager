@@ -125,6 +125,12 @@ public class AppointmentEditScreenController {
 
                 alertGenerator("Appointment cannot end earlier than today's date!");
 
+                //Forced appointment type capture
+            } else if (type_field.getText().trim().isEmpty()) {
+
+                alertGenerator("Appointment type cannot be blank!");
+
+
             } else {
 
 
