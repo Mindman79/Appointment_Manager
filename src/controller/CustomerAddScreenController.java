@@ -3,7 +3,6 @@ package controller;
 
 import database.AddressDao;
 import database.CityDao;
-import database.CountryDao;
 import database.CustomerDao;
 import entity.Address;
 import entity.City;
@@ -23,7 +22,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class CustomerAddScreenController {

@@ -1,6 +1,6 @@
 package controller;
 
-import database.AddressDao;
+import com.mysql.jdbc.AssertionFailedException;
 import database.AppointmentDao;
 import database.CustomerDao;
 import database.UserDao;
@@ -19,10 +19,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.net.URL;
 import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
@@ -56,8 +53,9 @@ public class LoginScreenController {
     private String upcomingAppt;
 
 
+    //Two means of exception control in this method. Try/catch and assertion. See line 80 for the assertion test and associated error if it fails (please enable assertion errors in IntelliJ to see this). This also displays a user error alert box via the try/catch block.
     @FXML
-    void LoginButtonHandler(ActionEvent event) throws IOException, SQLException {
+    void LoginButtonHandler(ActionEvent event) throws IOException, SQLException, AssertionError {
 
         String username = username_field.getText();
         String password = password_field.getText();
@@ -73,53 +71,52 @@ public class LoginScreenController {
 
         ObservableList<User> Users = UserDao.getActiveUsers();
 
-        //        for (User user : Users)
 
-        //Lambda to simplify the user login loop
+        //Lambda #1 to simplify the user login loop
         Users.forEach((user -> {
 
             try {
-                assert user.getUserName().equals(username) && user.getUserPassword().equals(password) : "Incorrect login!";
+
+                assert user.getUserName().equals(username) && user.getUserPassword().equals(password) : "Incorrect username or password!";
 
 
-
-                    isValidUser = true;
-
-
-                    if (isValidUser = true) {
-
-                        //Stage
-                        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-                        scene = FXMLLoader.load(getClass().getResource("/view/MainScreen.fxml"));
-                        stage.setScene(new Scene(scene));
-                        stage.show();
-
-                        //Logging
-                        FileHandler userLF = new FileHandler("userlog.txt", true);
-                        SimpleFormatter sf = new SimpleFormatter();
-                        userLF.setFormatter(sf);
-                        userLogger.addHandler(userLF);
-                        userLogger.log(Level.INFO, "User " + currentUser.getUserName() + " logged in successfully");
+                isValidUser = true;
 
 
-                        try {
-                            Appointment appointment = AppointmentDao.getUpcomingAppointments();
-                            if (!(appointment.getAppointmentId() == 0)) {
+                if (isValidUser = true) {
 
-                                Customer customer = CustomerDao.getCustomerById(appointment.getCustomerId());
-                                Alert apptAlert = new Alert(Alert.AlertType.INFORMATION);
-                                apptAlert.setTitle(upcomingAppt);
-                                apptAlert.setHeaderText(upcomingAppt);
-                                apptAlert.setContentText(appointment.getStart().format(DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm a")) + " with " + customer.getCustomerName());
-                                apptAlert.showAndWait();
+                    //Stage
+                    stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+                    scene = FXMLLoader.load(getClass().getResource("/view/MainScreen.fxml"));
+                    stage.setScene(new Scene(scene));
+                    stage.show();
 
-                            }
+                    //Logging
+                    FileHandler userLF = new FileHandler("userlog.txt", true);
+                    SimpleFormatter sf = new SimpleFormatter();
+                    userLF.setFormatter(sf);
+                    userLogger.addHandler(userLF);
+                    userLogger.log(Level.INFO, "User " + currentUser.getUserName() + " logged in successfully");
 
-                        } catch (Exception e) {
-                            e.printStackTrace();
+
+                    try {
+                        Appointment appointment = AppointmentDao.getUpcomingAppointments();
+                        if (!(appointment.getAppointmentId() == 0)) {
+
+                            Customer customer = CustomerDao.getCustomerById(appointment.getCustomerId());
+                            Alert apptAlert = new Alert(Alert.AlertType.INFORMATION);
+                            apptAlert.setTitle(upcomingAppt);
+                            apptAlert.setHeaderText(upcomingAppt);
+                            apptAlert.setContentText(appointment.getStart().format(DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm a")) + " with " + customer.getCustomerName());
+                            apptAlert.showAndWait();
+
                         }
 
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
+
+                }
 
 
             } catch (IOException e) {
@@ -136,14 +133,15 @@ public class LoginScreenController {
             }
 
         }))
-    ;}
-
+        ;
+    }
 
 
     @FXML
     void initialize() {
 
 
+        //Locale related items
         Locale espanol = new Locale("es", "ES");
         Locale german = new Locale("de", "DE");
         Locale userLocale = Locale.getDefault();
@@ -157,5 +155,7 @@ public class LoginScreenController {
         upcomingAppt = rb.getString("upcomingappt");
 
     }
+
+
 
 }

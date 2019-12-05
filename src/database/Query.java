@@ -3,8 +3,6 @@ package database;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-import static database.DBConnection.*;
-
 public class Query {
 
     private static String query;

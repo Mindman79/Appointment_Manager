@@ -1,12 +1,9 @@
 package database;
 
 import entity.Address;
-import entity.City;
-import entity.Customer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import javax.swing.text.Caret;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

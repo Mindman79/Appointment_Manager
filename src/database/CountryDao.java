@@ -1,8 +1,6 @@
 package database;
 
-import entity.Address;
 import entity.Country;
-import entity.Customer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 

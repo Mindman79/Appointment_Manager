@@ -1,21 +1,14 @@
 package database;
 
-import entity.Address;
 import entity.Appointment;
-import entity.Customer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import utils.DateTime;
 
-import javax.xml.bind.SchemaOutputResolver;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.time.*;
-import java.time.temporal.ChronoUnit;
-import java.util.TimeZone;
 
 import static controller.LoginScreenController.currentUser;
 import static database.DBConnection.conn;

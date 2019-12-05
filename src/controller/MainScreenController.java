@@ -1,20 +1,7 @@
 package controller;
 
-import java.awt.*;
-import java.io.IOException;
-import java.lang.management.PlatformLoggingMXBean;
-import java.net.URL;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.util.ResourceBundle;
-import java.util.TimeZone;
-
-import database.AddressDao;
 import database.AppointmentDao;
-import database.CustomerDao;
 import entity.Appointment;
-import entity.Customer;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
@@ -23,11 +10,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import utils.DateTime;
+
+import java.io.IOException;
+import java.net.URL;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.ResourceBundle;
 
 public class MainScreenController {
 

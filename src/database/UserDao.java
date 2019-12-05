@@ -1,6 +1,5 @@
 package database;
 
-import entity.Customer;
 import entity.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -8,6 +7,7 @@ import javafx.collections.ObservableList;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import static database.DBConnection.conn;
 
 public class UserDao {

@@ -1,11 +1,12 @@
 package database;
 
 //import com.mysql.jdbc.PreparedStatement;
-import java.sql.PreparedStatement;
-import entity.*;
-import javafx.beans.property.ReadOnlyStringWrapper;
+
+import entity.Customer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 

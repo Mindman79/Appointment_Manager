@@ -1,10 +1,6 @@
 package controller;
 
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import database.AddressDao;
 import database.CityDao;
 import database.CountryDao;
@@ -23,7 +19,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import javafx.util.StringConverter;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 public class CustomerEditScreenController {
 

@@ -1,5 +1,18 @@
 package controller;
 
+import database.AppointmentDao;
+import database.CustomerDao;
+import entity.Appointment;
+import entity.Customer;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.stage.Stage;
+import javafx.util.StringConverter;
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -11,22 +24,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ResourceBundle;
 import java.util.TimeZone;
-
-import database.AppointmentDao;
-import database.CustomerDao;
-import entity.Appointment;
-import entity.Customer;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.stage.Stage;
-import javafx.util.StringConverter;
-
-import static controller.LoginScreenController.currentUser;
 
 public class AppointmentEditScreenController {
 

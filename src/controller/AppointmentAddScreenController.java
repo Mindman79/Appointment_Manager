@@ -1,15 +1,5 @@
 package controller;
 
-import java.io.IOException;
-import java.net.URL;
-import java.sql.SQLException;
-import java.sql.Time;
-import java.time.*;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.ResourceBundle;
-import java.util.TimeZone;
-
 import database.AppointmentDao;
 import database.CustomerDao;
 import entity.Appointment;
@@ -23,11 +13,18 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
-import utils.DateTime;
 
-import static controller.LoginScreenController.currentUser;
-import static java.util.Calendar.NARROW_FORMAT;
-import static java.util.Calendar.PM;
+import java.io.IOException;
+import java.net.URL;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.ResourceBundle;
+import java.util.TimeZone;
 
 public class AppointmentAddScreenController {
 

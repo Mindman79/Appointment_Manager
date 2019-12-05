@@ -1,7 +1,5 @@
 package controller;
 
-import java.io.IOException;
-
 import database.CustomerDao;
 import entity.Customer;
 import javafx.application.Platform;
@@ -15,6 +13,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 
 
 public class CustomerScreenController {
