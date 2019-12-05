@@ -466,19 +466,20 @@ public class AppointmentDao {
     public static Appointment getUpcomingAppointments() {
 
 
+        LocalDateTime now = LocalDateTime.now();
+        ZoneId zid = ZoneId.systemDefault();
+        ZonedDateTime zdt = now.atZone(zid);
+        LocalDateTime ldt = zdt.withZoneSameInstant(ZoneId.of("UTC")).toLocalDateTime();
+        LocalDateTime ldt2 = ldt.plusMinutes(15);
+
         try {
 
 
             Appointment appointment = new Appointment();
-            String upcomingAppointment = "SELECT * FROM appointment WHERE (start BETWEEN ? AND ADDTIME(NOW(), '00:15:00'))";
+            String SQL = "SELECT * FROM appointment WHERE start BETWEEN '" + ldt + "' AND '" + ldt2 + "'";
 
 
-            PreparedStatement statement = conn.prepareStatement(upcomingAppointment);
-
-            ZonedDateTime localZDT = ZonedDateTime.now(localZoneId);
-            ZonedDateTime ZDTToUTC = localZDT.withZoneSameInstant(ZoneId.of("UTC"));
-            LocalDateTime localToUTC = ZDTToUTC.toLocalDateTime();
-            statement.setTimestamp(1, Timestamp.valueOf(localToUTC));
+            PreparedStatement statement = conn.prepareStatement(SQL);
 
             ResultSet result = statement.executeQuery();
 
