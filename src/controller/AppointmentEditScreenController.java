@@ -32,7 +32,8 @@ public class AppointmentEditScreenController {
 
     private static ZoneId localZoneId = ZoneId.of(TimeZone.getDefault().getID());
 
-    private Appointment appointment = new Appointment();
+    private int apptId;
+
 
     Stage stage;
     Parent scene;
@@ -83,13 +84,21 @@ public class AppointmentEditScreenController {
     private Button cancel_button;
 
     @FXML
-    void cancel_button_handler(ActionEvent event) {
+    void cancel_button_handler(ActionEvent event) throws IOException {
+
+        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("/view/MainScreen.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.show();
+
 
     }
 
     @FXML
     void save_button_handler(ActionEvent event) throws SQLException, IOException {
 
+        System.out.println("appointment ID test 2: " + apptId);
+        Appointment appointment = AppointmentDao.getAppointmentById(apptId);
 
         try {
             //Set business hours open and close times
@@ -107,16 +116,6 @@ public class AppointmentEditScreenController {
             ZonedDateTime end = ZonedDateTime.of(endDate, endTime, localZoneId);
 
 
-            appointment.setCustomerId(customer_combo_box.getValue().getCustomerId());
-            appointment.setAppointmentId(appointment.getAppointmentId());
-            appointment.setTitle(title_field.getText());
-            appointment.setDescription(description_field.getText());
-            appointment.setLocation(location_field.getText());
-            appointment.setContact(contact_field.getText());
-            appointment.setType(type_field.getText());
-            appointment.setUrl(url_field.getText());
-            appointment.setStart(start);
-            appointment.setEnd(end);
 
             //Appointment validator checker (checks that start/end times are within the hours of 7:00 AM - 7:00 PM and that fields are not blank, etc. Other values are check via the try/catch block
             if (startTime.isBefore(openTime)) {
@@ -138,12 +137,64 @@ public class AppointmentEditScreenController {
             } else {
 
 
-                AppointmentDao.updateAppointment(appointment);
 
-                stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-                scene = FXMLLoader.load(getClass().getResource("/view/MainScreen.fxml"));
-                stage.setScene(new Scene(scene));
-                stage.show();
+
+                appointment.setCustomerId(customer_combo_box.getValue().getCustomerId());
+                appointment.setAppointmentId(apptId);
+                appointment.setTitle(title_field.getText());
+                appointment.setDescription(description_field.getText());
+                appointment.setLocation(location_field.getText());
+                appointment.setContact(contact_field.getText());
+                appointment.setType(type_field.getText());
+                appointment.setUrl(url_field.getText());
+                appointment.setStart(start);
+                appointment.setEnd(end);
+
+//                AppointmentDao.updateAppointment(appointment);
+//
+//                stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+//                scene = FXMLLoader.load(getClass().getResource("/view/MainScreen.fxml"));
+//                stage.setScene(new Scene(scene));
+//                stage.show();
+//
+
+                Appointment overlappingAppointment = overlapChecker(appointment);
+                if (overlappingAppointment != null) {
+
+
+                    //System.out.println("Appointment ID test: " + appointmentOverlap.getAppointmentId());
+
+                    Customer overlapCustomer = CustomerDao.getCustomerById(overlappingAppointment.getCustomerId());
+
+                    Alert overlappingAlert = new Alert(Alert.AlertType.INFORMATION);
+                    overlappingAlert.setTitle("You have an overlapping appointment!");
+                    overlappingAlert.setHeaderText("Appointment is with " + overlapCustomer.getCustomerName() + " from " + overlappingAppointment.getStart().format(DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm a")) + " to " + overlappingAppointment.getEnd().format(DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm a")));
+                    overlappingAlert.showAndWait();
+
+
+
+
+                } else {
+
+                    appointment.setCustomerId(customer_combo_box.getValue().getCustomerId());
+                    appointment.setAppointmentId(apptId);
+                    appointment.setTitle(title_field.getText());
+                    appointment.setDescription(description_field.getText());
+                    appointment.setLocation(location_field.getText());
+                    appointment.setContact(contact_field.getText());
+                    appointment.setType(type_field.getText());
+                    appointment.setUrl(url_field.getText());
+                    appointment.setStart(start);
+                    appointment.setEnd(end);
+
+                    AppointmentDao.updateAppointment(appointment);
+
+                    stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+                    scene = FXMLLoader.load(getClass().getResource("/view/MainScreen.fxml"));
+                    stage.setScene(new Scene(scene));
+                    stage.show();
+                }
+
 
 
             }
@@ -188,11 +239,12 @@ public class AppointmentEditScreenController {
     }
 
 
-    public void receiveAppointment(Appointment selectedAppt) {
+    public int receiveAppointment(Appointment appointment) {
 
 
-        appointment = selectedAppt;
+        apptId = appointment.getAppointmentId();
 
+        System.out.println("appointment ID test: " + apptId);
 
         customer_combo_box.setItems(CustomerDao.getAllCustomers());
 
@@ -214,6 +266,7 @@ public class AppointmentEditScreenController {
         start_date_selector.setValue(appointment.getStart().toLocalDate());
         end_date_selector.setValue(appointment.getEnd().toLocalDate());
 
+        return apptId;
 
     }
 
@@ -228,4 +281,18 @@ public class AppointmentEditScreenController {
 
     }
 
+    public Appointment overlapChecker(Appointment appointmentToCheck) {
+
+        Appointment appointmentChecked = AppointmentDao.overlappingAppointment(appointmentToCheck);
+
+        if (appointmentChecked.getAppointmentId() != 0) {
+
+            return appointmentChecked;
+
+        } else {
+
+            return null;
+        }
+
+    }
 }
