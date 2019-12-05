@@ -158,7 +158,7 @@ public class AppointmentEditScreenController {
 //                stage.show();
 //
 
-                Appointment overlappingAppointment = overlapChecker(appointment);
+                Appointment overlappingAppointment = overlapChecker2(appointment, apptId);
                 if (overlappingAppointment != null) {
 
 
@@ -281,13 +281,36 @@ public class AppointmentEditScreenController {
 
     }
 
-    public Appointment overlapChecker(Appointment appointmentToCheck) {
+//    public Appointment overlapChecker(Appointment appointmentToCheck) {
+//
+//        Appointment appointmentChecked = AppointmentDao.overlappingAppointment(appointmentToCheck);
+//
+//
+//
+//        if (appointmentChecked.getAppointmentId() != 0 ) {
+//
+//            return appointmentChecked;
+//
+//        } else {
+//
+//            return null;
+//        }
+//
+//    }
 
-        Appointment appointmentChecked = AppointmentDao.overlappingAppointment(appointmentToCheck);
 
-        if (appointmentChecked.getAppointmentId() != 0) {
+    public Appointment overlapChecker2(Appointment appointmentToCheck, int apptId) {
+
+
+
+        Appointment appointmentChecked = AppointmentDao.overlappingAppointment2(appointmentToCheck, apptId);
+
+
+
+        if (appointmentChecked.getAppointmentId() != 0 && appointmentChecked.getAppointmentId() != apptId) {
 
             return appointmentChecked;
+
 
         } else {
 
@@ -295,4 +318,5 @@ public class AppointmentEditScreenController {
         }
 
     }
+
 }

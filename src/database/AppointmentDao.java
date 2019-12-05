@@ -592,5 +592,80 @@ public class AppointmentDao {
     }
 
 
+    public static Appointment overlappingAppointment2(Appointment appointment, int appId) {
+
+        Timestamp timestampStart = startDateTimeConverter(appointment);
+        Timestamp timestampEnd = endDateTimeConverter(appointment);
+
+        System.out.println("Timestamp start test 4: " + timestampStart);
+        System.out.println("Timestamp end test 4: " + timestampEnd);
+        System.out.println("AppID test 4: " + appId);
+
+
+        try {
+
+
+            //String sqlStatement = "select * FROM appointment WHERE (start between '" + timestampStart'" + AND + "'"timestampEnd"''");
+
+//            String sqlStatement = "SELECT * FROM appointment WHERE (start BETWEEN ? and ?)" +
+//                    "AND appointmentId != ?";
+
+
+            //String sqlStatement = "SELECT * FROM appointment WHERE (start BETWEEN '" + timestampStart + "' and '" + timestampEnd + "') AND appointmentId != 1";
+            String sqlStatement = "SELECT * FROM appointment WHERE (start BETWEEN '" + timestampStart + "' and '" + timestampEnd + "') AND appointmentId != 1" + appId + "";
+
+            QueryManager.makeQuery(sqlStatement);
+            ResultSet result = QueryManager.getResult();
+
+            /*PreparedStatement statement = conn.prepareStatement(sqlStatement);
+            statement.setTimestamp(1, timestampStart);
+            statement.setTimestamp(2, timestampEnd);
+            statement.setInt(3, appId);
+            ResultSet result = statement.executeQuery();*/
+
+
+
+
+
+
+            if (result.next()) {
+
+
+
+                appointment.setAppointmentId(result.getInt("appointmentId"));
+                appointment.setCustomerId(result.getInt("customerId"));
+                appointment.setUserId(result.getInt("userId"));
+                appointment.setTitle(result.getString("title"));
+                appointment.setDescription(result.getString("description"));
+                appointment.setLocation(result.getString("location"));
+                appointment.setContact(result.getString("contact"));
+                appointment.setType(result.getString("type"));
+                appointment.setUrl(result.getString("url"));
+
+                LocalDateTime startUTC = result.getTimestamp("start").toLocalDateTime();
+                LocalDateTime endUTC = result.getTimestamp("end").toLocalDateTime();
+                ZonedDateTime startLocal = ZonedDateTime.ofInstant(startUTC.toInstant(ZoneOffset.UTC), localZoneId);
+                ZonedDateTime endLocal = ZonedDateTime.ofInstant(endUTC.toInstant(ZoneOffset.UTC), localZoneId);
+
+                appointment.setStart(startLocal);
+                appointment.setEnd(endLocal);
+
+
+
+                System.out.println("Appointment ID test 4: " + appointment.getAppointmentId());
+            }
+        } catch (SQLException e) {
+            System.out.println("SQLException (overlap): " + e.getMessage());
+
+
+        }
+
+        return appointment;
+
+
+    }
+
+
+
 
 }
