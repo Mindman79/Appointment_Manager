@@ -36,7 +36,7 @@ public class AppointmentAddScreenController {
 
     private static ZoneId localZoneId = ZoneId.of(TimeZone.getDefault().getID());
 
-    Appointment appointment = new Appointment();
+
 
     @FXML
     private ResourceBundle resources;
@@ -129,6 +129,8 @@ public class AppointmentAddScreenController {
     @FXML
     void save_button_handler(ActionEvent event) throws SQLException, IOException {
 
+
+        Appointment appointment = new Appointment();
 
         try {
 
