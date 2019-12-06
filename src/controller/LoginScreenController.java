@@ -99,6 +99,7 @@ public class LoginScreenController {
                     userLogger.log(Level.INFO, "User " + currentUser.getUserName() + " logged in successfully");
 
 
+                    //Appointment alert
                     try {
                         Appointment appointment = AppointmentDao.getUpcomingAppointments();
                         if (!(appointment.getAppointmentId() == 0)) {
