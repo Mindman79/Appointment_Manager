@@ -289,33 +289,30 @@ public class AppointmentDao {
     public static void addAppointment(Appointment appointment) throws SQLException {
 
 
-        int appointmentId = getNextApptId();
-
         Timestamp timestampStart = startDateTimeConverter(appointment);
         Timestamp timestampEnd = endDateTimeConverter(appointment);
 
         String addAppointment = String.join(" ",
-                "INSERT INTO appointment (appointmentId, customerId, userId, title, "
+                "INSERT INTO appointment (customerId, userId, title, "
                         + "description, location, contact, type, url, start, end, " //11
                         + "createDate, createdBy, lastUpdate, lastUpdateBy) ",
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), ?)");
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), ?)");
 
         try {
             PreparedStatement statement = conn.prepareStatement(addAppointment);
-            statement.setInt(1, appointmentId);
-            statement.setObject(2, appointment.getCustomerId());
-            statement.setObject(3, currentUser.getUserId());
-            statement.setObject(4, appointment.getTitle());
-            statement.setObject(5, appointment.getDescription());
-            statement.setObject(6, appointment.getLocation());
-            statement.setObject(7, appointment.getContact());
-            statement.setObject(8, appointment.getType());
-            statement.setObject(9, appointment.getUrl());
-            statement.setObject(10, timestampStart);
-            statement.setObject(11, timestampEnd);
-            statement.setObject(12, LocalDate.now());
+            statement.setObject(1, appointment.getCustomerId());
+            statement.setObject(2, currentUser.getUserId());
+            statement.setObject(3, appointment.getTitle());
+            statement.setObject(4, appointment.getDescription());
+            statement.setObject(5, appointment.getLocation());
+            statement.setObject(6, appointment.getContact());
+            statement.setObject(7, appointment.getType());
+            statement.setObject(8, appointment.getUrl());
+            statement.setObject(9, timestampStart);
+            statement.setObject(10, timestampEnd);
+            statement.setObject(11, LocalDate.now());
+            statement.setString(12, currentUser.getUserName());
             statement.setString(13, currentUser.getUserName());
-            statement.setString(14, currentUser.getUserName());
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
