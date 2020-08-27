@@ -1,508 +1,84 @@
-Nov 25, 2019 3:09:59 PM controller.LoginScreenController LoginButtonHandler
+Dec 05, 2019 2:57:34 PM controller.LoginScreenController lambda$LoginButtonHandler$0
 INFO: User test logged in successfully
-Nov 25, 2019 3:12:42 PM controller.LoginScreenController LoginButtonHandler
+Dec 06, 2019 9:46:56 AM controller.LoginScreenController lambda$LoginButtonHandler$0
 INFO: User test logged in successfully
-Nov 25, 2019 11:16:49 PM controller.LoginScreenController LoginButtonHandler
+Dec 06, 2019 9:38:41 AM controller.LoginScreenController lambda$LoginButtonHandler$0
 INFO: User test logged in successfully
-Nov 25, 2019 11:19:44 PM controller.LoginScreenController LoginButtonHandler
+Dec 06, 2019 9:40:46 AM controller.LoginScreenController lambda$LoginButtonHandler$0
 INFO: User test logged in successfully
-Nov 25, 2019 11:34:33 PM controller.LoginScreenController LoginButtonHandler
+Dec 06, 2019 9:41:11 AM controller.LoginScreenController lambda$LoginButtonHandler$0
 INFO: User test logged in successfully
-Nov 25, 2019 11:39:46 PM controller.LoginScreenController LoginButtonHandler
+Dec 06, 2019 9:43:47 AM controller.LoginScreenController lambda$LoginButtonHandler$0
 INFO: User test logged in successfully
-Nov 26, 2019 9:28:01 AM controller.LoginScreenController LoginButtonHandler
+Dec 06, 2019 9:48:27 AM controller.LoginScreenController lambda$LoginButtonHandler$0
 INFO: User test logged in successfully
-Nov 26, 2019 11:05:54 AM controller.LoginScreenController LoginButtonHandler
+Dec 06, 2019 9:50:02 AM controller.LoginScreenController lambda$LoginButtonHandler$0
 INFO: User test logged in successfully
-Nov 26, 2019 11:07:31 AM controller.LoginScreenController LoginButtonHandler
+Dec 06, 2019 9:50:58 AM controller.LoginScreenController lambda$LoginButtonHandler$0
 INFO: User test logged in successfully
-Nov 26, 2019 11:18:53 AM controller.LoginScreenController LoginButtonHandler
+Dec 06, 2019 9:54:28 AM controller.LoginScreenController lambda$LoginButtonHandler$0
 INFO: User test logged in successfully
-Nov 26, 2019 11:19:15 AM controller.LoginScreenController LoginButtonHandler
+Dec 14, 2019 8:45:30 AM controller.LoginScreenController lambda$LoginButtonHandler$0
 INFO: User test logged in successfully
-Nov 26, 2019 11:20:57 AM controller.LoginScreenController LoginButtonHandler
+Dec 14, 2019 8:52:20 AM controller.LoginScreenController lambda$LoginButtonHandler$0
 INFO: User test logged in successfully
-Nov 26, 2019 11:22:55 AM controller.LoginScreenController LoginButtonHandler
+Dec 14, 2019 8:55:06 AM controller.LoginScreenController lambda$LoginButtonHandler$0
 INFO: User test logged in successfully
-Nov 26, 2019 11:26:10 AM controller.LoginScreenController LoginButtonHandler
+Dec 14, 2019 8:59:02 AM controller.LoginScreenController lambda$LoginButtonHandler$0
 INFO: User test logged in successfully
-Nov 26, 2019 11:31:29 AM controller.LoginScreenController LoginButtonHandler
+Jan 24, 2020 1:28:43 PM controller.LoginScreenController lambda$LoginButtonHandler$0
 INFO: User test logged in successfully
-Nov 26, 2019 2:07:35 PM controller.LoginScreenController lambda$LoginButtonHandler$0
+Mar 06, 2020 11:05:41 AM controller.LoginScreenController lambda$LoginButtonHandler$0
 INFO: User test logged in successfully
-Nov 26, 2019 2:13:41 PM controller.LoginScreenController lambda$LoginButtonHandler$0
+Mar 10, 2020 10:02:40 PM controller.LoginScreenController lambda$LoginButtonHandler$0
 INFO: User test logged in successfully
-Nov 26, 2019 4:05:00 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User  logged in successfully
-Nov 26, 2019 4:07:06 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User  logged in successfully
-Nov 27, 2019 1:56:55 PM controller.LoginScreenController lambda$LoginButtonHandler$0
+Mar 10, 2020 10:03:30 PM controller.LoginScreenController lambda$LoginButtonHandler$0
 INFO: User test logged in successfully
-Nov 27, 2019 2:02:17 PM controller.LoginScreenController lambda$LoginButtonHandler$0
+Mar 10, 2020 10:04:12 PM controller.LoginScreenController lambda$LoginButtonHandler$0
 INFO: User test logged in successfully
-Nov 27, 2019 2:05:22 PM controller.LoginScreenController lambda$LoginButtonHandler$0
+Mar 10, 2020 10:04:31 PM controller.LoginScreenController lambda$LoginButtonHandler$0
 INFO: User test logged in successfully
-Nov 27, 2019 2:07:48 PM controller.LoginScreenController lambda$LoginButtonHandler$0
+Apr 23, 2020 12:04:18 PM controller.LoginScreenController lambda$LoginButtonHandler$0
 INFO: User test logged in successfully
-Nov 27, 2019 2:25:52 PM controller.LoginScreenController lambda$LoginButtonHandler$0
+Jul 15, 2020 9:57:13 PM controller.LoginScreenController lambda$LoginButtonHandler$0
 INFO: User test logged in successfully
-Nov 27, 2019 2:41:24 PM controller.LoginScreenController lambda$LoginButtonHandler$0
+Aug 10, 2020 8:51:18 PM controller.LoginScreenController lambda$LoginButtonHandler$0
 INFO: User test logged in successfully
-Nov 27, 2019 3:14:25 PM controller.LoginScreenController lambda$LoginButtonHandler$0
+Aug 11, 2020 12:41:52 PM controller.LoginScreenController lambda$LoginButtonHandler$0
 INFO: User test logged in successfully
-Nov 27, 2019 3:17:39 PM controller.LoginScreenController lambda$LoginButtonHandler$0
+Aug 18, 2020 11:22:03 AM controller.LoginScreenController lambda$LoginButtonHandler$0
 INFO: User test logged in successfully
-Nov 27, 2019 3:38:03 PM controller.LoginScreenController lambda$LoginButtonHandler$0
+Aug 18, 2020 10:58:11 PM controller.LoginScreenController lambda$LoginButtonHandler$0
 INFO: User test logged in successfully
-Nov 27, 2019 3:53:39 PM controller.LoginScreenController lambda$LoginButtonHandler$0
+Aug 18, 2020 11:05:00 PM controller.LoginScreenController lambda$LoginButtonHandler$0
 INFO: User test logged in successfully
-Nov 29, 2019 11:04:25 AM controller.LoginScreenController lambda$LoginButtonHandler$0
+Aug 18, 2020 11:17:45 PM controller.LoginScreenController lambda$LoginButtonHandler$0
 INFO: User test logged in successfully
-Nov 29, 2019 11:28:43 AM controller.LoginScreenController lambda$LoginButtonHandler$0
+Aug 18, 2020 11:18:33 PM controller.LoginScreenController lambda$LoginButtonHandler$0
 INFO: User test logged in successfully
-Nov 29, 2019 11:29:44 AM controller.LoginScreenController lambda$LoginButtonHandler$0
+Aug 18, 2020 11:19:50 PM controller.LoginScreenController lambda$LoginButtonHandler$0
 INFO: User test logged in successfully
-Nov 29, 2019 12:31:25 PM controller.LoginScreenController lambda$LoginButtonHandler$0
+Aug 18, 2020 11:20:30 PM controller.LoginScreenController lambda$LoginButtonHandler$0
 INFO: User test logged in successfully
-Nov 29, 2019 1:15:33 PM controller.LoginScreenController lambda$LoginButtonHandler$0
+Aug 18, 2020 11:22:35 PM controller.LoginScreenController lambda$LoginButtonHandler$0
 INFO: User test logged in successfully
-Nov 29, 2019 12:20:18 PM controller.LoginScreenController lambda$LoginButtonHandler$0
+Aug 18, 2020 11:23:31 PM controller.LoginScreenController lambda$LoginButtonHandler$0
 INFO: User test logged in successfully
-Nov 29, 2019 12:48:00 PM controller.LoginScreenController lambda$LoginButtonHandler$0
+Aug 18, 2020 11:31:31 PM controller.LoginScreenController lambda$LoginButtonHandler$0
 INFO: User test logged in successfully
-Nov 29, 2019 12:52:31 PM controller.LoginScreenController lambda$LoginButtonHandler$0
+Aug 18, 2020 11:33:28 PM controller.LoginScreenController lambda$LoginButtonHandler$0
 INFO: User test logged in successfully
-Nov 29, 2019 12:53:57 PM controller.LoginScreenController lambda$LoginButtonHandler$0
+Aug 18, 2020 11:34:25 PM controller.LoginScreenController lambda$LoginButtonHandler$0
 INFO: User test logged in successfully
-Nov 29, 2019 12:55:17 PM controller.LoginScreenController lambda$LoginButtonHandler$0
+Aug 20, 2020 10:49:34 AM controller.LoginScreenController lambda$LoginButtonHandler$0
 INFO: User test logged in successfully
-Nov 29, 2019 1:00:00 PM controller.LoginScreenController lambda$LoginButtonHandler$0
+Aug 20, 2020 1:25:12 PM controller.LoginScreenController lambda$LoginButtonHandler$0
 INFO: User test logged in successfully
-Nov 29, 2019 1:02:37 PM controller.LoginScreenController lambda$LoginButtonHandler$0
+Aug 20, 2020 9:19:54 PM controller.LoginScreenController lambda$LoginButtonHandler$0
 INFO: User test logged in successfully
-Nov 29, 2019 1:16:21 PM controller.LoginScreenController lambda$LoginButtonHandler$0
+Aug 22, 2020 1:08:30 PM controller.LoginScreenController lambda$LoginButtonHandler$0
 INFO: User test logged in successfully
-Nov 29, 2019 1:19:42 PM controller.LoginScreenController lambda$LoginButtonHandler$0
+Aug 24, 2020 8:41:11 PM controller.LoginScreenController lambda$LoginButtonHandler$0
 INFO: User test logged in successfully
-Nov 29, 2019 1:20:38 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Nov 29, 2019 1:24:04 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Nov 29, 2019 1:32:54 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Nov 29, 2019 2:14:53 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Nov 29, 2019 2:22:42 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Nov 29, 2019 2:33:29 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Nov 29, 2019 2:41:54 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Nov 29, 2019 2:43:09 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Nov 29, 2019 2:49:03 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Nov 29, 2019 3:56:20 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Nov 29, 2019 4:00:59 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Nov 29, 2019 4:05:06 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Nov 29, 2019 4:08:41 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Nov 29, 2019 4:11:08 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 02, 2019 9:56:19 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 02, 2019 9:59:54 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 02, 2019 10:02:23 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 02, 2019 10:08:34 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 02, 2019 10:17:37 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 02, 2019 10:36:11 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 02, 2019 10:48:26 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 02, 2019 10:51:59 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 02, 2019 10:56:29 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 02, 2019 11:02:33 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 02, 2019 11:07:22 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 02, 2019 11:10:09 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 02, 2019 11:15:51 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 02, 2019 11:33:34 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 02, 2019 11:40:48 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 02, 2019 11:43:56 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 03, 2019 12:02:18 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 03, 2019 12:05:50 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 03, 2019 12:13:46 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 03, 2019 12:32:09 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 03, 2019 12:44:49 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 03, 2019 12:59:11 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 03, 2019 1:03:47 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 03, 2019 9:50:22 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 03, 2019 9:54:18 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 03, 2019 9:55:12 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 03, 2019 12:13:47 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 03, 2019 12:16:37 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 03, 2019 1:10:31 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 03, 2019 8:47:31 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 03, 2019 8:49:19 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 03, 2019 8:51:17 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 03, 2019 8:55:19 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 03, 2019 8:59:29 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 03, 2019 9:02:40 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 03, 2019 9:05:21 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 03, 2019 9:12:33 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 03, 2019 9:39:48 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 03, 2019 9:42:08 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 03, 2019 9:43:46 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 03, 2019 9:44:29 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 03, 2019 9:46:45 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 03, 2019 9:53:03 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 03, 2019 10:53:32 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 03, 2019 10:54:33 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 03, 2019 10:55:03 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 03, 2019 11:06:58 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 03, 2019 11:09:57 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 03, 2019 11:10:17 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 03, 2019 11:10:50 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 03, 2019 11:13:24 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 04, 2019 8:58:28 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 04, 2019 9:10:14 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 04, 2019 9:14:48 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 04, 2019 9:17:25 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 04, 2019 9:22:24 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 04, 2019 9:24:38 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 04, 2019 9:31:05 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 04, 2019 9:33:15 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 04, 2019 9:34:39 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 04, 2019 9:35:24 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 04, 2019 9:36:47 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 04, 2019 9:42:07 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 04, 2019 9:51:47 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 04, 2019 9:53:31 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 04, 2019 9:56:31 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 04, 2019 9:59:16 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 04, 2019 10:01:23 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 04, 2019 10:03:00 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 04, 2019 10:10:35 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 04, 2019 10:11:11 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 04, 2019 10:13:53 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 04, 2019 10:20:48 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 04, 2019 10:21:51 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 04, 2019 10:24:15 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 04, 2019 10:28:13 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 04, 2019 10:38:56 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 04, 2019 10:40:49 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 04, 2019 10:42:24 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 04, 2019 10:43:50 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 04, 2019 10:51:42 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 04, 2019 10:54:01 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 04, 2019 10:55:14 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 04, 2019 10:57:01 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 04, 2019 10:57:15 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 04, 2019 11:00:57 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 04, 2019 11:05:06 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 04, 2019 11:10:10 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 04, 2019 11:12:58 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 04, 2019 11:14:09 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 04, 2019 11:17:27 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 04, 2019 11:19:13 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 04, 2019 11:20:46 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 04, 2019 11:22:13 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 04, 2019 11:28:31 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 04, 2019 11:31:19 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 04, 2019 11:36:13 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 04, 2019 11:37:07 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 04, 2019 11:43:19 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 04, 2019 11:43:51 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 04, 2019 11:49:38 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 04, 2019 11:51:22 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 04, 2019 11:53:35 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 12:55:54 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 12:03:42 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 12:04:52 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 12:07:50 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 12:09:30 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 12:17:56 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 12:19:11 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 12:20:07 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 12:49:54 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 8:37:39 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 8:50:36 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 9:03:55 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 9:04:50 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 9:06:23 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 9:09:51 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 9:10:22 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 9:10:46 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 9:15:56 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 9:18:06 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 9:18:38 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 9:33:05 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 9:37:12 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 9:39:43 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 9:45:19 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 9:46:59 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 9:53:28 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 9:54:36 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 9:55:35 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 9:56:52 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 9:57:57 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 9:58:54 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 10:00:31 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 10:02:16 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 10:03:07 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 10:04:25 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 10:04:37 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 10:08:17 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 10:12:06 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 10:13:21 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 10:14:49 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 10:17:57 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 10:18:59 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 10:20:16 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 10:21:48 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 11:59:24 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 12:00:12 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 1:01:52 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 1:03:11 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 1:13:21 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 1:16:22 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 1:17:49 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 1:18:19 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 1:23:20 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 1:30:15 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 1:30:59 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 1:45:28 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 2:17:39 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 2:24:04 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 2:26:30 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 2:29:01 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 2:32:42 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 2:39:27 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 2:41:18 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 2:52:58 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 2:55:30 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 6:26:00 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 6:27:44 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 6:30:45 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 6:31:44 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 6:32:28 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 6:33:17 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 6:34:00 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 6:34:55 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 6:38:18 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 6:53:55 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 6:55:16 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 8:35:29 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 06, 2019 7:45:43 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 06, 2019 7:46:20 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 06, 2019 7:48:53 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 06, 2019 8:24:50 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 06, 2019 8:26:28 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 06, 2019 8:15:38 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 06, 2019 8:17:37 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 06, 2019 8:18:20 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 06, 2019 9:46:09 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 06, 2019 8:15:54 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 06, 2019 9:54:41 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 2:51:09 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 2:48:45 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 06, 2019 3:45:13 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 06, 2019 3:52:37 PM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 06, 2019 9:23:11 AM controller.LoginScreenController lambda$LoginButtonHandler$0
-INFO: User test logged in successfully
-Dec 05, 2019 2:46:36 PM controller.LoginScreenController lambda$LoginButtonHandler$0
+Aug 25, 2020 8:49:05 PM controller.LoginScreenController lambda$LoginButtonHandler$0
 INFO: User test logged in successfully

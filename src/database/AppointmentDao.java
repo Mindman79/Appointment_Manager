@@ -72,7 +72,7 @@ public class AppointmentDao {
         try {
 
 
-            String sqlStatement = "SELECT * FROM appointment ORDER BY start ASC";
+            String sqlStatement = "SELECT * FROM apptcust";
 
             QueryManager.makeQuery(sqlStatement);
             ResultSet result = QueryManager.getResult();
@@ -81,9 +81,9 @@ public class AppointmentDao {
 
                 Appointment appointment = new Appointment();
                 appointment.setAppointmentId(result.getInt("appointmentId"));
-                appointment.setCustomerId(result.getInt("customerId"));
+                //appointment.setCustomerId(result.getInt("customerId"));
                 appointment.setTitle(result.getString("title"));
-                appointment.setDescription(result.getString("description"));
+                appointment.setDescription(result.getString("customerName"));
                 appointment.setLocation(result.getString("location"));
                 appointment.setContact(result.getString("contact"));
                 appointment.setType(result.getString("type"));
