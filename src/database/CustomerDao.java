@@ -87,6 +87,49 @@ public class CustomerDao {
     }
 
 
+    public static ObservableList<Customer> getSearchCustomers(String searchString) {
+
+
+        Customers.clear();
+
+
+        String search = searchString;
+
+
+        try {
+
+
+            String sqlStatement = String.join(" ",
+                    "select * from customer",
+                    "where customerName like ",
+                    "'%"+search+"%'");
+
+            QueryManager.makeQuery(sqlStatement);
+            ResultSet result = QueryManager.getResult();
+
+            while (result.next()) {
+
+
+
+                String customerName = result.getString("customerName");
+                int addressId = result.getInt("addressId");
+                int customerId = result.getInt("customerId");
+
+                Customer customer = new Customer(customerName, addressId, customerId);
+
+
+                Customers.add(customer);
+
+            }
+
+            return Customers;
+        } catch (SQLException e) {
+            System.out.println("SQL Exception: " + e.getMessage());
+            return null;
+        }
+    }
+
+
 
 
 

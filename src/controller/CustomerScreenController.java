@@ -3,6 +3,8 @@ package controller;
 import database.CustomerDao;
 import entity.Customer;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
@@ -52,6 +55,12 @@ public class CustomerScreenController {
     @FXML
     private Button logs_button;
 
+    @FXML
+    private Button search_button;
+
+    @FXML
+    private TextField search_field;
+
 
 
     @FXML
@@ -61,6 +70,40 @@ public class CustomerScreenController {
         CustomerTable.setItems(CustomerDao.getAllCustomers());
         cust_name_col.setCellValueFactory(new PropertyValueFactory<>("customerName"));
 
+
+
+    }
+
+
+    @FXML
+    void search_button_handler(ActionEvent event) {
+
+        String searchString = search_field.getText();
+        CustomerTable.setItems(CustomerDao.getSearchCustomers(searchString));
+
+
+//        System.out.println("Hello!");
+//        for (Customer customerToSearch : CustomerDao.getSearchCustomers(searchString)) {
+//
+//            if ((searchString.contains(customerToSearch.getCustomerName().toLowerCase()))) {
+//
+//            //if ((searchString.matches("(?i:.*" + customerToSearch.getCustomerName() + ".*)"))) {
+//
+//                System.out.println(customerToSearch.getCustomerName());
+//                String customerName = customerToSearch.getCustomerName();
+//                int addressId = customerToSearch.getAddressId();
+//                int customerId = customerToSearch.getCustomerId();
+//
+//                Customer customer = new Customer(customerName, addressId, customerId);
+//
+//                Customers.add(customer);
+//                CustomerTable.getSelectionModel().select(customerToSearch);
+//                CustomerTable.setItems();
+//
+//
+//            }
+//
+//        }
 
 
     }
