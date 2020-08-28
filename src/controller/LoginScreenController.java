@@ -7,6 +7,7 @@ import database.UserDao;
 import entity.Appointment;
 import entity.Customer;
 import entity.User;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -158,5 +159,53 @@ public class LoginScreenController {
     }
 
 
+    public boolean loginTester(String un, String pw) throws SQLException {
+
+        boolean status = false;
+
+        //ObservableList<User> UsersMatch = UserDao.getActiveUsers();
+
+        ObservableList<User> UsersMatch = FXCollections.observableArrayList();
+
+
+        User user = new User();
+
+        user.setUserName("test");
+        user.setUserPassword("test");
+
+        UsersMatch.add(user);
+
+
+        for (User user2 : UsersMatch) {
+
+            //System.out.println(user2.getUserName());
+
+            if (user2.getUserName().equals(un) && user2.getUserPassword().equals(pw)) {
+
+                status = true;
+
+            } else {
+
+                status = false;
+            }
+
+
+
+        }
+
+        return status;
+
+    }
 
 }
+
+
+
+
+
+
+
+
+
+
+

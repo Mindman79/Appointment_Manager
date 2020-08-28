@@ -142,3 +142,9 @@ Aug 26, 2020 11:51:05 PM controller.LoginScreenController lambda$LoginButtonHand
 INFO: User test logged in successfully
 Aug 26, 2020 11:53:18 PM controller.LoginScreenController lambda$LoginButtonHandler$0
 INFO: User test logged in successfully
+Aug 27, 2020 10:42:41 PM controller.LoginScreenController lambda$LoginButtonHandler$0
+INFO: User test logged in successfully
+Aug 27, 2020 11:05:23 PM controller.LoginScreenController lambda$LoginButtonHandler$0
+INFO: User test logged in successfully
+Aug 28, 2020 12:39:48 AM controller.LoginScreenController lambda$LoginButtonHandler$0
+INFO: User test logged in successfully
