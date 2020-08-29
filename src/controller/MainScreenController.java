@@ -1,6 +1,7 @@
 package controller;
 
 import database.AppointmentDao;
+import database.CustomerDao;
 import entity.Appointment;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
@@ -15,6 +16,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
@@ -123,13 +125,26 @@ public class MainScreenController {
 
 
     @FXML
-    void add_button_handler(ActionEvent event) throws IOException {
+    void add_button_handler(ActionEvent event) throws IOException, SQLException {
 
 
-        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/view/AppointmentAddScreen.fxml"));
-        stage.setScene(new Scene(scene));
-        stage.show();
+        int customerCount = CustomerDao.checkForCustomers();
+
+
+        if (CustomerDao.checkForCustomers() != 0) {
+
+            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            scene = FXMLLoader.load(getClass().getResource("/view/AppointmentAddScreen.fxml"));
+            stage.setScene(new Scene(scene));
+            stage.show();
+
+        } else {
+
+            alertGenerator("Please add at least one customer to the system before adding an appointment");
+        }
+
+
+
 
     }
 
@@ -204,6 +219,16 @@ public class MainScreenController {
         scene = FXMLLoader.load(getClass().getResource("/view/ReportsScreen.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
+
+    }
+
+    public void alertGenerator(String message) {
+
+        Alert apptAlert = new Alert(Alert.AlertType.INFORMATION);
+        apptAlert.setTitle(message);
+        apptAlert.setHeaderText(message);
+        apptAlert.showAndWait();
+
 
     }
 

@@ -54,7 +54,7 @@ public class UserDao {
 
         try {
 
-            String yo = "SELECT * FROM user WHERE userId = ?";
+            String yo = "SELECT * FROM user WHERE userId = ? ";
 
             PreparedStatement statement = conn.prepareStatement(yo);
             statement.setInt(1, id);
@@ -88,7 +88,21 @@ public class UserDao {
     }
 
 
+    public static void setSessionTimeout() throws SQLException {
 
+        String sql = "SET @@SESSION.wait_timeout=28000";
+
+        PreparedStatement statement = conn.prepareStatement(sql);
+
+
+        try {
+            statement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+    }
 
     }
 

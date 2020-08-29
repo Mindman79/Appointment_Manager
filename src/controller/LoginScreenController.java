@@ -140,8 +140,10 @@ public class LoginScreenController {
 
 
     @FXML
-    void initialize() {
+    void initialize() throws SQLException {
 
+
+        UserDao.setSessionTimeout();
 
         //Locale related items
         Locale espanol = new Locale("es", "ES");

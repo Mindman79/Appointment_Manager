@@ -210,6 +210,35 @@ public class CustomerDao {
     }
 
 
+    public static int checkForCustomers() throws SQLException {
+
+
+        int customerCount = 0;
+
+        String sqlStatement = "SELECT COUNT(*) FROM customer";
+
+        try {
+            QueryManager.makeQuery(sqlStatement);
+
+            ResultSet result = QueryManager.getResult();
+
+            while (result.next()) {
+
+                customerCount = result.getInt(1);
+
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("SQL Exception: " + e.getMessage());
+
+        }
+
+        return customerCount;
+
+    }
+
+
     public static void deleteCustomer(Customer customer) {
 
         String deleteCustomer = String.join(" ",
