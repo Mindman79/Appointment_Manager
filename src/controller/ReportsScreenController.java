@@ -137,6 +137,7 @@ public class ReportsScreenController {
     @FXML
     void active_customers_button_handler(ActionEvent event) {
 
+        String active = "True";
 
         try {
             report_textarea.clear();
@@ -146,11 +147,26 @@ public class ReportsScreenController {
 
             for (Customer customer : activeCustomers) {
 
-                report.append("Customer " + customer.getCustomerName() + " is active");
+                //                if(customer.getActive() == true) {
+//
+//                    active = "True";
+//
+//                } else {
+//
+//                    active = "False";
+//
+//                }
+
+                report.append("---------------------------------------------------");
+                report.append(System.getProperty("line.separator"));
+                report.append("Customer Name       Status          Last Login");
+                report.append(System.getProperty("line.separator"));
+                report.append("---------------------------------------------------");
+                report.append(System.getProperty("line.separator"));
+                report.append(customer.getCustomerName() + customer.getLastUpdate().toString());
                 report.append(System.getProperty("line.separator"));
 
             }
-
 
             String finishedReport = report.toString();
 

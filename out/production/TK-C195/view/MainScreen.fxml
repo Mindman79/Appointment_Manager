@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
+
 <AnchorPane prefHeight="502.0" prefWidth="895.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainScreenController">
     <children>
         <Label layoutX="76.0" layoutY="35.0" text="Appointment Manager">
@@ -17,10 +23,10 @@
                 <Label layoutX="28.0" layoutY="27.0" text="Appointments" />
                 <TableView fx:id="AppointmentTable" layoutX="24.0" layoutY="73.0" prefHeight="208.0" prefWidth="621.0">
                     <columns>
-                        <TableColumn fx:id="appt_title_col" prefWidth="105.0" text="Title" />
-                        <TableColumn fx:id="appt_description_col" prefWidth="105.0" text="Description" />
-                        <TableColumn fx:id="appt_start_col" prefWidth="200.0" text="Start Time" />
-                  <TableColumn fx:id="appt_end_col" prefWidth="200.0" text="End Time" />
+                        <TableColumn fx:id="appt_title_col" prefWidth="124.00002670288086" text="Title" />
+                        <TableColumn fx:id="appt_description_col" prefWidth="171.99998474121094" text="Customer" />
+                        <TableColumn fx:id="appt_start_col" prefWidth="162.39996337890625" text="Start Time" />
+                  <TableColumn fx:id="appt_end_col" prefWidth="164.79998779296875" text="End Time" />
                     </columns>
                 </TableView>
                 <HBox layoutX="233.0" layoutY="286.0" prefHeight="51.0" prefWidth="240.0" spacing="10.0">

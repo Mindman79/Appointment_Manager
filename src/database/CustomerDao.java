@@ -72,6 +72,7 @@ public class CustomerDao {
                 int addressId = result.getInt("addressId");
                 int customerId = result.getInt("customerId");
 
+
                 Customer customer = new Customer(customerName, addressId, customerId);
 
 
