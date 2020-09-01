@@ -20,6 +20,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
@@ -101,21 +103,44 @@ public class ReportsScreenController {
     void report_consultant_button_handler(ActionEvent event) throws SQLException {
 
 
+
+
         try {
             report_textarea.clear();
             ObservableList<Appointment> appointmentsByUser = AppointmentDao.getAllAppointmentsByUser();
 
+
+
             StringBuilder report = new StringBuilder();
 
+            //report.append(String.format("%-20s%-20s%-20s%-20s%-20s%-20s%-20s\n","Identifier","Category","Level","Space","Type","Dimension","Limits"));
+            report.append("--------------------------------------------------------------------------------------------");
+            report.append(System.getProperty("line.separator"));
+            report.append(String.format("%-11s%-28s%-20s%-35s%-25s","User","Title","Customer","Start Time","End Time"));
+            report.append(System.getProperty("line.separator"));
+            report.append("--------------------------------------------------------------------------------------------");
 
-            User user = new User();
+
+            User user;
+            Customer customer;
+
 
             for (Appointment appointment : appointmentsByUser) {
 
 
+
+
                 user = UserDao.getUserById(appointment.getUserId());
-                report.append("Appointment for user: " + user.getUserName() + ", titled: "  + appointment.getTitle() + ", starting at " + appointment.getStart().toLocalDateTime().format(DTformatter)+ " and lasting until " + appointment.getEnd().toLocalDateTime().format(DTformatter));
+                customer = CustomerDao.getCustomerById(appointment.getCustomerId());
+
                 report.append(System.getProperty("line.separator"));
+                report.append(String.format("%-12s%-19s%-20s%-25s%-25s", user.getUserName(), appointment.getTitle(), customer.getCustomerName(), appointment.getStart().toLocalDateTime().atZone(localZoneId).format(DTformatter), appointment.getEnd().toLocalDateTime().atZone(localZoneId).format(DTformatter)));
+                //report.append(user.getUserName() + "         " + appointment.getTitle() + "     " + appointment.getStart().toLocalDateTime().format(DTformatter) + "        " + appointment.getEnd().toLocalDateTime().format(DTformatter));
+                report.append(System.getProperty("line.separator"));
+
+//
+//                report.append("Appointment for user: " + user.getUserName() + ", titled: " + appointment.getTitle() + ", starting at " + appointment.getStart().toLocalDateTime().format(DTformatter) + " and lasting until " + appointment.getEnd().toLocalDateTime().format(DTformatter));
+//                report.append(System.getProperty("line.separator"));
 
             }
 
@@ -145,25 +170,28 @@ public class ReportsScreenController {
             StringBuilder report = new StringBuilder();
 
 
+            report.append("---------------------------------------------------");
+            report.append(System.getProperty("line.separator"));
+            report.append(String.format("%-23s%-20s%-20s", "Customer Name","Active","Last Update"));
+            report.append(System.getProperty("line.separator"));
+            report.append("---------------------------------------------------");
+
+
             for (Customer customer : activeCustomers) {
 
-                //                if(customer.getActive() == true) {
-//
-//                    active = "True";
-//
-//                } else {
-//
-//                    active = "False";
-//
-//                }
+                if (customer.getActive() == true) {
 
-                report.append("---------------------------------------------------");
+                    active = "True";
+
+                } else {
+
+                    active = "False";
+
+                }
+
+
                 report.append(System.getProperty("line.separator"));
-                report.append("Customer Name       Status          Last Login");
-                report.append(System.getProperty("line.separator"));
-                report.append("---------------------------------------------------");
-                report.append(System.getProperty("line.separator"));
-                report.append(customer.getCustomerName() + customer.getLastUpdate().toString());
+                report.append(String.format("%-28s%-20s%-20s",customer.getCustomerName(), active, customer.getLastUpdate().toLocalDateTime().minusHours(6).atZone(localZoneId).format(DTformatter)));
                 report.append(System.getProperty("line.separator"));
 
             }
@@ -174,7 +202,6 @@ public class ReportsScreenController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
 
 
     }
@@ -191,7 +218,6 @@ public class ReportsScreenController {
     }
 
 
-
     @FXML
     void exit_button_handler(ActionEvent event) {
 
@@ -205,13 +231,11 @@ public class ReportsScreenController {
         try {
             ProcessBuilder pb = new ProcessBuilder("Notepad.exe", "userlog.txt");
             pb.start();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
     }
-
 
 
     @FXML
@@ -227,8 +251,6 @@ public class ReportsScreenController {
 
     @FXML
     void initialize() {
-
-
 
 
     }

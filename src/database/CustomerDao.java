@@ -9,11 +9,18 @@ import javafx.collections.ObservableList;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 
 import static controller.LoginScreenController.currentUser;
 import static database.DBConnection.conn;
 
 public class CustomerDao {
+
+    private static ZoneId localZoneId = ZoneId.systemDefault();
 
     private static ObservableList<Customer> Customers = FXCollections.observableArrayList();
 
@@ -67,13 +74,14 @@ public class CustomerDao {
             while (result.next()) {
 
 
-
                 String customerName = result.getString("customerName");
                 int addressId = result.getInt("addressId");
                 int customerId = result.getInt("customerId");
+                boolean active = result.getBoolean("active");
+                Timestamp lastUpdate = result.getTimestamp("lastUpdate");
 
 
-                Customer customer = new Customer(customerName, addressId, customerId);
+                Customer customer = new Customer(customerName, addressId, customerId, active, lastUpdate);
 
 
                 Customers.add(customer);
@@ -115,8 +123,10 @@ public class CustomerDao {
                 String customerName = result.getString("customerName");
                 int addressId = result.getInt("addressId");
                 int customerId = result.getInt("customerId");
+                boolean active = result.getBoolean("active");
+                Timestamp lastUpdate = result.getTimestamp("lastUpdate");
 
-                Customer customer = new Customer(customerName, addressId, customerId);
+                Customer customer = new Customer(customerName, addressId, customerId, active,lastUpdate);
 
 
                 Customers.add(customer);

@@ -120,7 +120,7 @@ public class AppointmentDao {
 
         try {
 
-            String sqlStatement = "select * from appointment where start >= '" + begin + "' and start <= '" + end + "' GROUP BY type";
+            String sqlStatement = "select * from appointment where start >= '" + begin + "' and start <= '" + end + "'";
 
             QueryManager.makeQuery(sqlStatement);
             ResultSet result = QueryManager.getResult();

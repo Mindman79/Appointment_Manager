@@ -26,10 +26,12 @@ public class Customer {
     }
 
 
-    public Customer(String customerName, int addressId, int customerId) {
+    public Customer(String customerName, int addressId, int customerId, boolean active, Timestamp lastUpdate) {
         this.customerName = customerName;
         this.addressId = addressId;
         this.customerId = customerId;
+        this.lastUpdate = lastUpdate;
+        this.active = active;
     }
 
     public Customer(String customerName, int addressId, Boolean active, LocalDateTime createDate, String createdBy, Timestamp lastUpdate, String lastUpdateBy) {
