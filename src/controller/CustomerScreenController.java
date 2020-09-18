@@ -3,8 +3,6 @@ package controller;
 import database.CustomerDao;
 import entity.Customer;
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

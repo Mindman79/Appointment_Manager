@@ -1,6 +1,5 @@
 package controller;
 
-import com.mysql.jdbc.AssertionFailedException;
 import database.AppointmentDao;
 import database.CustomerDao;
 import database.UserDao;

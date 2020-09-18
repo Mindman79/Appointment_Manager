@@ -1,7 +1,6 @@
 package sample;
 
 import database.DBConnection;
-import database.UserDao;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
